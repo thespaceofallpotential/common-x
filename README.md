@@ -10,9 +10,11 @@ This repository ~~describes~~ *will eventually describe*:-
 
 1. a generalised approach & method for solving *"common-x"* type problems -- *(like "common-substring" and "common-subsequence")*
 
-2. detail on approach/algorithmic extensibility & transformation, to handle different kinds of *"common-x"* problems
+2. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
 3. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed commmon-x"*
+
+4. a discussion on the *"ideal form"* of common-x solutions, including data-structures & hardware
 
 Links:
 - [Practical demonstration](./src/main.ts)
