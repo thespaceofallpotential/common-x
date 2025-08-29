@@ -22,15 +22,13 @@ class Memo<T extends Token | Word> {
         const update = (bi: number, av: T): boolean => {
             const existing = prior.get(bi - 1);
 
-            if (existing) {
-                existing.ra.push(av);
+            if (!existing) return false;
 
-                current.set(bi, existing);
+            existing.ra.push(av);
 
-                return true;
-            }
+            current.set(bi, existing);
 
-            return false;
+            return true;
         };
 
         const create = (ai: Position, bi: Position, av: T): void => {
