@@ -1,0 +1,3 @@
+# b: meta
+
+- source: [wikipedia: longest common subsequence](https://en.wikipedia.org/wiki/Longest_common_subsequence)

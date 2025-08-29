@@ -1,0 +1,24 @@
+{
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": ["raw-imports"],
+    "deno.cacheOnSave": true,
+    "deno.enablePaths": ["./src", "./data"],
+    // "deno.maxTsServerMemory": 4090,
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash",
+            "args": ["-i"]
+        }
+    },
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always"
+        }
+    }
+    // "terminal.integrated.env.linux": {
+    //     "PATH": "/snap/bin:${env:PATH}"
+    // }
+}

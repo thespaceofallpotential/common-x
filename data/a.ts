@@ -1,0 +1,1 @@
+export const A = "computer science longest common substring two more strings longest string substring all them there may be more than one longest common substring applications include data deduplication plagiarism detection";

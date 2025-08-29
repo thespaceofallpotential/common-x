@@ -1,0 +1,4 @@
+# a: meta
+
+- source: [wikipedia: longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring)
+
