@@ -16,15 +16,16 @@ This repository ~~describes~~ *will eventually describe*:-
 
 4. a discussion on the *"ideal form"* of common-x solutions, including data-structures & hardware
 
-Links:
-- [Practical demonstration](./src/main.ts)
-- solvers
-    - [Brute Force Runner](./src/runners/bruteForceRunner.ts) | [Brute Force Solver](./src/solvers/BruteForceSolver.ts)
-    - [Constituient Runner](./src/runners/constituientRunner.ts) | [Solver](./src/solvers/ConstituientSolver.ts)
-    - [Cultivated Runner](./src/runners/cultivatedRunner.ts) | [Solver](./src/solvers/CultivatedSolver.ts)
-    - [Deductive Runner](./src/runners/deductiveRunner.ts) | [Solver](./src/solvers/DeductiveResolver.ts)
-    - [(Lazy Fake) Suffix-Tree Runner](./src/runners/lazyFakeSuffixTreeRunner.ts) | [(Lazy Fake) Suffix-Tree Solver](./src/solvers/LazyFakeSuffixTreeSolver.ts)
-    - [Positive Projection Runner](./src/runners/projectionSolver.ts) | [Positive Projection Solver](./src/solvers/ProjectionSolver.ts)
+> Links:
+> - [Practical demonstration](./src/main.ts)
+> 
+> Solvers
+>  - [Brute Force Runner](./src/runners/bruteForceRunner.ts) | [Brute Force Solver](./src/solvers/BruteForceSolver.ts)
+>  - [Constituient Runner](./src/runners/constituientRunner.ts) | [Solver](./src/solvers/ConstituientSolver.ts)
+>  - [Cultivated Runner](./src/runners/cultivatedRunner.ts) | [Solver](./src/solvers/CultivatedSolver.ts)
+>  - [Deductive Runner](./src/runners/deductiveRunner.ts) | [Solver](./src/solvers/DeductiveResolver.ts)
+>  - [(Lazy Fake) Suffix-Tree Runner](./src/runners/lazyFakeSuffixTreeRunner.ts) | [(Lazy Fake) Suffix-Tree Solver](./src/solvers/LazyFakeSuffixTreeSolver.ts)
+>  - [Positive Projection Runner](./src/runners/projectionSolver.ts) | [Positive Projection Solver](./src/solvers/ProjectionSolver.ts)
 
 ---
 
