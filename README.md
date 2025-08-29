@@ -6,7 +6,7 @@
 
 ## overview
 
-This repository ==describes== *will eventually describe*:-
+This repository ~~describes~~ *will eventually describe*:-
 
 1. a generalised approach & method for solving *"common-x"* type problems -- *(like "common-substring" and "common-subsequence")*
 
