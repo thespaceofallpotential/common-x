@@ -48,17 +48,16 @@ More than the difference between recall & derivation, perhaps the most apt analo
 
 Knowledge, it seems, is like a crop; and must be cultivated.
 
-Learning, it seems, depends upon situationally/topically appropriate *"knowledge culture"*, from which structural representational forms are cultivated, and grown to maturity.
+Learning, it seems, depends upon situationally/topically appropriate *"knowledge culture"*, from which structural representational forms are cultivated, and grown to maturity; and just like physical crops, *(in reality)*, it is quicker and easier to cultivate and grow crops, than find the same volume abrbitrarily distributed throughout some terrain...
 
-Wild.
+Wild, right?
 
-> indeed, *"wild-knowledge"*, grown, within abstract realms...
+> indeed, with the [Cultivated Solver](./src/runners/cultivatedRunner.ts), might we be looking at ***the domestication of "wild-knowledge"***, as cultivated and grown, within abstract realms...
 
----
-
-## caveats
+> tbc
 
 ---
+
 
 ...
 
