@@ -5,7 +5,7 @@ import { BruteForceSolver } from "./solvers/BruteForceSolver.ts";
 import { ConstituientSolver } from "./solvers/ConstituientSolver.ts";
 import { CultivatedSolver } from "./solvers/CultivatedSolver.ts";
 import { DeductiveResolver } from "./solvers/DeductiveResolver.ts";
-import { ProjectionSolver } from "./solvers/ProjectionSolver.ts";
+import { PositiveProjectionSolver } from "./solvers/PositiveProjectionSolver.ts";
 
 const isSummary = true;
 
@@ -37,7 +37,7 @@ console.log(`c:${constituient.cPa.length} (positive) -- cost:${constituient.cost
 
 console.log(`\nProjectionSolver`);
 
-const projection = new ProjectionSolver(aWr, bWr);
+const projection = new PositiveProjectionSolver(aWr, bWr);
 
 projection.process();
 

@@ -4,7 +4,7 @@ import { ISolver, Solver } from "../core/Solver.ts";
 import { Token, Word } from "../core/Types.ts";
 import { BruteForceSolver } from "./BruteForceSolver.ts";
 
-export class ProjectionSolver<T extends Token | Word> extends Solver<T> {
+export class PositiveProjectionSolver<T extends Token | Word> extends Solver<T> {
     readonly cra: CommonRange<T>[] = [];
 
     constructor(a: IRange<T>, b: IRange<T>) {
