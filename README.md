@@ -40,19 +40,19 @@ Like independent derivation, we can grow solutions *(to a problem-space type pro
 
 > for intuition, think of intellectual/cognitive creativity & insight -- *the gensis of new domains of knowledge*
 
-More than the difference between recall & derivation, perhaps the most apt analogy for this kind of *"remarkably organic"* problem-solving, is biological-growth: specifically, when we want to artificially engineer *(only very simple)* biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the rright kinds of principle *(chemical & biological)* *"pieces"* from which the intended forms will grow; and this is exactly what must be done to *"grow solutions to problem-space problems"* we must first identify and isolate only the right kinds of *"pieces"* from which the final solution form will grow...
+More than the difference between recall & derivation, perhaps the most apt analogy for this kind of *"remarkably organic"* problem-solving, is biological-growth: specifically, when we want to artificially engineer *(only very simple)* biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the *"right kinds"* of ingredients *(chemical & biological)* *"pieces"* from which the intended forms will grow; and this is exactly what must be done to *"grow solutions to problem-space problems"* we must first identify and isolate only the right kinds of *"ingredients"* from which the form of the final solution will grow...
 
 ...like a petri-dish in a laboratory environment...
 
-...but within the entirely abstract domain of *"information"*
+...but within the entirely abstract domain of *"information"*...
 
-Knowledge, it seems, is like a crop; and must be cultivated
+Knowledge, it seems, is like a crop; and must be cultivated.
 
 Learning, it seems, depends upon situationally/topically appropriate *"knowledge culture"*, from which structural representational forms are cultivated, and grown to maturity.
 
 Wild.
 
-Wild knowledge, in abstract realms...
+> indeed, *"wild-knowledge"*, grown, within abstract realms...
 
 ---
 
