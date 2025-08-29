@@ -19,7 +19,7 @@ This repository ~~describes~~ *will eventually describe*:-
 > Links:
 > - [Practical demonstration](./src/main.ts)
 > 
-> Solvers
+> Solvers:
 >  - [Brute Force Runner](./src/runners/bruteForceRunner.ts) | [Brute Force Solver](./src/solvers/BruteForceSolver.ts)
 >  - [Constituient Runner](./src/runners/constituientRunner.ts) | [Solver](./src/solvers/ConstituientSolver.ts)
 >  - [Cultivated Runner](./src/runners/cultivatedRunner.ts) | [Solver](./src/solvers/CultivatedSolver.ts)
@@ -30,6 +30,29 @@ This repository ~~describes~~ *will eventually describe*:-
 ---
 
 ## introduction
+> *common-x: knowledge-culture*
+
+So, it turns out that we can reformulate some *"finding things, in spaces"* type-problems, to *"growing things, in spaces"* type-problems *(--which is interesting, right?!)*
+
+> for intuition, think of the difference bewteen recall and derivation -- *(the difference between being told something to remember (like LLMs, say); and independently working things out from "first-principles")*
+
+Similarly, it turns out that we can grow the solution to a problem-space type problems piece-by-piece, from first-principles, to final structural form; and all without knowing specifically about the special-domain structural-forms *(which are grown)* in advance...
+
+> for intuition, think of intellectual/cognitive creativity & insight -- *the gensis of new domains of knowledge*
+
+More than the difference between recall & derivation, perhaps the most apt analogy for this kind of *"remarkably organic"* problem-solving, is biological-growth: specifically, when we want to artificially engineer *(very simple) * biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the rright kinds of principle *(chemical & biological)* *"pieces"* from which the intended forms will grow; and this is exactly what must be done to *"grow solutions to problem-space problems"* we must first identify and isolate only the right kinds of *"pieces"* from which the final solution form will grow...
+
+...like a petri-dish in a laboratory environment...
+
+...but within the entirely abstract domain of *"information"*
+
+Knowledge, it seems, is like a crop; and must be cultivated
+
+Learning, it seems, depends upon situationally/topically appropriate *"knowledge culture"*, from which structural representational forms are cultivated, and grown to maturity.
+
+Wild.
+
+Wild knowledge, in abstract realms...
 
 ---
 
