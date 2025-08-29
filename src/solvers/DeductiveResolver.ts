@@ -19,6 +19,9 @@ const conquer = <T extends Token | Word>(commonMap: CommonRange<T>, cma: CommonR
 
 const sufficientRemaining = <T extends Token | Word>(aRa: IRange<T>[], bRa: IRange<T>[], options?: IOptions) => (options ? aRa.find((x) => x.length > options.minimumSequenceLength) && bRa.find((x) => x.length > options.minimumSequenceLength) : aRa.length > 0 && bRa.length > 0);
 
+/**
+ * 
+ */
 export class DeductiveResolver<T extends Token | Word> extends Resolver<T> {
     readonly cra: CommonRange<T>[] = [];
 
@@ -33,9 +36,9 @@ export class DeductiveResolver<T extends Token | Word> extends Resolver<T> {
 
         if (common) conquer(common, cra);
 
-        if (sufficientRemaining(aRa, bRa)) processRanges(aRa, bRa, d + 1);
+        if (sufficientRemaining(aRa, bRa)) processRanges(aRa, bRa, d + 1); // fractal recursion: process (ranges) -> split to sub-ranges -> processRanges -> iteratively cross-check sub-ranges -> process (sub-ranges -> ranges) |->
 
-        step(aR.length + bR.length); // TODO: need to update this value... ballpark for now
+        step(aR.length + bR.length); // TODO: need to update this value... ballpark for now; custom data-structures will significanly reduce & custom hardware will eliminate
 
         return this;
     };
