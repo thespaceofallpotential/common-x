@@ -36,7 +36,7 @@ So, it turns out that we can reformulate some *"finding things, in spaces"* type
 
 > for intuition, think of the difference bewteen recall and derivation -- *(the difference between being told something to remember (like LLMs, say); and independently working things out from "first-principles")*
 
-Similarly, it turns out that we can grow the solution to a problem-space type problems piece-by-piece, from first-principles, to final structural form; and all without knowing specifically about the special-domain structural-forms *(which are grown)* in advance...
+Like independent derivation, we can grow solutions *(to a problem-space type problems)* piece-by-piece, from first-principles, to final structural form; and all without knowing specifically about the special-domain structural-forms *(which are grown)* in advance...
 
 > for intuition, think of intellectual/cognitive creativity & insight -- *the gensis of new domains of knowledge*
 
