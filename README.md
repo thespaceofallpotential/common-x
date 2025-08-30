@@ -15,7 +15,7 @@ This repository ~~describes~~ *will eventually describe*:-
 
 1. an [introduction](#introduction) to the premise of *"knowledge culture"*, to build intuition
 
-2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")*
+2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *(generation 1)*
 
 3. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
