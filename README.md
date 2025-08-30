@@ -17,16 +17,20 @@ This repository ~~describes~~ *will eventually describe*:-
 
 1. an [introduction](#introduction) to the premise of *"knowledge culture"*, to build intuition
 
-2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
+2. problem background, & motivation
 
-3. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
+3. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
 
-4. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
+4. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
-5. a discussion on the *"ideal form"* of *"common-x solvers"*, including data-structures & hardware
+5. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
 
-> Links:
-> - [Practical demonstration (generation 1)](./src/generation_1.ts)
+6. a discussion on the *"ideal form"* of *"common-x solvers"*, including data-structures & hardware
+
+> Practical demonstrations:
+> - [generation 1: basic substring — *(natural language)*](./src/generation_1.ts)
+> - generation 2: substring — *(DNA)*
+> - generation x: subsequence
 > 
 > Solvers *(generation 1)*:
 >  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.ts) | [Solver](./src/gen_1/solvers/BruteForceSolver.ts)
@@ -72,6 +76,15 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 	*consider, that with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
+## problem background, & motivation
+
+
+---
+## generalised approach & method
+
+2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
+
+
 ## tbc
 
 ...
