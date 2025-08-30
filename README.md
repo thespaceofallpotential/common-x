@@ -67,7 +67,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 
 > *musing:*
 > 
-> 	*consider that, with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?) within abstract realms... ([notes](./notes/cultivated%20solver.md))*
+> 	*consider that, with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
 ## tbc
