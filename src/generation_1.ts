@@ -12,17 +12,17 @@ const isSummary = true;
 
 console.log(`Solvers\,`);
 
-console.log("\,cost values are ballpark for now (though representative); ultimately affected by cachability/ operational architecture, not yet introduced \n\n")
+console.log(",cost values are ballpark for now (though representative); ultimately affected by cachability/ operational architecture, not yet introduced \n\n");
 
 // CultivatedSolver: organic "knowledge culture" ; middle-out/through
 
 console.log(`CultivatedSolver`);
 
-const culture = new CultivatedSolver(aWr, bWr);
+const cultivated = new CultivatedSolver(aWr, bWr);
 
-culture.process();
+cultivated.process();
 
-describeWordRanges(culture.cra, culture.cost, isSummary);
+describeWordRanges(cultivated.cra, cultivated.cost, isSummary);
 
 ///         ---         ///
 
@@ -83,3 +83,12 @@ const lazyFake = new LazyFakeSuffixTreeSolver(aWr, bWr);
 lazyFake.process();
 
 describeWordRanges(lazyFake.cra, lazyFake.cost, false);
+
+export const generation1 = {
+    cultivated,
+    constituient,
+    projection,
+    elemetary,
+    brute,
+    lazyFake,
+};

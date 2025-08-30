@@ -1,5 +1,5 @@
 import { CommonRange } from "./CommonTypes.ts";
-import { COMMA, NEW_LINE, Position, PositionPair, Report, SPACE, Word } from "./Types.ts";
+import { COMMA, COMMA_SEPARATOR, NEW_LINE, Position, PositionPair, Report, SPACE, Word } from "./Types.ts";
 
 const toReport = (ranges: CommonRange<Word>[]): Report => {
     const report: Report = new Map();
@@ -47,3 +47,7 @@ export const describeWordRanges = (ranges: CommonRange<Word>[], cost: number, su
 
     console.log(reportDescription);
 };
+
+export const topics = (x: object): string[] => Object.keys(x);
+
+export const topicListInline = (x: object): string => topics(x).join(COMMA_SEPARATOR);
