@@ -23,14 +23,16 @@ This repository ~~describes~~ *will eventually describe*:-
 
 4. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
-5. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
+5. a discussion on the *"ideal form"* of *"common-x solvers"*, including data-structures & hardware
 
-6. a discussion on the *"ideal form"* of *"common-x solvers"*, including data-structures & hardware
+6. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
 
 > Practical demonstrations:
 > - [generation 1: basic substring — *(natural language)*](./src/generation_1.ts)
 > - generation 2: substring — *(DNA)*
-> - generation x: subsequence
+> - generation ...: subsequence
+> - generation ...: artefacts
+> - generation ...: problem-space reformulation 
 > 
 > Solvers *(generation 1)*:
 >  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.ts) | [Solver](./src/gen_1/solvers/BruteForceSolver.ts)
@@ -82,7 +84,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 ---
 ## generalised approach & method
 
-2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
+> note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
 
 
 ## tbc

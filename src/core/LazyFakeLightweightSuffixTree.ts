@@ -20,11 +20,11 @@ export class LazyFakeLightweightSuffixTree<T extends Token | Word> {
     }
 
     getSuffixes = (t: T): PositionArray<T>[] => {
-        const { ra, rssi: rsii, cache } = this;
+        const { ra, rssi, cache } = this;
 
         if (cache?.has(t)) return cache.get(t)!;
 
-        const sia = rsii.get(t);
+        const sia = rssi.get(t);
 
         const pa = sia ? sia.map((p) => ({ p, ta: ra.slice(p) } as PositionArray<T>)) : [];
 
@@ -36,20 +36,19 @@ export class LazyFakeLightweightSuffixTree<T extends Token | Word> {
 
 export class LazyFakeSuffixTree<T extends Token | Word> extends LazyFakeLightweightSuffixTree<T> {
     /**
-     * rather than generate and pass all suffixes to caller,
-     * check sequence internally
+     * rather than generate and pass all suffixes to caller, check sequence internally
      * @param ta
      * @returns
      */
     check = (ta: TypeArray<T>): CommonRange<T>[] => {
         const cra: CommonRange<T>[] = [];
 
-        const { ra, rssi: rsii } = this;
+        const { ra, rssi } = this;
 
         for (let i = 0; i < ta.length; i++) {
             const t = ta[i];
 
-            const sia = rsii.get(t);
+            const sia = rssi.get(t);
 
             if (sia === undefined) continue;
 
