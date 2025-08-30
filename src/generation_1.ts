@@ -26,7 +26,7 @@ describeWordRanges(culture.cra, culture.cost, isSummary);
 
 ///         ---         ///
 
-// ConstituientSolver: structureless mass of the solution relative general-domain
+// ConstituientSolver: structureless mass of the solution-relative general-domain
 
 console.log(`\nConstituientSolver`);
 
@@ -38,7 +38,7 @@ console.log(`c:${constituient.cPa.length} (positive) -- cost:${constituient.cost
 
 ///         ---         ///
 
-// ProjectionSolver: approximation, hallucination, anomalous
+// ProjectionSolver: approximation, hallucination, anomaly
 
 console.log(`\nProjectionSolver`);
 
