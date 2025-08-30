@@ -73,6 +73,11 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 ...
 
 
+## appendix
 
+Additional notes:
+- [cultivated solver](./notes/cultivated%20solver.md)
+- [symmetric index](./notes/symmetric%20index.md)
+- [universal solver](./notes/universal%20solver.md)
 
 
