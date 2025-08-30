@@ -1,5 +1,5 @@
-import { describeWordRanges } from "../core/Report.ts";
-import { aWr, bWr } from "../core/Source.ts";
+import { describeWordRanges } from "../../core/Report.ts";
+import { aWr, bWr } from "../../core/Source.ts";
 import { BruteForceSolver } from "../solvers/BruteForceSolver.ts";
 
 // BruteForceSolver

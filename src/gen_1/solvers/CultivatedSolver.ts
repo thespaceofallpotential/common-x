@@ -1,9 +1,9 @@
-import { CommonRange } from "../core/CommonTypes.ts";
-import { getPositionVectors } from "../core/helpers.ts";
-import { IRange } from "../core/Range.ts";
-import { ISolver, Solver } from "../core/Solver.ts";
-import { toSymmetricIndex } from "../core/SymmetricIndex.ts";
-import { Position, Token, Word } from "../core/Types.ts";
+import { CommonRange } from "../../core/CommonTypes.ts";
+import { getPositionVectors } from "../../core/helpers.ts";
+import { IRange } from "../../core/Range.ts";
+import { ISolver, Solver } from "../../core/Solver.ts";
+import { toSymmetricIndex } from "../../core/SymmetricIndex.ts";
+import { Position, Token, Word } from "../../core/Types.ts";
 
 // solving the common-substring problem while avoiding redundant time and space complexity of "negative-space"
 

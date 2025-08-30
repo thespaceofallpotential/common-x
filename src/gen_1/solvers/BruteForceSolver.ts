@@ -1,7 +1,7 @@
-import { CommonRange } from "../core/CommonTypes.ts";
-import { IRange } from "../core/Range.ts";
-import { ISolver, Solver } from "../core/Solver.ts";
-import { Position, Token, Word } from "../core/Types.ts";
+import { CommonRange } from "../../core/CommonTypes.ts";
+import { IRange } from "../../core/Range.ts";
+import { ISolver, Solver } from "../../core/Solver.ts";
+import { Position, Token, Word } from "../../core/Types.ts";
 
 class Memo<T extends Token | Word> {
     readonly cra: CommonRange<T>[] = [];

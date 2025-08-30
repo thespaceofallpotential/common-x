@@ -1,5 +1,5 @@
-import { describeWordRanges } from "../core/Report.ts";
-import { aWr, bWr } from "../core/Source.ts";
+import { describeWordRanges } from "../../core/Report.ts";
+import { aWr, bWr } from "../../core/Source.ts";
 import { PositiveProjectionSolver } from "../solvers/PositiveProjectionSolver.ts";
 
 // ProjectionSolver: approximation, hallucination, anomalous

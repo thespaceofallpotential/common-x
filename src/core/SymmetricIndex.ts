@@ -2,6 +2,7 @@ import { Position, Token, TypeArray, TypeSet, Word } from "./Types.ts";
 
 /**
  * Symmetric Index
+ * > / Inverted Index (record-level). See "rebranding" notes below
  * 
  * > Map: a map is a lower-dimensional representation of arbitrarily-plural 
  * higher-dimensional form
@@ -19,6 +20,16 @@ import { Position, Token, TypeArray, TypeSet, Word } from "./Types.ts";
  * > (smaller) lower-dimensional abstract spaces to avoid the costs of (larger)
  * > higher-dimensional ones
  * 
+ * Notes: rebranding
+ * 
+ * The reason for "rebranding" an "inverted index" as "symmetric index", is due to 
+ * symetries between a document-level "intertex index" and the way i was using a
+ * (set-theoretic) set, as a lower-dimensional space to qualitativly filter complexity.
+ * 
+ * And as it turns out, symmetry between reference-frames are exploitable both by 
+ * analysis and synthetis, and consequently, symmetry becomes the clear and unavoidable 
+ * thematic unit and interpretive/ representational context; but more will be said 
+ * at a later stage
  */
 export type SymmetricIndex<T extends Token | Word> = Map<T, Array<Position>>;
 

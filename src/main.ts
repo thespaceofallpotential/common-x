@@ -1,13 +1,18 @@
 import { describeWordRanges } from "./core/Report.ts";
 import { aWr, bWr } from "./core/Source.ts";
 import { Word } from "./core/Types.ts";
-import { BruteForceSolver } from "./solvers/BruteForceSolver.ts";
-import { ConstituientSolver } from "./solvers/ConstituientSolver.ts";
-import { CultivatedSolver } from "./solvers/CultivatedSolver.ts";
-import { DeductiveResolver } from "./solvers/DeductiveResolver.ts";
-import { PositiveProjectionSolver } from "./solvers/PositiveProjectionSolver.ts";
+import { BruteForceSolver } from "./gen_1/solvers/BruteForceSolver.ts";
+import { ConstituientSolver } from "./gen_1/solvers/ConstituientSolver.ts";
+import { CultivatedSolver } from "./gen_1/solvers/CultivatedSolver.ts";
+import { DeductiveResolver } from "./gen_1/solvers/DeductiveResolver.ts";
+import { LazyFakeSuffixTreeSolver } from "./gen_1/solvers/LazyFakeSuffixTreeSolver.ts";
+import { PositiveProjectionSolver } from "./gen_1/solvers/PositiveProjectionSolver.ts";
 
 const isSummary = true;
+
+console.log(`Solvers\,`);
+
+console.log("\,cost values are ballpark for now (though representative); ultimately affected by cachability/ operational architecture, not yet introduced \n\n")
 
 // CultivatedSolver: organic "knowledge culture" ; middle-out/through
 
@@ -71,10 +76,10 @@ describeWordRanges(brute.cra, brute.cost, isSummary);
 
 // LazyFakeSuffixTreeSolver
 
-// console.log(`\nLazyFakeSuffixTreeSolver`);
+console.log(`\nLazyFakeSuffixTreeSolver`);
 
-// const lazyFake = new LazyFakeSuffixTreeSolver(aWr, bWr);
+const lazyFake = new LazyFakeSuffixTreeSolver(aWr, bWr);
 
-// lazyFake.process();
+lazyFake.process();
 
-// describeWordRanges(lazyFake.cra, lazyFake.cost, false);
+describeWordRanges(lazyFake.cra, lazyFake.cost, false);

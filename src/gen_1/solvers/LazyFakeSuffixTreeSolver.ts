@@ -1,10 +1,10 @@
-import { CommonRange } from "../core/CommonTypes.ts";
-import { strictParser } from "../core/helpers.ts";
-import { LazyFakeLightweightSuffixTree } from "../core/LazyFakeLightweightSuffixTree.ts";
-import { IRange } from "../core/Range.ts";
-import { ISolver, Solver } from "../core/Solver.ts";
-import { aWr, bWr } from "../core/Source.ts";
-import { Token, Word } from "../core/Types.ts";
+import { CommonRange } from "../../core/CommonTypes.ts";
+import { strictParser } from "../../core/helpers.ts";
+import { LazyFakeLightweightSuffixTree } from "../../core/LazyFakeLightweightSuffixTree.ts";
+import { IRange } from "../../core/Range.ts";
+import { ISolver, Solver } from "../../core/Solver.ts";
+import { aWr, bWr } from "../../core/Source.ts";
+import { Token, Word } from "../../core/Types.ts";
 
 /**
  * My intention was to implement and compare a generalised suffix-tree, but 

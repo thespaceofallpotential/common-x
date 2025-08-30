@@ -1,9 +1,9 @@
-import { CommonRange, DivideDismissConquer } from "../core/CommonTypes.ts";
-import { parseCheckSequence, parseSplitCommon } from "../core/FilteredRangeSplit.ts";
-import { IOptions } from "../core/Options.ts";
-import { IRange } from "../core/Range.ts";
-import IResolver, { Resolver } from "../core/Resolver.ts";
-import { Token, Word } from "../core/Types.ts";
+import { CommonRange, DivideDismissConquer } from "../../core/CommonTypes.ts";
+import { parseCheckSequence, parseSplitCommon } from "../../core/FilteredRangeSplit.ts";
+import { IOptions } from "../../core/Options.ts";
+import { IRange } from "../../core/Range.ts";
+import IResolver, { Resolver } from "../../core/Resolver.ts";
+import { Token, Word } from "../../core/Types.ts";
 
 const isCandidate = <T extends Token | Word>(a: IRange<T>, b: IRange<T>) => {
     const isSameSize = a.ra.length === b.ra.length;

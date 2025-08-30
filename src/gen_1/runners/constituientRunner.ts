@@ -1,4 +1,4 @@
-import { aWr, bWr } from "../core/Source.ts";
+import { aWr, bWr } from "../../core/Source.ts";
 import { ConstituientSolver } from "../solvers/ConstituientSolver.ts";
 
 // ConstituientSolver: structureless mass of the solution relative general-domain

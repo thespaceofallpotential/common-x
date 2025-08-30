@@ -1,7 +1,7 @@
-import { CommonRange } from "../core/CommonTypes.ts";
-import { IRange, toRanges } from "../core/Range.ts";
-import { ISolver, Solver } from "../core/Solver.ts";
-import { Token, Word } from "../core/Types.ts";
+import { CommonRange } from "../../core/CommonTypes.ts";
+import { IRange, toRanges } from "../../core/Range.ts";
+import { ISolver, Solver } from "../../core/Solver.ts";
+import { Token, Word } from "../../core/Types.ts";
 import { BruteForceSolver } from "./BruteForceSolver.ts";
 
 export class PositiveProjectionSolver<T extends Token | Word> extends Solver<T> {

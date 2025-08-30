@@ -1,8 +1,8 @@
-import { CommonPoint, CommonPoints } from "../core/CommonTypes.ts";
-import { IRange } from "../core/Range.ts";
-import { ISolver, Solver } from "../core/Solver.ts";
-import { toSymmetricIndex } from "../core/SymmetricIndex.ts";
-import { Token, Word } from "../core/Types.ts";
+import { CommonPoint, CommonPoints } from "../../core/CommonTypes.ts";
+import { IRange } from "../../core/Range.ts";
+import { ISolver, Solver } from "../../core/Solver.ts";
+import { toSymmetricIndex } from "../../core/SymmetricIndex.ts";
+import { Token, Word } from "../../core/Types.ts";
 
 export class ConstituientSolver<T extends Token | Word> extends Solver<T> {
     readonly cPa: CommonPoints<T> = [];
