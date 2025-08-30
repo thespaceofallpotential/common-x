@@ -41,8 +41,8 @@ This repository ~~describes~~ *will eventually describe*:-
 
 So, it turns out that we can reformulate some *"finding things, in spaces"* type-problems, to *"growing things, in spaces"* type-problems
 
-*—which is interesting, right?*
-
+> *—which is interesting, right?*
+> 
 > for intuition, think of the difference between recall and derivation — *(the difference between being told something to remember, like LLMs, say; and independently working things out from "first-principles")*
 
 Like independent derivation, we can grow solutions *(to problem-space type problems)* piece-by-piece: from first-principles, to final structural form; and all without being told what to look for — without knowing in advance the *"special-domain structural forms" (which are subsequently grown)*
@@ -53,21 +53,21 @@ More than the difference between recall & derivation, perhaps the most apt analo
 
 Specifically, when we want to artificially engineer *(only very simple)* biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the *"right kinds"* of ingredients, the *(chemical & biological)* *"pieces"* from which the intended forms will grow. And this is exactly what must be done to *"**grow** solutions, to problem-space problems"* we must first identify and isolate only the right kinds of *"ingredients"* from which the form of the final solution will grow...
 
-...like a petri-dish in a laboratory environment...
-
-...but within the entirely abstract domain of *"information"*...
+> *...like a petri-dish in a laboratory environment...*
+> 
+> *...but within the entirely abstract domain of "**information**"...*
 
 Knowledge, it seems, is like a crop; and must be cultivated.
 
 Learning, it seems, depends upon situationally appropriate *"knowledge culture"*, from which "structural representational forms" are cultivated, and grown to maturity. And just like physical-crops — *(in reality)* — it is sometimes quicker and easier to cultivate and grow a crop, than to find the same volume, arbitrarily distributed throughout some terrain...
 
-Wild, *right?*
-
-> *musing: consider that, with the [Cultivated Solver](./src/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"**, as a physical biological artefact, cultivated and grown (farmed?!), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
-
+> *Wild...* *—right?*
+> 
+> *musing:*
+> 
+> 	*consider that, with the [Cultivated Solver](./src/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?) within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
-
 ## tbc
 
 ...
