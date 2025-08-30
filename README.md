@@ -53,15 +53,17 @@ Like independent derivation, we can grow solutions *(to problem-space type probl
 
 More than the difference between recall & derivation, perhaps the most apt analogy for this kind of *"remarkably organic"* problem-solving, is biological-growth.
 
-Specifically, when we want to artificially engineer *(only very simple)* biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the *"right kinds"* of ingredients, the *(chemical & biological)* *"pieces"* from which the intended forms will grow. And this is exactly what must be done to *"**grow** solutions, to problem-space problems"* we must first identify and isolate only the right kinds of *"ingredients"* from which the form of the final solution will grow...
+Specifically, when we want to artificially engineer *(only very simple)* biological-form, we must first isolate and prepare a special environment, free from pollutants, full of all of the *"right kinds"* of ingredients, the *(chemical & biological)* *"ingredients"* from which the intended forms will grow. 
+
+And this is exactly what must be done to *"**grow** solutions, to problem-space problems"* —  we first identify and isolate only the right kinds of *"ingredients"* from which the structural form of the final solution will grow...
 
 > *...like a petri-dish in a laboratory environment...*
 > 
-> *...but within the entirely abstract domain of "**information**"...*
+> *...but within the entirely abstract domains of "**information & computation**"...*
 
-Knowledge, it seems, is like a crop; and must be cultivated.
+Knowledge, it seems, is like a physical crop; and must be cultivated.
 
-Learning, it seems, depends upon situationally appropriate *"knowledge culture"*, from which "structural representational forms" are cultivated, and grown to maturity. And just like physical-crops — *(in reality)* — it is sometimes quicker and easier to cultivate and grow a crop, than to find the same volume, arbitrarily distributed throughout some terrain...
+Learning, it seems, depends upon situationally appropriate *"knowledge culture"*, from which "structural representational forms" are cultivated, and grown to maturity. And just like physical-crops — *(in the physical environments of reality)* — it is sometimes quicker and easier to cultivate and grow a crop, than to find the same volume of form, arbitrarily distributed throughout some terrain...
 
 > *Wild...* *—right?*
 > 
