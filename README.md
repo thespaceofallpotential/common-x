@@ -1,4 +1,4 @@
-# common-x: *—from "knowledge culture" and a "universal solver"; to a basic model of "organic general-intelligence"*
+# common-x:  *—from "knowledge culture" and a "universal solver", to a basic model of "organic general-intelligence"*
 
 Yeah-yeah, ***finding*** solutions (within some problem-space) is cool... *—but did you ever think about **growing** them?*
 
@@ -6,9 +6,9 @@ Terms:-
 
 -  **knowledge culture**:  *~~finding~~ **growing** solutions within (cultivated) problem-space*
 
-- **universal solver**:  *symmetry based problem-reformulation makes respective solutions "more accessible" ([notes](./notes/universal%20solver.md))*
+- **universal solver**:  *symmetry based problem-reformulation makes respective solutions "compositionally accessible" ([notes](./notes/universal%20solver.md))*
 
-- **organic general-intelligence**:  *against brute-force; domain invariant intelligence, from first-principles*
+- **organic general-intelligence**:  *against brute-force — domain invariant intelligence, from first-principles*
 
 ---
 ## overview
@@ -39,7 +39,7 @@ This repository ~~describes~~ *will eventually describe*:-
 ---
 
 ## introduction
-> *common-x: knowledge-culture; to understand (any) complexity, we must first understand it's simplicities, and how the two relate*
+> *common-x: knowledge-culture — to understand (any) complexity, we must first understand it's simplicities, and how the two relate*
 
 So, it turns out that we can reformulate some *"finding things, in spaces"* type-problems, to *"growing things, in spaces"* type-problems
 
@@ -69,7 +69,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 
 > *musing:*
 > 
-> 	*consider that, with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
+> 	*consider, that with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
 ## tbc
