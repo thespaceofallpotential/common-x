@@ -2,6 +2,8 @@
 
 Yeah-yeah, ***finding*** solutions (within some problem-space) is cool... *—but did you ever think about **growing** them?*
 
+Terms:-
+
 -  **knowledge culture**:  *~~finding~~ **growing** solutions within (cultivated) problem-space*
 
 - **universal solver**:  *symmetry based problem-reformulation makes respective solutions "more accessible" ([notes](./notes/universal%20solver.md))*
@@ -15,7 +17,7 @@ This repository ~~describes~~ *will eventually describe*:-
 
 1. an [introduction](#introduction) to the premise of *"knowledge culture"*, to build intuition
 
-2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *(generation 1)*
+2. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
 
 3. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
@@ -24,15 +26,15 @@ This repository ~~describes~~ *will eventually describe*:-
 5. a discussion on the *"ideal form"* of *"common-x solvers"*, including data-structures & hardware
 
 > Links:
-> - [Practical demonstration (generation 1)](./src/main.ts)
+> - [Practical demonstration (generation 1)](./src/generation_1.ts)
 > 
 > Solvers *(generation 1)*:
->  - [Brute Force Runner](./src/runners/bruteForceRunner.ts) | [Solver](./src/solvers/BruteForceSolver.ts)
->  - [Constituent Runner](./src/runners/constituientRunner.ts) | [Solver](./src/solvers/ConstituientSolver.ts)
->  - [Cultivated Runner](./src/runners/cultivatedRunner.ts) | [Solver](./src/solvers/CultivatedSolver.ts)
->  - [Deductive Runner](./src/runners/deductiveRunner.ts) | [Solver](./src/solvers/DeductiveResolver.ts)
->  - [(Lazy Fake) Suffix-Tree Runner](./src/runners/lazyFakeSuffixTreeRunner.ts) | [Solver](./src/solvers/LazyFakeSuffixTreeSolver.ts)
->  - [Positive Projection Runner](./src/runners/projectionSolver.ts) | [Solver](./src/solvers/ProjectionSolver.ts)
+>  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.ts) | [Solver](./src/gen_1/solvers/BruteForceSolver.ts)
+>  - [Constituent Runner](./src/gen_1/runners/constituientRunner.ts) | [Solver](./src/gen_1/solvers/ConstituientSolver.ts)
+>  - [Cultivated Runner](./src/gen_1/runners/cultivatedRunner.ts) | [Solver](./src/gen_1/solvers/CultivatedSolver.ts)
+>  - [Deductive Runner](./src/gen_1/runners/deductiveRunner.ts) | [Solver](./src/gen_1/solvers/DeductiveResolver.ts)
+>  - [(Lazy Fake) Suffix-Tree Runner](./src/gen_1/runners/lazyFakeSuffixTreeRunner.ts) | [Solver](./src/gen_1/solvers/LazyFakeSuffixTreeSolver.ts)
+>  - [Positive Projection Runner](./src/gen_1/runners/projectionSolver.ts) | [Solver](./src/gen_1/solvers/ProjectionSolver.ts)
 
 ---
 
@@ -65,7 +67,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 
 > *musing:*
 > 
-> 	*consider that, with the [Cultivated Solver](./src/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?) within abstract realms... ([notes](./notes/cultivated%20solver.md))*
+> 	*consider that, with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), might we be looking at **the domestication of "wild-knowledge"** — (as a physical biological artefact) — albeit cultivated, grown (farmed?!), and evolved (bred?) within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
 ## tbc
