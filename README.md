@@ -87,6 +87,11 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
 
 
+---
+## generation 1
+
+> *(see: [generation 1](/notes/generation%201.md)
+
 ## tbc
 
 ...
