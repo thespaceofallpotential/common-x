@@ -10,6 +10,9 @@ Terms:-
 
 - **organic general-intelligence**:  *against brute-force — domain invariant intelligence, from first-principles*
 
+
+> 1. [generation 1](/notes/generation%201.md
+
 ---
 ## overview
 
