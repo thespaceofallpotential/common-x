@@ -3,10 +3,14 @@
 
   > *a map is a lower-dimensional representation of arbitrarily-plural higher-dimensional form*
   
-A *"symmetric index"* maps higher-dimensional form to *(index)* keys which represent respective *(indexed)* form *"literally"*.
+A *"symmetric index"* maps higher-dimensional form/space to *(index)* keys which represent respective *(indexed)* form/space *"literally"*.
 
-In this way, a *"symmetric index"* *(or a map generally)* represents and exploits symmetries-of-form *(between arbitrarily-different phenomena/dimensional-spaces)*, to enable interrogation and navigation of higher-dimensions, albeit at the *(correspondingly lower)* cost of lower-dimensional key-space
-  
+> the keys of a **"numeric symmetric index"** are **numbers** *(spatial coordinates)*
+
+> the keys of a **"formable symmetric index"** are **form** *(structure/ structural characteristics)*
+
+A *"symmetric index"* therefore, *(or a map generally)*, represents and exploits symmetries *(between arbitrarily-different phenomena/dimensional-spaces)* to enable interrogation and navigation of higher-dimensions, at the *(correspondingly lower)* cost of lower-dimensional key-space.
+
 > for example: *in physical reality, we use a map to learn about an area — (say, how to get somewhere) — without needing to physically move. And similarly, we can use (smaller) lower-dimensional abstract-spaces, to avoid the costs of (larger) higher-dimensional ones...*
 
 ---

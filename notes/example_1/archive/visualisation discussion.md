@@ -20,7 +20,7 @@
 ---
 ## visualising problem-space
 
-For two input-strings $a,b$ of lengths $n,m$, set to aes $x,y$, *respectively*; the area of the corresponding two-dimensional problem-space is equal to $n \times m$
+For two input-strings $a,b$ of lengths $n,m$, set to axis $x,y$, *respectively*; the area of the corresponding two-dimensional problem-space is equal to $n \times m$
 
 > or $O(n \times m)$
 
