@@ -7,7 +7,7 @@ from core.types import PositionedValues
 T = TypeVar("T", int, str)
 
 
-class LazyFakeLightweightSuffixTree[T]:
+class LazyFakeLightweightSuffixList[T]:
     range: Range
 
     symmetricMap: SymmetricIndex[T]
