@@ -1,16 +1,19 @@
 from core.range import Range
+from typing import Dict, List, Tuple, TypeVar
+
+T = TypeVar("T", int, str)
 
 
-type TPositionMap[T] = dict[T, int]
+type TPositionMap[T] = Dict[T, int]
 
 
 class CommonRange[T]:
     aPosition: int
     bPosition: int
 
-    values: list[T]
+    values: List[T]
 
-    def __init__(self, aPosition: int, bPosition: int, values: list[T] | None = None):
+    def __init__(self, aPosition: int, bPosition: int, values: List[T] | None = None):
         self.aPosition = aPosition
         self.bPosition = bPosition
 
@@ -20,7 +23,7 @@ class CommonRange[T]:
         return f"a:{self.aPosition} b:{self.bPosition}, v:{self.values})"
 
 
-type CommonRanges[T] = dict[int, CommonRange[T]]
+type CommonRanges[T] = Dict[int, CommonRange]
 
 
 class CommonPoint[T]:
@@ -36,27 +39,28 @@ class CommonPoint[T]:
         self.value = value
 
 
-type CommonPoints[T] = list[CommonPoint[T]]
+type CommonPoints[T] = List[CommonPoint]
 
 
 class CommonalityResult[T]:
-    aRanges: list[Range[T]]
-    bRanges: list[Range[T]]
+    aRanges: List[Range]
+    bRanges: List[Range]
 
-    common: CommonRange[T] | None
+    common: CommonRange | None
 
     def __init__(
         self,
-        aRanges: list[Range[T]],
-        bRanges: list[Range[T]],
-        common: CommonRange[T] | None,
+        aRanges: List[Range],
+        bRanges: List[Range],
+        common: CommonRange | None,
     ) -> None:
         self.aRanges = aRanges
         self.bRanges = bRanges
+
         self.common = common
 
 
-type CommonalityResult2[T] = tuple[list[Range[T]], list[Range[T]], CommonRange[T] | None]
+type CommonalityResult2[T] = Tuple[List[Range], List[Range], CommonRange | None]
 
 # export type CommonPoint<T extends Token | Word> = [ap: Position, bp: Position, v: T];
 # export type CommonPoints<T extends Token | Word> = CommonPoint<T>[];

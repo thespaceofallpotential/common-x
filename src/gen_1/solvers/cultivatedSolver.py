@@ -1,8 +1,11 @@
+from typing import List, TypeVar
 from core import solver
 from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
 from core.types import CommonRange, CommonRanges
 from core.vectors import getPartitionVectors
+
+T = TypeVar("T", int, str)
 
 # CultivtedSolver
 # > search-free "grown" solution; growth from curated parts/ cultivated environment
@@ -34,10 +37,10 @@ from core.vectors import getPartitionVectors
 #   how else might we describe the cultivated solver?
 
 
-class CultivatedSolver[T](solver.AbstractSolver[T]):
-    commonRanges: list[CommonRange] = []
+class CultivatedSolver[T](solver.AbstractSolver):
+    commonRanges: List[CommonRange] = []
 
-    def __init__(self, a: Range[T], b: Range[T]):
+    def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
 
     def process(self):

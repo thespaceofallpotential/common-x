@@ -1,11 +1,14 @@
+from typing import List, TypeVar
 from core import resolver
 from core.debug import debugValues, debugVectors
 from core.parsers import parseCheck, smartRepartition
 from core.range import Range
-from core.types import CommonRange, CommonalityResult
+from core.types import CommonRange
+
+T = TypeVar("T", int, str)
 
 
-def isCandidate[T](a: Range[T], b: Range[T]) -> bool:
+def isCandidate(a: Range, b: Range) -> bool:
     # customisable: dependent upon kind of problem
 
     isSameSize = a.length == b.length
@@ -15,7 +18,7 @@ def isCandidate[T](a: Range[T], b: Range[T]) -> bool:
     return isSameSize & isCommon
 
 
-def areValid[T](aRanges: list[Range[T]], bRanges: list[Range[T]]):
+def areValid(aRanges: List[Range], bRanges: List[Range]):
     # customisable: dependent upon kind of problem
 
     return len(aRanges) > 0 and len(bRanges) > 0
@@ -31,13 +34,13 @@ def areValid[T](aRanges: list[Range[T]], bRanges: list[Range[T]]):
 #   whittling down a piece of wood to reveal the final artefactual-form,
 #   or expert archeological excavation & discovery
 #
-class DeductiveResolver[T](resolver.AbstractResolver[T]):
-    commonRanges: list[CommonRange[T]] = []
+class DeductiveResolver[T](resolver.AbstractResolver):
+    commonRanges: List[CommonRange] = []
 
     def __init__(self) -> None:
         super().__init__()
 
-    def process(self, a: Range[T], b: Range[T], depth: int = 1) -> resolver.AbstractResolver:
+    def process(self, a: Range, b: Range, depth: int = 1) -> resolver.AbstractResolver:
 
         # debugVectors(a, b)
 
@@ -80,14 +83,14 @@ class DeductiveResolver[T](resolver.AbstractResolver[T]):
             # > "exclude the impossible and what is left, however improbable, must be the truth"
             #
             # the deductiveResolver is therefore, a model elementary logical deduction
-            # 
+            #
             # which is more intelligent:
             #   - a process which unconditionally processes all form/space only once, (positive and negative form/space)
-            #   - a process which conditionally reprocesses form/space, to "circle and reevaluate" circumstances under different conditions 
-            # 
-            # when all is said and done, i feel that "hold-up! wtf was that? i'mma take another look!" 
-            # is about as clear a sign of "real/organic/natural" intelligence as is possible to discern 
-            # from such a simple practical demonstration 
+            #   - a process which conditionally reprocesses form/space, to "circle and reevaluate" circumstances under different conditions
+            #
+            # when all is said and done, i feel that "hold-up! wtf was that? i'mma take another look!"
+            # is about as clear a sign of "real/organic/natural" intelligence as is possible to discern
+            # from such a simple practical demonstration
             self.processRanges(aRanges, bRanges, depth + 1)
 
             # self.step(len(result.aRanges) + len(result.bRanges))
@@ -95,5 +98,5 @@ class DeductiveResolver[T](resolver.AbstractResolver[T]):
 
         return self
 
-    def add(self, common: CommonRange[T]):
+    def add(self, common: CommonRange):
         self.commonRanges.append(common)

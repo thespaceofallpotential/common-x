@@ -1,3 +1,8 @@
+from typing import List, Set, TypeVar
+
+T = TypeVar("T", int, str)
+
+
 class PartitionVector:
     position: int
     length: int
@@ -16,15 +21,15 @@ class PartitionVector:
 class Range[T](PartitionVector):
     def __init__(
         self,
-        values: list[T],
+        values: List[T],
         position: int = 0,
-        parts: set[T] | None = None,
+        parts: Set[T] | None = None,
     ):
         super().__init__(position, len(values))
-        
+
         self.values = values
 
-        self.parts = parts if parts else set(values)
+        self.parts = parts if parts else set[T](values)
 
     def getIndex(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)

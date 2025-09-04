@@ -1,12 +1,16 @@
+from typing import List, TypeVar
 from core import solver
+from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
 from core.types import CommonPoint
 
+T = TypeVar("T", int, str)
+
 
 class ConstituientSolver[T](solver.AbstractSolver):
-    commonPoints: list[CommonPoint[T]] = []
+    commonPoints: List[CommonPoint] = []
 
-    def __init__(self, a: solver.Range, b: solver.Range):
+    def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
 
     def process(self) -> solver.AbstractSolver:
@@ -20,7 +24,7 @@ class ConstituientSolver[T](solver.AbstractSolver):
         aXValuePositionMap = toSymmetricIndex(a.values, commonSet)
         bXValuePositionMap = toSymmetricIndex(b.values, commonSet)
 
-        commonValues = list(commonSet)
+        commonValues = list[T](commonSet)
 
         for value in commonValues:
 
@@ -33,7 +37,7 @@ class ConstituientSolver[T](solver.AbstractSolver):
             for ap in aPositions:
                 for bp in bPositions:
 
-                    common = CommonPoint[T](ap, bp, value)
+                    common = CommonPoint(ap, bp, value)
 
                     items.append(common)
 

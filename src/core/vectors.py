@@ -1,10 +1,14 @@
+from typing import List, Set, TypeVar
 from core.range import PartitionVector
 
 
+T = TypeVar("T", int, str)
+
+
 def getPartitionVectors[T](
-    values: list[T], commonSet: set[T], position: int = 0
+    values: List[T], commonSet: Set[T], position: int = 0
 ) -> list[PartitionVector]:
-    items: list[PartitionVector] = []
+    items: List[PartitionVector] = []
 
     current: PartitionVector | None = None
 

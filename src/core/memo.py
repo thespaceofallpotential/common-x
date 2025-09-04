@@ -1,14 +1,18 @@
-from core.types import CommonRange, CommonRanges
+from typing import Dict, List, TypeVar
+from core.types import CommonRange
+
+
+T = TypeVar("T", int, str)
 
 
 class Memo[T]:
-    commonRanges: list[CommonRange[T]] = []
+    commonRanges: List[CommonRange] = []
 
-    prior: dict[int, CommonRange[T]] = dict()
+    prior: Dict[int, CommonRange] = dict()
 
-    current: dict[int, CommonRange[T]] = dict()
+    current: Dict[int, CommonRange] = dict()
 
-    def __init__(self, items: list[CommonRange[T]]) -> None:
+    def __init__(self, items: List[CommonRange]) -> None:
         self.commonRanges = items
 
     def record(self, ai: int, bi: int, aValue: T, bValue: T):
@@ -32,7 +36,7 @@ class Memo[T]:
             return True
 
         def create(ai: int, bi: int, aValue: T):
-            x = CommonRange[T](ai, bi, values=[aValue])
+            x = CommonRange(ai, bi, values=[aValue])
 
             items.append(x)
 

@@ -1,15 +1,18 @@
+from typing import TypeVar
 from core.range import Range
 
 import abc
+
+T = TypeVar("T", int, str)
 
 
 class AbstractSolver[T](metaclass=abc.ABCMeta):
     count: int = 0
 
-    a: Range[T]
-    b: Range[T]
+    a: Range
+    b: Range
 
-    def __init__(self, a: Range[T], b: Range[T]):
+    def __init__(self, a: Range, b: Range):
         self.a = a
         self.b = b
 
@@ -17,5 +20,5 @@ class AbstractSolver[T](metaclass=abc.ABCMeta):
         self.count += value
 
     @abc.abstractmethod
-    def process():
+    def process(self):
         pass

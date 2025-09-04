@@ -1,8 +1,12 @@
+from typing import List, Set, Tuple, TypeVar
 from core.range import PartitionVector, Range
 from core.vectors import getPartitionVectors
 
 
-def partition[T](r: Range[T], pv: PartitionVector) -> Range[T]:
+T = TypeVar("T", int, str)
+
+
+def partition[T](r: Range, pv: PartitionVector) -> Range:
 
     i_start = pv.position - r.position
     i_end = pv.getEnd() - r.position
@@ -15,7 +19,7 @@ def partition[T](r: Range[T], pv: PartitionVector) -> Range[T]:
     return range
 
 
-def partitions[T](r: Range[T], commonSet: set[T]) -> list[Range[T]]:
+def partitions[T](r: Range, commonSet: Set[T]) -> List[Range]:
     vectors = getPartitionVectors(r.values, commonSet, r.position)
 
     ranges = list(map(lambda pv: partition(r, pv), vectors))
@@ -23,7 +27,7 @@ def partitions[T](r: Range[T], commonSet: set[T]) -> list[Range[T]]:
     return ranges
 
 
-def commonPartitions[T](a: Range[T], b: Range[T]) -> tuple[list[Range[T]], list[Range[T]]]:
+def commonPartitions[T](a: Range, b: Range) -> Tuple[List[Range], List[Range]]:
     commonSet = a.parts.intersection(b.parts)
 
     aRanges = partitions(a, commonSet)
@@ -32,32 +36,32 @@ def commonPartitions[T](a: Range[T], b: Range[T]) -> tuple[list[Range[T]], list[
     return (aRanges, bRanges)
 
 
-def partitionAfter[T](r: Range[T], i: int) -> Range[T]:
-    return Range[T](r.values[i:], r.position + i)
+def partitionAfter[T](r: Range, i: int) -> Range:
+    return Range(r.values[i:], r.position + i)
 
 
-def partitionAt[T](r: Range[T], i: int) -> list[Range[T]]:
+def partitionAt[T](r: Range, i: int) -> List[Range]:
     # TODO: check inclusive/exclusive
-    items = [Range[T](r.values[0:i], r.position), partitionAfter(r, i)]
+    items = [Range(r.values[0:i], r.position), partitionAfter(r, i)]
 
     return [x for x in items if x.length > 0]
 
 
-def partitionOn[T](r: Range[T], delimiter: T) -> list[Range[T]]:
-    items: list[Range[T]] = []
+def partitionOn[T](r: Range, delimiter: T) -> List[Range]:
+    items: List[Range] = []
 
     p: int = 0  # position
 
     i: int = r.getIndex(delimiter)  # TODO: check inclusive/exclusive
 
     while i > -1:
-        items.append(Range[T](r.values[p:i], p))
+        items.append(Range(r.values[p:i], p))
 
         p = i
 
         i = r.getIndex(delimiter, i + 1)
 
         if p < r.length:
-            items.append(Range[T](r.values[p:], p))
+            items.append(Range(r.values[p:], p))
 
     return items

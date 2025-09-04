@@ -1,18 +1,19 @@
+from typing import List
 from core.globalDomain import GlobalDomain
 from core.range import Range
 from data.example1Source import A
 
 
 class Source:
-    aWordRange: Range[str]
-    bWordRange: Range[str]
+    aWordRange: Range
+    bWordRange: Range
 
     globalDomain: GlobalDomain
 
-    aTokenRange: Range[int]
-    bTokenRange: Range[int]
+    aTokenRange: Range
+    bTokenRange: Range
 
-    def __init__(self, aWords: list[str], bWords: list[str]) -> None:
+    def __init__(self, aWords: List[str], bWords: List[str]) -> None:
 
         self.aWordRange = Range(aWords)
 

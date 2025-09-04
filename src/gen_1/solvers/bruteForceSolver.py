@@ -1,13 +1,17 @@
+from typing import List, TypeVar
 from core import solver
 from core.memo import Memo
 from core.range import Range
 from core.types import CommonRange
 
 
-class BruteForceSolver[T](solver.AbstractSolver):
-    commonRanges: list[CommonRange[T]] = []
+T = TypeVar("T", int, str)
 
-    def __init__(self, a: Range[T], b: Range[T]) -> None:
+
+class BruteForceSolver[T](solver.AbstractSolver):
+    commonRanges: List[CommonRange] = []
+
+    def __init__(self, a: Range, b: Range) -> None:
         super().__init__(a, b)
 
     def process(self) -> solver.AbstractSolver:
