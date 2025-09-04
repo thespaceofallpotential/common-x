@@ -20,7 +20,23 @@ class CommonRange[T]:
         return f"a:{self.aPosition} b:{self.bPosition}, v:{self.values})"
 
 
-type CommonRanges = dict[int, CommonRange]
+type CommonRanges[T] = dict[int, CommonRange[T]]
+
+
+class CommonPoint[T]:
+    aPosition: int
+    bPosition: int
+
+    value: T
+
+    def __init__(self, ap: int, bp: int, value: T) -> None:
+        self.aPosition = ap
+        self.bPosition = bp
+
+        self.value = value
+
+
+type CommonPoints[T] = list[CommonPoint[T]]
 
 
 class CommonalityResult[T]:
