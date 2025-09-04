@@ -13,7 +13,7 @@ def isCandidate(a: Range, b: Range) -> bool:
 
     isSameSize = a.length == b.length
 
-    isCommon = len(a.parts.symmetric_difference(b.parts)) == 0
+    isCommon = len(a.elements.symmetric_difference(b.elements)) == 0
 
     return isSameSize & isCommon
 
@@ -23,6 +23,7 @@ def areValid(aRanges: List[Range], bRanges: List[Range]):
 
     return len(aRanges) > 0 and len(bRanges) > 0
 
+# DeductiveSolver: idiomatic divide & dismiss, organic: unknown special-domain creativity/ insight
 
 # DeductiveResolver (generation 1: general case)
 #

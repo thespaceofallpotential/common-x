@@ -28,7 +28,7 @@ def partitions[T](r: Range, commonSet: Set[T]) -> List[Range]:
 
 
 def commonPartitions[T](a: Range, b: Range) -> Tuple[List[Range], List[Range]]:
-    commonSet = a.parts.intersection(b.parts)
+    commonSet = a.elements.intersection(b.elements)
 
     aRanges = partitions(a, commonSet)
     bRanges = partitions(b, commonSet)

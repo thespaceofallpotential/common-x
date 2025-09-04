@@ -6,6 +6,7 @@ from core.types import CommonPoint
 
 T = TypeVar("T", int, str)
 
+# ConstituientSolver: structureless mass of the solution-relative general-domain
 
 class ConstituientSolver[T](solver.AbstractSolver):
     commonPoints: List[CommonPoint] = []
@@ -19,7 +20,7 @@ class ConstituientSolver[T](solver.AbstractSolver):
         a = self.a
         b = self.b
 
-        commonSet = a.parts.intersection(b.parts)
+        commonSet = a.elements.intersection(b.elements)
 
         aXValuePositionMap = toSymmetricIndex(a.values, commonSet)
         bXValuePositionMap = toSymmetricIndex(b.values, commonSet)

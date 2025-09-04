@@ -75,7 +75,7 @@ def parseWithRepartition[T](
 
 def smartRepartition[T](a: Range, b: Range) -> CommonalityResult:
 
-    commonSet = a.parts.intersection(b.parts)
+    commonSet = a.elements.intersection(b.elements)
 
     if len(commonSet) == 0:
         return CommonalityResult([], [], None)

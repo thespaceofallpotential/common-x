@@ -7,6 +7,8 @@ from core.vectors import getPartitionVectors
 
 T = TypeVar("T", int, str)
 
+# CultivatedSolver: organic "knowledge culture" ; middle-out/through
+
 # CultivtedSolver
 # > search-free "grown" solution; growth from curated parts/ cultivated environment
 
@@ -49,7 +51,7 @@ class CultivatedSolver[T](solver.AbstractSolver):
 
         items = self.commonRanges # results
 
-        commonSet = a.parts.intersection(b.parts)
+        commonSet = a.elements.intersection(b.elements)
         # unique to each pair
 
         positivePartionVectors = getPartitionVectors(a.values, commonSet, a.position)

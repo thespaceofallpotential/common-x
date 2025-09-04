@@ -8,6 +8,9 @@ from gen_1.solvers.bruteForceSolver import BruteForceSolver
 T = TypeVar("T", int, str)
 
 
+# ProjectionSolver: approximation, hallucination, anomalous
+
+
 class PositiveProjectionSolver[T](solver.AbstractSolver):
     commonRanges: List[CommonRange] = []
 
@@ -20,7 +23,7 @@ class PositiveProjectionSolver[T](solver.AbstractSolver):
         a = self.a
         b = self.b
 
-        commonSet = a.parts.intersection(b.parts)
+        commonSet = a.elements.intersection(b.elements)
 
         aRanges = partitions(a, commonSet)
         bRanges = partitions(b, commonSet)

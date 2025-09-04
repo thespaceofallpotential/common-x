@@ -7,6 +7,7 @@ from core.types import CommonRange
 
 T = TypeVar("T", int, str)
 
+# BruteForceSolver
 
 class BruteForceSolver[T](solver.AbstractSolver):
     commonRanges: List[CommonRange] = []

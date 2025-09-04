@@ -29,10 +29,10 @@ class Range[T](PartitionVector):
 
         self.values = values
 
-        self.parts = parts if parts else set[T](values)
+        self.elements = parts if parts else set[T](values)
 
     def getIndex(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)
 
     def __repr__(self) -> str:
-        return f"p:{self.position} l:{self.length} v:{self.values} s:{self.parts=})"
+        return f"p:{self.position} l:{self.length} v:{self.values} s:{self.elements=})"

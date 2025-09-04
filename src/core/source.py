@@ -19,9 +19,9 @@ class Source:
 
         self.bWordRange = Range(bWords)
 
-        aWordSet = self.aWordRange.parts
+        aWordSet = self.aWordRange.elements
 
-        bWordSet = self.bWordRange.parts
+        bWordSet = self.bWordRange.elements
 
         self.globalDomain = GlobalDomain(aWordSet.union(bWordSet))
 
