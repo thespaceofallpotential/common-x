@@ -2,17 +2,19 @@ from typing import List, TypeVar
 from core import solver
 from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
-from core.types import CommonPoint
+from core.commonality import CommonPoint
 
 T = TypeVar("T", int, str)
 
 # ConstituientSolver: structureless mass of the solution-relative general-domain
 
+
 class ConstituientSolver[T](solver.AbstractSolver):
-    commonPoints: List[CommonPoint] = []
+    commonPoints: List[CommonPoint]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
+        self.commonRanges = []
 
     def process(self) -> solver.AbstractSolver:
 

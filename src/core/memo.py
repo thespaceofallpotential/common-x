@@ -1,12 +1,12 @@
+from core.commonality import CommonRange
 from typing import Dict, List, TypeVar
-from core.types import CommonRange
 
 
 T = TypeVar("T", int, str)
 
 
 class Memo[T]:
-    commonRanges: List[CommonRange] = []
+    commonRanges: List[CommonRange]
 
     prior: Dict[int, CommonRange] = dict()
 

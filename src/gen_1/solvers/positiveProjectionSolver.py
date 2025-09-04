@@ -2,7 +2,7 @@ from typing import List, TypeVar
 from core import solver
 from core.partitionHelpers import partitions
 from core.range import Range
-from core.types import CommonRange
+from core.commonality import CommonRange
 from gen_1.solvers.bruteForceSolver import BruteForceSolver
 
 T = TypeVar("T", int, str)
@@ -12,10 +12,11 @@ T = TypeVar("T", int, str)
 
 
 class PositiveProjectionSolver[T](solver.AbstractSolver):
-    commonRanges: List[CommonRange] = []
+    commonRanges: List[CommonRange]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
+        self.commonRanges = []
 
     def process(self) -> solver.AbstractSolver:
 

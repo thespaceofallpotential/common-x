@@ -3,7 +3,7 @@ from core import resolver
 from core.debug import debugValues, debugVectors
 from core.parsers import parseCheck, smartRepartition
 from core.range import Range
-from core.types import CommonRange
+from core.commonality import CommonRange
 
 T = TypeVar("T", int, str)
 
@@ -23,7 +23,9 @@ def areValid(aRanges: List[Range], bRanges: List[Range]):
 
     return len(aRanges) > 0 and len(bRanges) > 0
 
+
 # DeductiveSolver: idiomatic divide & dismiss, organic: unknown special-domain creativity/ insight
+
 
 # DeductiveResolver (generation 1: general case)
 #
@@ -36,10 +38,11 @@ def areValid(aRanges: List[Range], bRanges: List[Range]):
 #   or expert archeological excavation & discovery
 #
 class DeductiveResolver[T](resolver.AbstractResolver):
-    commonRanges: List[CommonRange] = []
+    commonRanges: List[CommonRange]
 
     def __init__(self) -> None:
         super().__init__()
+        self.commonRanges = []
 
     def process(self, a: Range, b: Range, depth: int = 1) -> resolver.AbstractResolver:
 

@@ -2,7 +2,7 @@ from typing import List, TypeVar
 from core import solver
 from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
-from core.types import CommonRange, CommonRanges
+from core.commonality import CommonRange, CommonRanges
 from core.vectors import getPartitionVectors
 
 T = TypeVar("T", int, str)
@@ -21,35 +21,36 @@ T = TypeVar("T", int, str)
 # possiblity-space to "only those parts (of the set of all) which (legally/ validly) go together"
 
 # note: the commnon-x cultivated solver is a toy model of causality -- hear me out!
-#   
+#
 #   what drives causality, is (sufficient) intersection within finite spaces/ reference-frames
-#       
+#
 #   if we think of chemistry/ biology in four-dimensions of space-time
-#   then only chemicals which become sufficiently adjacent have the potential to react, 
+#   then only chemicals which become sufficiently adjacent have the potential to react,
 #   only a subset of which react, and a subset again form persisted stable forms
-# 
+#
 #   the same applies to biological organisms: re reward/ avoidance, survival, and reproduction
-# 
+#
 #   whatever volume of phenomena exist within physical spaces, not all is relevant all the time
 #   not all is "at play"
-# 
-#   do we learn more by becoming overwhelemed by "the space of all possible", or do we intelligently 
+#
+#   do we learn more by becoming overwhelemed by "the space of all possible", or do we intelligently
 #   culture or attention-spaces, to only those phenomena relelevant to an immediate need
-# 
+#
 #   how else might we describe the cultivated solver?
 
 
 class CultivatedSolver[T](solver.AbstractSolver):
-    commonRanges: List[CommonRange] = []
+    commonRanges: List[CommonRange]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
+        self.commonRanges = []
 
     def process(self):
         a = self.a
         b = self.b
 
-        items = self.commonRanges # results
+        items = self.commonRanges  # results
 
         commonSet = a.elements.intersection(b.elements)
         # unique to each pair
@@ -60,7 +61,7 @@ class CultivatedSolver[T](solver.AbstractSolver):
         xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
         # value (word | token) -> position map for all common elements in b
 
-        progress: CommonRanges = dict() # memoise (immediately/ adjacent) prior position
+        progress: CommonRanges = dict()  # memoise (immediately/ adjacent) prior position
 
         for vector in positivePartionVectors:
             origin = vector.position
@@ -68,11 +69,11 @@ class CultivatedSolver[T](solver.AbstractSolver):
             for i_v in range(vector.length):
                 position = origin + i_v
 
-                value = a.values[position] # (word | token)
-                
+                value = a.values[position]  # (word | token)
+
                 xPositions = (
                     xValuePositionsMap.get(value) or []
-                ) # positions of the value in b: none are redundant
+                )  # positions of the value in b: none are redundant
                 # TODO: never None - check  python equivalent for TS '!'
 
                 for xp in xPositions:

@@ -1,6 +1,5 @@
 from typing import TypeVar
-from core.range import Range
-from core.reporting import rangeValueString, vectorsString
+from core.range import Range, rangeValues, vectorsString
 
 T = TypeVar("T", int, str)
 
@@ -14,4 +13,4 @@ def debugVectors[T](a: Range, b: Range, override: bool = False):
 
 def debugValues[T](a: Range, b: Range, override: bool = False):
     if override or isActive:
-        print(f"{rangeValueString(a)} | {rangeValueString(b)}")
+        print(f"{rangeValues(a)} | {rangeValues(b)}")

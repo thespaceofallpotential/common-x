@@ -1,5 +1,4 @@
 from typing import TypeVar
-from core.reporting import commonPartitionString
 from core.source import Source
 from data.example1Source import aWords
 from data.example1Source import bWords
@@ -29,7 +28,7 @@ brute = BruteForceSolver(a, b)
 brute.process()
 
 for c in brute.commonRanges:
-    print(commonPartitionString(c))
+    print(c)
 
 # cultivted solver: search-free "grown" solution; growth from curated parts/ cultivated environment
 
@@ -40,7 +39,7 @@ cultivated = CultivatedSolver(a, b)
 cultivated.process()
 
 for c in cultivated.commonRanges:
-    print(commonPartitionString(c))
+    print(c)
 
 # deductive resolver: knowledge-free "whittled" solution; iterative elimination of negative-space
 
@@ -51,7 +50,7 @@ deductive = DeductiveResolver()
 deductive.process(a, b)
 
 for c in deductive.commonRanges:
-    print(commonPartitionString(c))
+    print(c)
 
 # positive projecttion  solver
 
@@ -62,4 +61,4 @@ projection = PositiveProjectionSolver(a, b)
 projection.process()
 
 for c in projection.commonRanges:
-    print(commonPartitionString(c))
+    print(c)

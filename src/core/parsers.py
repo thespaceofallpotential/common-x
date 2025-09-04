@@ -1,7 +1,7 @@
 from typing import Tuple, TypeVar
+from core.commonality import CommonRange, CommonalityResult
 from core.range import Range
 from core.partitionHelpers import commonPartitions, partitionAfter
-from core.types import CommonRange, CommonalityResult
 
 T = TypeVar("T", int, str)
 
