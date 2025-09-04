@@ -3,7 +3,7 @@
 
 ---
 ## brute-force
-> *[solver](/src/gen_1/solvers/BruteForceSolver.ts) | [runner](/src/gen_1/runners/bruteForceRunner.ts)*
+> *[solver](/src/gen_1/solvers/BruteForceSolver.py) | [runner](/src/gen_1/runners/bruteForceRunner.py)*
 
 The brute-force solver does not enumerates the entire problem-space area.
 
@@ -17,7 +17,7 @@ $$a \times b = 924$$
 
 ---
 ## positive projection
-> *[solver](/src/gen_1/solvers/PositiveProjectionSolver.ts) | [runner](/src/gen_1/runners/positiveProjectionRunner.ts)*
+> *[solver](/src/gen_1/solvers/PositiveProjectionSolver.py) | [runner](/src/gen_1/runners/positiveProjectionRunner.py)*
 
 The positive projection solver enumerates the area coloured purple.
 
@@ -37,7 +37,7 @@ $$= 90$$
 
 ---
 ## cultivated
-> *[solver](/src/gen_1/solvers/PositiveProjectionSolver.ts) | [runner](/src/gen_1/runners/positiveProjectionRunner.ts)*
+> *[solver](/src/gen_1/solvers/PositiveProjectionSolver.py) | [runner](/src/gen_1/runners/positiveProjectionRunner.py)*
 
 The cultivated solver enumerates only the area coloured orange *(within higher-dimensional problem-space)*.
 

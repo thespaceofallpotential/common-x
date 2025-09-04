@@ -1,5 +1,7 @@
 # common-x:  *—from "knowledge culture" and a "universal solver", to a basic model of "organic general-intelligence"*
 
+> ***note: presently porting TS to python***
+
 Yeah-yeah, ***finding*** solutions (within some problem-space) is cool... *—but did you ever think about **growing** them?*
 
 Terms:-
@@ -25,7 +27,7 @@ This repository ~~describes~~ *will eventually describe*:-
 
 2. problem background, & motivation
 
-3. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
+3. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.py))*
 
 4. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
@@ -34,19 +36,21 @@ This repository ~~describes~~ *will eventually describe*:-
 6. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
 
 > Practical demonstrations:
-> - [generation 1: basic substring — *(natural language)*](./src/generation_1.ts)
+> - [generation 1: basic substring — *(natural language)*](./src/generation_1.py)
 > - generation 2: substring — *(DNA)*
 > - generation ...: subsequence
 > - generation ...: artefacts
 > - generation ...: problem-space reformulation 
 > 
 > Solvers *(generation 1)*:
->  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.ts) | [Solver](./src/gen_1/solvers/BruteForceSolver.ts)
->  - [Constituent Runner](./src/gen_1/runners/constituientRunner.ts) | [Solver](./src/gen_1/solvers/ConstituientSolver.ts)
->  - [Cultivated Runner](./src/gen_1/runners/cultivatedRunner.ts) | [Solver](./src/gen_1/solvers/CultivatedSolver.ts)
->  - [Deductive Runner](./src/gen_1/runners/deductiveRunner.ts) | [Solver](./src/gen_1/solvers/DeductiveResolver.ts)
->  - [(Lazy Fake) Suffix-Tree Runner](./src/gen_1/runners/lazyFakeSuffixTreeRunner.ts) | [Solver](./src/gen_1/solvers/LazyFakeSuffixTreeSolver.ts)
->  - [Positive Projection Runner](./src/gen_1/runners/projectionSolver.ts) | [Solver](./src/gen_1/solvers/ProjectionSolver.ts)
+>  - [Cultivated Runner](./src/gen_1/runners/cultivatedRunner.py) | [Solver](./src/gen_1/solvers/CultivatedSolver.py)
+>  - [Deductive Runner](./src/gen_1/runners/deductiveRunner.py) | [Solver](./src/gen_1/solvers/DeductiveResolver.py)
+> 
+> Not yet ported to python:
+>  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.py) | [Solver](./src/gen_1/solvers/BruteForceSolver.py)
+>  - [Constituent Runner](./src/gen_1/runners/constituientRunner.py) | [Solver](./src/gen_1/solvers/ConstituientSolver.py)
+>  - [(Lazy Fake) Suffix-Tree Runner](./src/gen_1/runners/lazyFakeSuffixTreeRunner.py) | [Solver](./src/gen_1/solvers/LazyFakeSuffixTreeSolver.py)
+>  - [Positive Projection Runner](./src/gen_1/runners/projectionSolver.py) | [Solver](./src/gen_1/solvers/ProjectionSolver.py)
 
 ---
 
@@ -81,7 +85,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 
 > *musing:*
 > 
-> 	*consider, that with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.ts), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
+> 	*consider, that with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.py), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
 ## problem background, & motivation
@@ -90,7 +94,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 ---
 ## generalised approach & method
 
-> note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.ts))*
+> note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.py))*
 
 
 ---

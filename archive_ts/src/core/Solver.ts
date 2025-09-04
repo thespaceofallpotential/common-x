@@ -16,7 +16,6 @@ export abstract class Solver<T extends Token | Word> implements ISolver<T> {
     constructor(a: IRange<T>, b: IRange<T>) {
         this.a = a;
         this.b = b;
-        this.b = b;
     }
 
     public abstract process(): ISolver<T>;
