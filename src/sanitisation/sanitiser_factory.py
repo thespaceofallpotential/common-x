@@ -1,6 +1,6 @@
-from sanitisation.sanitiser import Sanitiser
+from sanitisation.sanitiser import Sanitiser, SanitiserOptions
 
 
 class SanitiserFactory:
-    def build(self) -> Sanitiser | None:
-        return Sanitiser()
+    def build(self, options: SanitiserOptions | None) -> Sanitiser:
+        return Sanitiser(options)

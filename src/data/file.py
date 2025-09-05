@@ -1,4 +1,4 @@
-from core.sequence import Sequence
+from utils.path_helper import PathHelper
 from utils.file_content_helper import FileContentHelper
 
 
@@ -7,21 +7,23 @@ class File[T]:
 
     content: str
 
-    sequence: Sequence
-
     def __init__(self, path: str, content: str) -> None:
         self.path = path
         self.content = content
 
 
-class FileHelper:
+class FileHelper(PathHelper):
     content_helper: FileContentHelper
 
-    def __init__(self) -> None:
+    def __init__(self, root: str) -> None:
+        super().__init__(root)
+
         self.content_helper = FileContentHelper()
 
-    def get(self, path: str) -> File[str]:
-        content = self.content_helper.get_content(path)
+    def get_file(self, path: str) -> File[str]:
+        full_path = self.get_path(path)
+
+        content = self.content_helper.get_content(full_path)
 
         file = File(path, content)
 

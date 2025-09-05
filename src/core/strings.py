@@ -1,1 +1,5 @@
+EMPTY = ""
+
 SPACE = " "
+
+NEWLINE = "\n"
