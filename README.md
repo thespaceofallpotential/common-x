@@ -17,6 +17,8 @@ Terms:-
 Quick Links:
 
 1. [generation 1](/notes/generation%201.md)
+2. [basic batching](/src/batch.py) *(need to match solver/processor type with record type for the time being)*
+
 
 ---
 ## overview

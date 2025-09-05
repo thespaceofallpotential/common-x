@@ -1,6 +1,7 @@
-from typing import cast
+from typing import List, cast
 from batch.file_domain import FileDomain
 from batch.processor_factory import ProcessorFactory
+from batch.file import File
 from core.sink import Sink
 from core.options import Options
 from core.processable import AbstractProcessable
@@ -11,7 +12,7 @@ from utils.custom_exception import CustomException
 class Processor[T, C]:
     options: Options | None
 
-    file_domain: FileDomain
+    files: List[File]
 
     processor_factory: ProcessorFactory
 
@@ -21,29 +22,29 @@ class Processor[T, C]:
 
     def __init__(
         self,
-        file_domain: FileDomain,
+        files: List[File],
         processable_factory: ProcessorFactory,
         options: Options | None = None,
     ) -> None:
-        self.file_domain = file_domain
+        self.files = files
         self.options = options
         self.processor_factory = processable_factory
 
         self.sink = Sink[BatchSequences[C]]()
 
     def process(self):
-        position = 0
-
-        length = len(self.file_domain)
+        length = len(self.files)
 
         for i_a in range(length):
-            a = self.file_domain.get_file(position)
+            a = self.files[i_a]
 
             for i_b in range(length):
                 if i_a >= i_b:
+                    # only process a pair once
+                    # no same file comparisons for now
                     continue
 
-                b = self.file_domain.get_file(i_b)
+                b = self.files[i_b]
 
                 processor = self.processor_factory.build()
 
