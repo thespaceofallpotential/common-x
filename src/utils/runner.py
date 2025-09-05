@@ -37,3 +37,7 @@ def runner_factory[T, C](processor_type: ProcessorTypes) -> Runner:
     runner = Runner[T, C](processor_type)
 
     return runner
+
+
+def run_and_print(processor_type: ProcessorTypes, a: Sequence, b: Sequence):
+    runner_factory(processor_type).run_and_print(a, b)
