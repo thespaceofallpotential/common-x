@@ -34,6 +34,9 @@ class CommonPoint[T]:
 
         self.value = value
 
+    def __repr__(self) -> str:
+        return f"a:{self.a_position} b:{self.b_position} v:{self.value}"
+
 
 type CommonPoints[T] = List[CommonPoint]
 
