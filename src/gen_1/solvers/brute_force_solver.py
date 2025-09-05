@@ -6,8 +6,7 @@ from core.sequence import Sequence
 
 # BruteForceSolver
 
-# The brute force solver: unbound enumeration of an entire possibility-space
-#
+# The brute force solver: unchecked/unbound enumeration of possibility-space
 
 
 class BruteForceSolver[T](solver.AbstractSolver[T, CommonSequence]):
