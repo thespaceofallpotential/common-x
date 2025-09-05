@@ -2,7 +2,7 @@ from typing import List
 
 # from batch.file_domain import FileDomain
 from core.sequence import Sequence
-from core.sink import Sink
+from core.sink import Sink, sink_factory
 from core.processor import IProcessor
 from batch.batch import Batch
 from core.processor_factory import ProcessorFactory, ProcessorTypes
@@ -47,3 +47,11 @@ def batch_runner[C](
     engine = BatchEngine()
 
     engine.process(sequences, processor, sink)
+
+
+def batch_run_and_print(processor_type: ProcessorTypes, sequences: List[Sequence]):
+    sink = sink_factory()
+
+    batch_runner(processor_type, sequences, sink)
+
+    print(f"{sink.items}")

@@ -1,14 +1,15 @@
-from batch.batch_engine import batch_runner
+from batch.batch_engine import batch_run_and_print
 from core.processor_factory import ProcessorTypes
 from data.example_1_source import source
-from core.sink import sink_factory
-
-processor_type = ProcessorTypes.BRUTE_FORCE  # solver/ processor type
 
 sequences = [source.a_words, source.b_words]
 
-sink = sink_factory()
+batch_run_and_print(ProcessorTypes.BRUTE_FORCE, sequences)
 
-batch_runner(processor_type, sequences, sink)
+batch_run_and_print(ProcessorTypes.CONSTITUENT, sequences)
 
-print(f"{sink.items}")
+batch_run_and_print(ProcessorTypes.CULTIVATED, sequences)
+
+batch_run_and_print(ProcessorTypes.DEDUCTIVE, sequences)
+
+batch_run_and_print(ProcessorTypes.POSITIVE_PROJECTION, sequences)
