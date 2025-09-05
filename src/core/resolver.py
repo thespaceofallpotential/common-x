@@ -3,7 +3,7 @@ import abc
 from typing import List, TypeVar
 
 from core.sequence import Sequence
-from core.processing.partition_helpers import partition_on
+from core.partition_helpers import partition_on
 
 
 T = TypeVar("T", int, str)

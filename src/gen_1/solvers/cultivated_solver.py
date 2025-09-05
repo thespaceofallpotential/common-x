@@ -1,7 +1,7 @@
 from typing import List, TypeVar
-from core.processing import solver
+from core import solver
 from core.sequence import Sequence
-from core.processing.symmetric_index import to_symmetric_index
+from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonSequence, CommonSequences
 from core.vector import get_partition_vectors
 

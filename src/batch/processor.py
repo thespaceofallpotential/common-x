@@ -1,6 +1,6 @@
 from typing import TypeVar
 
-from core.processing.file_domain import FileDomain
+from batch.file_domain import FileDomain
 from core.options import Options
 
 
@@ -21,9 +21,11 @@ class Processor[T]:
 
         length = len(self.file_domain)
 
-        while position < length:
+        for i_a in range(length):
             a = self.file_domain.get_file(position)
 
             for i_b in range(length):
-                b = self.file_domain.get_file(i_b)
+                if i_a == i_b:
+                    continue
 
+                b = self.file_domain.get_file(i_b)

@@ -1,5 +1,5 @@
 from typing import List
-from core.processing.global_domain import GlobalDomain
+from batch.global_domain import GlobalDomain
 from core.sequence import Sequence
 
 

@@ -1,6 +1,6 @@
 from typing import List, TypeVar
-from core.processing import solver
-from core.processing.memo import Memo
+from core import solver
+from core.memo import Memo
 from core.sequence import Sequence
 from core.commonality import CommonSequence
 

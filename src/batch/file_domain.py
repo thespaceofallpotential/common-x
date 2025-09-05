@@ -1,5 +1,5 @@
 from typing import List
-from core.processing.file import File
+from batch.file import File
 
 
 class FileDomain:
@@ -12,4 +12,4 @@ class FileDomain:
         return self.files[i]
 
     def __len__(self):
-        return self.files.__len__()
+        return len(self.files)

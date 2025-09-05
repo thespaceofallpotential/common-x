@@ -1,6 +1,6 @@
 from typing import List, TypeVar
-from core.processing import solver
-from core.processing.partition_helpers import partitions
+from core import solver
+from core.partition_helpers import partitions
 from core.sequence import Sequence
 from core.commonality import CommonSequence
 from gen_1.solvers.brute_force_solver import BruteForceSolver
