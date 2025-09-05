@@ -6,9 +6,19 @@ from core.types import values_str
 T = TypeVar("T", int, str)
 
 
-class Sequence[T](PartitionVector):
+class BasicSequence[T](PartitionVector):
     values: List[T]
 
+    def __init__(self, position: int, values: List[T]):
+        super().__init__(position, len(values))
+
+        self.values = values
+
+    def __repr__(self) -> str:
+        return f"p:{self.position} l:{self.length} v:{values_str(cast(List[str], self.values))}"
+
+
+class Sequence[T](BasicSequence):
     elements: Set[T]
 
     def __init__(
@@ -17,9 +27,7 @@ class Sequence[T](PartitionVector):
         position: int = 0,
         elements: Set[T] | None = None,
     ):
-        super().__init__(position, len(values))
-
-        self.values = values
+        super().__init__(position, values)
 
         self.elements = elements if elements else set[T](values)
 
@@ -27,7 +35,7 @@ class Sequence[T](PartitionVector):
         return self.values.index(value, start)
 
     def __repr__(self) -> str:
-        return f"p:{self.position} l:{self.length} v:{self.values} e:{self.elements}"
+        return f"p:{self.position} l:{self.length} v:{values_str(cast(List[str], self.values))} e:{self.elements}"
 
 
 def sequence_values_str(sequence: Sequence) -> str:

@@ -1,7 +1,6 @@
 from typing import Dict, TypeVar
-from core.sequence import Sequence
+from core.sequence import BasicSequence, Sequence
 from core.symmetric_index import SymmetricIndex, to_symmetric_index
-from core.types import PositionedValues
 
 
 T = TypeVar("T", int, str)
@@ -12,7 +11,7 @@ class LazyFakeLightweightSuffixList[T]:
 
     symmetric_map: SymmetricIndex[T]
 
-    cache: Dict[T, list[PositionedValues[T]]] | None
+    cache: Dict[T, list[BasicSequence]] | None  # noqa: F821
 
     def __init__(self, sequence: Sequence, cache: bool = False) -> None:
         self.sequence = sequence
@@ -22,7 +21,7 @@ class LazyFakeLightweightSuffixList[T]:
         if cache:
             self.cache = {}
 
-    def get_suffixes(self, value: T) -> list[PositionedValues[T]] | None:
+    def get_suffixes(self, value: T) -> list[BasicSequence] | None:
         cache = self.cache
         symmetric_map = self.symmetric_map
         r = self.sequence
@@ -33,9 +32,7 @@ class LazyFakeLightweightSuffixList[T]:
         value_positions = symmetric_map.get(value)
 
         if value_positions:
-            return list(
-                map(lambda p: PositionedValues[T](p, r.values[p]), value_positions)
-            )
+            return list(map(lambda p: BasicSequence(p, r.values[p]), value_positions))
 
         return None
 

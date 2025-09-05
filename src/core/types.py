@@ -9,18 +9,6 @@ T = TypeVar("T", int, str)
 type TPositionMap[T] = Dict[T, int]
 
 
-class PositionedValues[T]:
-    position: int
-    values: List[T]
-
-    def __init__(self, position: int, values: List[T]):
-        self.position = position
-        self.values = values
-
-    def __repr__(self) -> str:
-        return f"p:{self.position} v:{values_str(cast(List[str], self.values))}"
-
-
 def values_str(values: List[T]) -> str:
     return str.join(SPACE, cast(List[str], values))
 

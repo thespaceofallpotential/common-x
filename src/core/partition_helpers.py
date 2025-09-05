@@ -46,7 +46,7 @@ def partition_at(sequence: Sequence, i: int) -> List[Sequence]:
     return [x for x in items if x.length > 0]
 
 
-def partition_on[T](sequence: Sequence[T], delimiter: T) -> List[Sequence]:
+def partition_on(sequence: Sequence, delimiter: T) -> List[Sequence]:
     items: List[Sequence] = []
 
     p: int = 0  # position
