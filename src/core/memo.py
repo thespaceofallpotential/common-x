@@ -1,9 +1,7 @@
-from typing import Dict, List, TypeVar
+from typing import Dict, List
 
 from core.commonality import CommonSequence
-
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 class Memo[T]:

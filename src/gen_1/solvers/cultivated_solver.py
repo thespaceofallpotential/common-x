@@ -1,11 +1,9 @@
-from typing import List, TypeVar
 from core import solver
 from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonSequence, CommonSequences
 from core.vector import get_partition_vectors
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 # CultivatedSolver: organic "knowledge culture" ; middle-out/through
 
@@ -39,12 +37,9 @@ T = TypeVar("T", int, str)
 #   how else might we describe the cultivated solver?
 
 
-class CultivatedSolver[T](solver.AbstractSolver):
-    common_sequences: List[CommonSequence]
-
+class CultivatedSolver[T](solver.AbstractSequenceSolver):
     def __init__(self, a: Sequence, b: Sequence):
         super().__init__(a, b)
-        self.common_sequences = []
 
     def process(self):
         a = self.a

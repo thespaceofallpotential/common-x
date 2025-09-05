@@ -1,10 +1,6 @@
-from typing import TypeVar
-
 from batch.file_domain import FileDomain
 from core.options import Options
-
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 class Processor[T]:

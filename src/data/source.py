@@ -1,5 +1,5 @@
 from typing import List
-from batch.global_domain import GlobalDomain
+from batch.ordered_domain import OrderedDomain
 from core.sequence import Sequence
 
 
@@ -7,7 +7,7 @@ class Source:
     a_words: Sequence
     b_words: Sequence
 
-    global_domain: GlobalDomain
+    ordered_domain: OrderedDomain
 
     a_tokens: Sequence
     b_tokens: Sequence
@@ -21,11 +21,11 @@ class Source:
 
         b_word_elements = self.b_words.elements
 
-        self.global_domain = GlobalDomain(a_word_elements.union(b_word_elements))
+        self.ordered_domain = OrderedDomain(a_word_elements.union(b_word_elements))
 
-        a_tokens = self.global_domain.to_tokens(self.a_words.values)
+        a_tokens = self.ordered_domain.to_tokens(self.a_words.values)
 
-        b_tokens = self.global_domain.to_tokens(self.b_words.values)
+        b_tokens = self.ordered_domain.to_tokens(self.b_words.values)
 
         self.a_tokens = Sequence(a_tokens)
 

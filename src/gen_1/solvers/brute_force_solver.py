@@ -1,21 +1,17 @@
-from typing import List, TypeVar
 from core import solver
 from core.memo import Memo
 from core.sequence import Sequence
-from core.commonality import CommonSequence
 
-
-T = TypeVar("T", int, str)
 
 # BruteForceSolver
 
+# The brute force solver: unbound enumeration of an entire possibility-space
+#
 
-class BruteForceSolver[T](solver.AbstractSolver):
-    common_sequences: List[CommonSequence]
 
+class BruteForceSolver[T](solver.AbstractSequenceSolver):
     def __init__(self, a: Sequence, b: Sequence) -> None:
         super().__init__(a, b)
-        self.common_sequences = []
 
     def process(self) -> solver.AbstractSolver:
         a = self.a

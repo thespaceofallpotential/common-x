@@ -1,9 +1,8 @@
-from typing import List, Set, TypeVar, cast
+from typing import List, Set, cast
 
 from core.vector import PartitionVector
 from core.types import values_str
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 class BasicSequence[T](PartitionVector):

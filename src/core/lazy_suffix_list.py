@@ -1,9 +1,7 @@
-from typing import Dict, TypeVar
+from typing import Dict
 from core.sequence import BasicSequence, Sequence
 from core.symmetric_index import SymmetricIndex, to_symmetric_index
-
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 class LazyFakeLightweightSuffixList[T]:

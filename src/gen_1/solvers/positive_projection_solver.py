@@ -1,25 +1,18 @@
-from typing import List, TypeVar
 from core import solver
 from core.partition_helpers import partitions
 from core.sequence import Sequence
-from core.commonality import CommonSequence
+from core.types import T
 from gen_1.solvers.brute_force_solver import BruteForceSolver
-
-T = TypeVar("T", int, str)
 
 
 # ProjectionSolver: approximation, hallucination, anomalous
 
 
-class PositiveProjectionSolver[T](solver.AbstractSolver):
-    common_sequences: List[CommonSequence]
-
+class PositiveProjectionSolver[T](solver.AbstractSequenceSolver):
     def __init__(self, a: Sequence, b: Sequence):
         super().__init__(a, b)
-        self.common_sequences = []
 
     def process(self) -> solver.AbstractSolver:
-        items = self.common_sequences
         a = self.a
         b = self.b
 
@@ -34,7 +27,7 @@ class PositiveProjectionSolver[T](solver.AbstractSolver):
 
                 brute.process()
 
-                items.extend(brute.common_sequences)
+                self.common_sequences.extend(brute.common_sequences)
 
                 self.step()
 

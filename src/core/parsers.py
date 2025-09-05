@@ -1,9 +1,9 @@
-from typing import Tuple, TypeVar
+from typing import Tuple
 from core.commonality import CommonSequence, CommonalityResult
 from core.sequence import Sequence
 from core.partition_helpers import common_partitions, partition_after
+from core.types import T
 
-T = TypeVar("T", int, str)
 
 I_UNSET = -1
 

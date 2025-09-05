@@ -3,7 +3,8 @@ from typing import Dict, List, Set, TypeVar, cast
 from core.strings import SPACE
 
 
-T = TypeVar("T", int, str)
+T = TypeVar("T")
+# T = TypeVar("T", int, str)
 
 
 type TPositionMap[T] = Dict[T, int]

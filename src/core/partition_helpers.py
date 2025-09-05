@@ -1,9 +1,7 @@
-from typing import List, Set, Tuple, TypeVar
+from typing import List, Set, Tuple
 from core.sequence import PartitionVector, Sequence
 from core.vector import get_partition_vectors
-
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 def partition(sequence: Sequence, pv: PartitionVector) -> Sequence:
@@ -26,7 +24,9 @@ def partitions(sequence: Sequence, common_set: Set[T]) -> List[Sequence]:
     return sequences
 
 
-def common_partitions(a: Sequence, b: Sequence) -> Tuple[List[Sequence], List[Sequence]]:
+def common_partitions(
+    a: Sequence, b: Sequence
+) -> Tuple[List[Sequence], List[Sequence]]:
     common_set = a.elements.intersection(b.elements)
 
     a_sequences = partitions(a, common_set)
@@ -41,7 +41,10 @@ def partition_after(sequence: Sequence, i: int) -> Sequence:
 
 def partition_at(sequence: Sequence, i: int) -> List[Sequence]:
     # TODO: check inclusive/exclusive
-    items = [Sequence(sequence.values[0:i], sequence.position), partition_after(sequence, i)]
+    items = [
+        Sequence(sequence.values[0:i], sequence.position),
+        partition_after(sequence, i),
+    ]
 
     return [x for x in items if x.length > 0]
 

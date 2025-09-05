@@ -1,4 +1,3 @@
-from typing import TypeVar
 from data.source import Source
 from data.example_1_source import a_words
 from data.example_1_source import b_words
@@ -14,8 +13,6 @@ source = Source(a_words, b_words)  # words <-> tokens
 a = source.a_words  # or token sequences
 
 b = source.b_words
-
-T = TypeVar("T", int, str)
 
 # solvers
 

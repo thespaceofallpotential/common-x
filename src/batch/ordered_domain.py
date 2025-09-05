@@ -2,7 +2,7 @@ from typing import List, Set
 from core.types import TPositionMap
 
 
-class GlobalDomain:
+class OrderedDomain:
     words: Set[str]
 
     values: List[str]

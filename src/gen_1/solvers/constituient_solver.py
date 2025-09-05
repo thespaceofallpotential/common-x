@@ -1,23 +1,17 @@
-from typing import List, TypeVar
 from core import solver
 from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 # ConstituientSolver: structureless mass of the solution-relative general-domain
 
 
-class ConstituientSolver[T](solver.AbstractSolver):
-    common_points: List[CommonPoint]
-
+class ConstituientSolver[T](solver.AbstractPointSolver):
     def __init__(self, a: Sequence, b: Sequence):
         super().__init__(a, b)
-        self.common_sequences = []
 
     def process(self) -> solver.AbstractSolver:
-        items = self.common_points
         a = self.a
         b = self.b
 
@@ -39,7 +33,7 @@ class ConstituientSolver[T](solver.AbstractSolver):
                 for bp in b_positions:
                     common = CommonPoint(ap, bp, value)
 
-                    items.append(common)
+                    self.common_points.append(common)
 
                     self.step()
 

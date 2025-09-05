@@ -1,11 +1,10 @@
-from typing import List, TypeVar
+from typing import List
 from core import resolver
 from utils.debug import debug_values, debug_vectors
 from core.parsers import parse_check, smart_repartition
 from core.sequence import Sequence
 from core.commonality import CommonSequence
-
-T = TypeVar("T", int, str)
+from core.types import T
 
 
 def is_candidate(a: Sequence, b: Sequence) -> bool:
@@ -24,27 +23,30 @@ def are_valid(a_sequences: List[Sequence], b_sequences: List[Sequence]):
     return len(a_sequences) > 0 and len(b_sequences) > 0
 
 
-# DeductiveSolver: idiomatic divide & dismiss, organic: unknown special-domain creativity/ insight
+# DeductiveSolver: idiomatic divide & dismiss
+# > organic: unknown-special-domain creativity/ insight
 
 
 # DeductiveResolver (generation 1: general case)
 #
 # The DeductiveResolver recursivly eliminates (solution)-negative-space
 # to reveal common-substrings without "searching"
-# -- (searching: knowing about higher-dimensional structures/ unconditional enumeration of possibility-space) --
+#
+# > searching:-
+# >  - knowing about higher-dimensional structures
+# >  - unconditional (positive & negative) enumeration of possibility-space
 #
 # very much like:
 #   whittling down a piece of wood to reveal the final artefactual-form,
 #   or expert archeological excavation & discovery
 #
-class DeductiveResolver[T](resolver.AbstractResolver):
-    common_sequences: List[CommonSequence]
-
+class DeductiveResolver[T](resolver.AbstractSequenceResolver):
     def __init__(self) -> None:
         super().__init__()
-        self.common_sequences = []
 
-    def process(self, a: Sequence, b: Sequence, depth: int = 1) -> resolver.AbstractResolver:
+    def process(
+        self, a: Sequence, b: Sequence, depth: int = 1
+    ) -> resolver.AbstractSequenceResolver:
         # debugVectors(a, b)
 
         # isCandidate: if sequence constituients and lengths are the same size
