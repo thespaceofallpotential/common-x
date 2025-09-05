@@ -1,6 +1,6 @@
 from typing import List, TypeVar
 from core.range import Range
-from core.partitionHelpers import partitionOn
+from core.partition_helpers import partitionOn
 
 import abc
 

@@ -7,7 +7,6 @@ T = TypeVar("T", int, str)
 
 
 def partition[T](r: Range, pv: PartitionVector) -> Range:
-
     i_start = pv.position - r.position
     i_end = pv.getEnd() - r.position
 

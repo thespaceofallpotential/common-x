@@ -45,7 +45,6 @@ class DeductiveResolver[T](resolver.AbstractResolver):
         self.commonRanges = []
 
     def process(self, a: Range, b: Range, depth: int = 1) -> resolver.AbstractResolver:
-
         # debugVectors(a, b)
 
         # isCandidate: if range constituients and lengths are the same size

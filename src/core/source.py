@@ -1,5 +1,5 @@
 from typing import List
-from core.globalDomain import GlobalDomain
+from core.global_domain import GlobalDomain
 from core.range import Range
 from data.example1Source import A
 
@@ -14,7 +14,6 @@ class Source:
     bTokenRange: Range
 
     def __init__(self, aWords: List[str], bWords: List[str]) -> None:
-
         self.aWordRange = Range(aWords)
 
         self.bWordRange = Range(bWords)

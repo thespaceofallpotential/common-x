@@ -1,7 +1,7 @@
 from typing import Tuple, TypeVar
 from core.commonality import CommonRange, CommonalityResult
 from core.range import Range
-from core.partitionHelpers import commonPartitions, partitionAfter
+from core.partition_helpers import commonPartitions, partitionAfter
 
 T = TypeVar("T", int, str)
 
@@ -11,7 +11,6 @@ i_unset = -1
 def strictParser[T](
     a: Range, b: Range, includePartial: bool = False
 ) -> Tuple[CommonRange | None, int, int]:
-
     item = CommonRange(a.position, b.position)
 
     avl = len(a.values)
@@ -40,7 +39,6 @@ def strictParser[T](
 
 
 def parseCheck[T](a: Range, b: Range) -> CommonalityResult:
-
     [common, i_a, i_b] = strictParser(a, b)
 
     if i_a > 0 or i_b > 0:
@@ -54,7 +52,6 @@ def parseCheck[T](a: Range, b: Range) -> CommonalityResult:
 def parseWithRepartition[T](
     a: Range, b: Range, haltOnUnhandled: bool = False
 ) -> CommonalityResult:
-
     [common, i_a, i_b] = strictParser(a, b)
 
     if common:
@@ -74,7 +71,6 @@ def parseWithRepartition[T](
 
 
 def smartRepartition[T](a: Range, b: Range) -> CommonalityResult:
-
     commonSet = a.elements.intersection(b.elements)
 
     if len(commonSet) == 0:

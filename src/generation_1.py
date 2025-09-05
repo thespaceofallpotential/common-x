@@ -3,11 +3,11 @@ from core.source import Source
 from data.example1Source import aWords
 from data.example1Source import bWords
 
-from gen_1.solvers.bruteForceSolver import BruteForceSolver
-from gen_1.solvers.cultivatedSolver import CultivatedSolver
+from gen_1.solvers.brute_force_solver import BruteForceSolver
+from gen_1.solvers.cultivated_solver import CultivatedSolver
 
-from gen_1.solvers.deductiveResolver import DeductiveResolver
-from gen_1.solvers.positiveProjectionSolver import PositiveProjectionSolver
+from gen_1.solvers.deductive_resolver import DeductiveResolver
+from gen_1.solvers.positive_projection_solver import PositiveProjectionSolver
 
 source = Source(aWords, bWords)  # words <-> tokens
 

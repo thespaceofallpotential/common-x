@@ -1,7 +1,7 @@
 from typing import List, TypeVar
 from core import solver
 from core.range import Range
-from core.symmetricIndex import toSymmetricIndex
+from core.symmetric_index import toSymmetricIndex
 from core.commonality import CommonRange, CommonRanges
 from core.vectors import getPartitionVectors
 
@@ -61,7 +61,9 @@ class CultivatedSolver[T](solver.AbstractSolver):
         xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
         # value (word | token) -> position map for all common elements in b
 
-        progress: CommonRanges = dict()  # memoise (immediately/ adjacent) prior position
+        progress: CommonRanges = (
+            dict()
+        )  # memoise (immediately/ adjacent) prior position
 
         for vector in positivePartionVectors:
             origin = vector.position

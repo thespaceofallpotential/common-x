@@ -1,6 +1,6 @@
 from typing import Dict, List, TypeVar, cast
 from core.range import Range
-from core.symmetricIndex import SymmetricIndex, toSymmetricIndex
+from core.symmetric_index import SymmetricIndex, toSymmetricIndex
 from core.types import PositionedValues
 
 
@@ -23,7 +23,6 @@ class LazyFakeLightweightSuffixList[T]:
             self.cache = dict()
 
     def getSuffixes(self, value: T) -> list[PositionedValues[T]] | None:
-
         cache = self.cache
         symmetricMap = self.symmetricMap
         range = self.range
@@ -34,12 +33,11 @@ class LazyFakeLightweightSuffixList[T]:
         valuePositions = symmetricMap.get(value)
 
         if valuePositions:
-            return list(map(lambda p: PositionedValues[T](p, range.values[p]), valuePositions))
+            return list(
+                map(lambda p: PositionedValues[T](p, range.values[p]), valuePositions)
+            )
 
         return None
-
-
-
 
 
 # export class LazyFakeSuffixTree<T extends Token | Word> extends LazyFakeLightweightSuffixTree<T> {

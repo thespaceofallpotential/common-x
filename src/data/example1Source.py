@@ -9,4 +9,3 @@ B = "longest common subsequence lcs longest subsequence common all sequences set
 aWords = str(A).split(space)
 
 bWords = str(B).split(space)
-
