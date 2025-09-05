@@ -1,4 +1,7 @@
 commit.sh
+commit_only.sh
+
+pylinter1.sh
 pylinter2.sh
 
 __pycache__

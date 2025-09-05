@@ -37,11 +37,11 @@ type SymmetricIndex[T] = Dict[T, List[int]]
 # at a later stage
 
 
-def toSymmetricIndex[T](values: List[T], commonSet: Set[T]) -> SymmetricIndex[T]:
-    item: SymmetricIndex[T] = dict()
+def to_symmetric_index(values: List[T], common_set: Set[T]) -> SymmetricIndex[T]:
+    item: SymmetricIndex[T] = {}
 
     for i, value in enumerate(values):
-        if value not in commonSet:
+        if value not in common_set:
             continue
 
         if value not in item:

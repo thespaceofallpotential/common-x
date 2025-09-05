@@ -1,7 +1,7 @@
 from typing import TypeVar
 from core.source import Source
-from data.example1Source import aWords
-from data.example1Source import bWords
+from data.example_1_source import a_words
+from data.example_1_source import b_words
 
 from gen_1.solvers.brute_force_solver import BruteForceSolver
 from gen_1.solvers.cultivated_solver import CultivatedSolver
@@ -9,11 +9,11 @@ from gen_1.solvers.cultivated_solver import CultivatedSolver
 from gen_1.solvers.deductive_resolver import DeductiveResolver
 from gen_1.solvers.positive_projection_solver import PositiveProjectionSolver
 
-source = Source(aWords, bWords)  # words <-> tokens
+source = Source(a_words, b_words)  # words <-> tokens
 
-a = source.aWordRange  # or token ranges
+a = source.a_words  # or token ranges
 
-b = source.bWordRange
+b = source.b_words
 
 T = TypeVar("T", int, str)
 
@@ -27,7 +27,7 @@ brute = BruteForceSolver(a, b)
 
 brute.process()
 
-for c in brute.commonRanges:
+for c in brute.common_ranges:
     print(c)
 
 # cultivted solver: search-free "grown" solution; growth from curated parts/ cultivated environment
@@ -38,7 +38,7 @@ cultivated = CultivatedSolver(a, b)
 
 cultivated.process()
 
-for c in cultivated.commonRanges:
+for c in cultivated.common_ranges:
     print(c)
 
 # deductive resolver: knowledge-free "whittled" solution; iterative elimination of negative-space
@@ -49,7 +49,7 @@ deductive = DeductiveResolver()
 
 deductive.process(a, b)
 
-for c in deductive.commonRanges:
+for c in deductive.common_ranges:
     print(c)
 
 # positive projecttion  solver
@@ -60,5 +60,5 @@ projection = PositiveProjectionSolver(a, b)
 
 projection.process()
 
-for c in projection.commonRanges:
+for c in projection.common_ranges:
     print(c)

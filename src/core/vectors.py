@@ -1,20 +1,17 @@
-from typing import List, Set, TypeVar
+from typing import List, Set
 from core.range import PartitionVector
 
 
-T = TypeVar("T", int, str)
-
-
-def getPartitionVectors[T](
-    values: List[T], commonSet: Set[T], position: int = 0
+def get_partition_vectors[T](
+    values: List[T], common_set: Set[T], position: int = 0
 ) -> list[PartitionVector]:
     items: List[PartitionVector] = []
 
     current: PartitionVector | None = None
 
     for i, value in enumerate(values):
-        if value in commonSet:
-            if current == None:
+        if value in common_set:
+            if current is None:
                 current = PartitionVector(position + i, 0)
 
                 items.append(current)

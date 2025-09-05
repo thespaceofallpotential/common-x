@@ -1,6 +1,6 @@
 from typing import List, Set, TypeVar, cast
 
-from core.types import values
+from core.types import values_str
 
 T = TypeVar("T", int, str)
 
@@ -13,40 +13,40 @@ class PartitionVector:
         self.position = position
         self.length = length
 
-    def getEnd(self):
+    def get_end(self):
         return self.position + self.length
 
     def __repr__(self) -> str:
         return f"[p:{self.position},l:{self.length}]"
 
 
-def vectorsString[T](a: PartitionVector, b: PartitionVector) -> str:
+def vectors_str(a: PartitionVector, b: PartitionVector) -> str:
     return f"a:{a} | b:{b}"
 
 
 class Range[T](PartitionVector):
+    values: List[T]
+
+    elements: Set[T]
+
     def __init__(
         self,
         values: List[T],
         position: int = 0,
-        parts: Set[T] | None = None,
+        elements: Set[T] | None = None,
     ):
         super().__init__(position, len(values))
 
         self.values = values
 
-        self.elements = parts if parts else set[T](values)
+        self.elements = elements if elements else set[T](values)
 
-    def getIndex(self, value: T, start: int = 0) -> int:
+    def get_index(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)
 
     def __repr__(self) -> str:
         return f"p:{self.position} l:{self.length} v:{self.values} e:{self.elements}"
 
 
-def rangeValues[T](r: Range) -> str:
-    return values(cast(List[str], r.values))
-
-
-def range[T](r: Range) -> str:
-    return f"p:{r.position} v:{rangeValues(r)}"
+def range_values_str(r: Range) -> str:
+    return values_str(cast(List[str], r.values))

@@ -1,8 +1,10 @@
-from typing import List, TypeVar
-from core.range import Range
-from core.partition_helpers import partitionOn
-
 import abc
+
+from typing import List, TypeVar
+
+from core.range import Range
+from core.partition_helpers import partition_on
+
 
 T = TypeVar("T", int, str)
 
@@ -13,16 +15,16 @@ class AbstractResolver[T](metaclass=abc.ABCMeta):
     def __init__(self):
         pass
 
-    def processRanges(self, aRanges: List[Range], bRanges: List[Range], depth: int):
-        for a in aRanges:
-            for b in bRanges:
+    def process_ranges(self, a_ranges: List[Range], b_ranges: List[Range], depth: int):
+        for a in a_ranges:
+            for b in b_ranges:
                 self.process(a, b, depth + 1)
 
-    def processContent(self, a: Range, b: Range, depth: int, newLine: T):
-        aRanges = partitionOn(a, newLine)
-        bRanges = partitionOn(b, newLine)
+    def process_content(self, a: Range, b: Range, depth: int, new_line: T):
+        a_ranges = partition_on(a, new_line)
+        b_ranges = partition_on(b, new_line)
 
-        self.processRanges(aRanges, bRanges, depth + 1)
+        self.process_ranges(a_ranges, b_ranges, depth + 1)
 
     def step(self, value: int = 1):
         self.cost += value

@@ -12,29 +12,29 @@ T = TypeVar("T", int, str)
 
 
 class PositiveProjectionSolver[T](solver.AbstractSolver):
-    commonRanges: List[CommonRange]
+    common_ranges: List[CommonRange]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
-        self.commonRanges = []
+        self.common_ranges = []
 
     def process(self) -> solver.AbstractSolver:
-        items = self.commonRanges
+        items = self.common_ranges
         a = self.a
         b = self.b
 
-        commonSet = a.elements.intersection(b.elements)
+        common_set = a.elements.intersection(b.elements)
 
-        aRanges = partitions(a, commonSet)
-        bRanges = partitions(b, commonSet)
+        a_ranges = partitions(a, common_set)
+        b_ranges = partitions(b, common_set)
 
-        for aRange in aRanges:
-            for bRange in bRanges:
-                brute = BruteForceSolver(aRange, bRange)
+        for a_range in a_ranges:
+            for b_range in b_ranges:
+                brute = BruteForceSolver(a_range, b_range)
 
                 brute.process()
 
-                items.extend(brute.commonRanges)
+                items.extend(brute.common_ranges)
 
                 self.step()
 

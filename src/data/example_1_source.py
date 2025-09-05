@@ -1,4 +1,4 @@
-from core.strings import space
+from core.strings import SPACE
 
 # source: see ./data for origina and cleaned versions
 
@@ -6,6 +6,6 @@ A = "computer science longest common substring two more strings longest string s
 
 B = "longest common subsequence lcs longest subsequence common all sequences set sequences often just two sequences it differs from longest common substring unlike substrings subsequences are not required occupy consecutive positions within original sequences"
 
-aWords = str(A).split(space)
+a_words = str(A).split(SPACE)
 
-bWords = str(B).split(space)
+b_words = str(B).split(SPACE)

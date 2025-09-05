@@ -1,15 +1,15 @@
 from typing import Tuple, TypeVar
 from core.commonality import CommonRange, CommonalityResult
 from core.range import Range
-from core.partition_helpers import commonPartitions, partitionAfter
+from core.partition_helpers import common_partitions, partition_after
 
 T = TypeVar("T", int, str)
 
-i_unset = -1
+I_UNSET = -1
 
 
-def strictParser[T](
-    a: Range, b: Range, includePartial: bool = False
+def strict_parser(
+    a: Range, b: Range, include_partial: bool = False
 ) -> Tuple[CommonRange | None, int, int]:
     item = CommonRange(a.position, b.position)
 
@@ -21,25 +21,25 @@ def strictParser[T](
 
         if i >= bvl:
             # a is longer than b; return common partition, with index to split remaining a
-            return (item, i, i_unset)
+            return (item, i, I_UNSET)
 
         if av != bv:
             # anomaly found
-            if includePartial and len(item.values) > 0:
+            if include_partial and len(item.values) > 0:
                 return (item, i, i)
-            else:
-                return (None, i, i)
+
+            return (None, i, i)
 
         item.values.append(av)
 
     # if b is longer than a, return common partition, with index for remaining b
-    i_default = avl if avl < bvl else i_unset
+    i_default = avl if avl < bvl else I_UNSET
 
-    return (item, i_unset, i_default)
+    return (item, I_UNSET, i_default)
 
 
-def parseCheck[T](a: Range, b: Range) -> CommonalityResult:
-    [common, i_a, i_b] = strictParser(a, b)
+def parse_check(a: Range, b: Range) -> CommonalityResult:
+    [common, i_a, i_b] = strict_parser(a, b)
 
     if i_a > 0 or i_b > 0:
         # anomlay detected
@@ -49,18 +49,16 @@ def parseCheck[T](a: Range, b: Range) -> CommonalityResult:
     return CommonalityResult([], [], common)
 
 
-def parseWithRepartition[T](
-    a: Range, b: Range, haltOnUnhandled: bool = False
-) -> CommonalityResult:
-    [common, i_a, i_b] = strictParser(a, b)
+def parse_with_repartition(a: Range, b: Range) -> CommonalityResult:
+    [common, i_a, i_b] = strict_parser(a, b)
 
     if common:
         if i_a > 0:
             # common partition with
-            return CommonalityResult([partitionAfter(a, i_a)], [b], common)
+            return CommonalityResult([partition_after(a, i_a)], [b], common)
 
         if i_b > 0:
-            return CommonalityResult([], [partitionAfter(b, i_b)], common)
+            return CommonalityResult([], [partition_after(b, i_b)], common)
 
         return CommonalityResult([], [], common)
 
@@ -70,24 +68,24 @@ def parseWithRepartition[T](
     return CommonalityResult([], [], None)
 
 
-def smartRepartition[T](a: Range, b: Range) -> CommonalityResult:
-    commonSet = a.elements.intersection(b.elements)
+def smart_repartition(a: Range, b: Range) -> CommonalityResult:
+    common_set = a.elements.intersection(b.elements)
 
-    if len(commonSet) == 0:
+    if len(common_set) == 0:
         return CommonalityResult([], [], None)
 
-    [aRanges, bRanges] = commonPartitions(a, b)
+    [a_ranges, b_ranges] = common_partitions(a, b)
 
-    arl = len(aRanges)
-    brl = len(bRanges)
+    arl = len(a_ranges)
+    brl = len(b_ranges)
 
     if arl > 1 or brl > 1:
         # return partitions for processing
-        return CommonalityResult(aRanges, bRanges, None)
+        return CommonalityResult(a_ranges, b_ranges, None)
 
     if arl == 0 or brl == 0:
         # no commonality
         return CommonalityResult([], [], None)
 
     # arl == 1 and brl == 1, then might as well attempt parse
-    return parseCheck(aRanges[0], bRanges[0])
+    return parse_check(a_ranges[0], b_ranges[0])

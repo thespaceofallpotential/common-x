@@ -11,21 +11,21 @@ T = TypeVar("T", int, str)
 
 
 class BruteForceSolver[T](solver.AbstractSolver):
-    commonRanges: List[CommonRange]
+    common_ranges: List[CommonRange]
 
     def __init__(self, a: Range, b: Range) -> None:
         super().__init__(a, b)
-        self.commonRanges = []
+        self.common_ranges = []
 
     def process(self) -> solver.AbstractSolver:
         a = self.a
         b = self.b
 
-        memo = Memo(self.commonRanges)
+        memo = Memo(self.common_ranges)
 
-        for i_a, aValue in enumerate(a.values):
-            for i_b, bValue in enumerate(b.values):
-                memo.record(a.position + i_a, b.position + i_b, aValue, bValue)
+        for i_a, a_value in enumerate(a.values):
+            for i_b, b_value in enumerate(b.values):
+                memo.record(a.position + i_a, b.position + i_b, a_value, b_value)
 
                 self.step()
 

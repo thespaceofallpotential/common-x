@@ -1,5 +1,6 @@
-from core.strings import space
 from typing import Dict, List, Set, TypeVar, cast
+
+from core.strings import SPACE
 
 
 T = TypeVar("T", int, str)
@@ -16,13 +17,16 @@ class PositionedValues[T]:
         self.position = position
         self.values = values
 
+    def __repr__(self) -> str:
+        return f"p:{self.position} v:{values_str(cast(List[str], self.values))}"
 
-def values[T](values: List[T]) -> str:
-    return str.join(space, cast(List[str], values))
+
+def values_str(values: List[T]) -> str:
+    return str.join(SPACE, cast(List[str], values))
 
 
-def elements[T](elements: Set[T]) -> str:
-    return str.join(space, cast(List[str], list(elements)))
+def elements_str(elements: Set[T]) -> str:
+    return str.join(SPACE, cast(List[str], list(elements)))
 
 
 # export type CommonPoint<T extends Token | Word> = [ap: Position, bp: Position, v: T];

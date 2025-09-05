@@ -1,6 +1,6 @@
-from typing import Dict, List, TypeVar, cast
+from typing import Dict, TypeVar
 from core.range import Range
-from core.symmetric_index import SymmetricIndex, toSymmetricIndex
+from core.symmetric_index import SymmetricIndex, to_symmetric_index
 from core.types import PositionedValues
 
 
@@ -10,31 +10,31 @@ T = TypeVar("T", int, str)
 class LazyFakeLightweightSuffixList[T]:
     range: Range
 
-    symmetricMap: SymmetricIndex[T]
+    symmetric_map: SymmetricIndex[T]
 
     cache: Dict[T, list[PositionedValues[T]]] | None
 
-    def __init__(self, range: Range, cache: bool = False) -> None:
-        self.range = range
+    def __init__(self, r: Range, cache: bool = False) -> None:
+        self.range = r
 
-        self.symmetricMap = toSymmetricIndex(range.values, range.elements)
+        self.symmetric_map = to_symmetric_index(r.values, r.elements)
 
         if cache:
-            self.cache = dict()
+            self.cache = {}
 
-    def getSuffixes(self, value: T) -> list[PositionedValues[T]] | None:
+    def get_suffixes(self, value: T) -> list[PositionedValues[T]] | None:
         cache = self.cache
-        symmetricMap = self.symmetricMap
-        range = self.range
+        symmetric_map = self.symmetric_map
+        r = self.range
 
         if cache:
             return cache.get(value)
 
-        valuePositions = symmetricMap.get(value)
+        value_positions = symmetric_map.get(value)
 
-        if valuePositions:
+        if value_positions:
             return list(
-                map(lambda p: PositionedValues[T](p, range.values[p]), valuePositions)
+                map(lambda p: PositionedValues[T](p, r.values[p]), value_positions)
             )
 
         return None

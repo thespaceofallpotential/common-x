@@ -6,5 +6,5 @@ class Options:
 
     minimumSequenceLength: int = 0
 
-    def sufficient[T](self, range: Range) -> bool:
-        return range.length >= self.minimumSequenceLength
+    def sufficient(self, r: Range) -> bool:
+        return r.length >= self.minimumSequenceLength

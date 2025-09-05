@@ -1,9 +1,9 @@
 from typing import List, TypeVar
 from core import solver
 from core.range import Range
-from core.symmetric_index import toSymmetricIndex
+from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonRange, CommonRanges
-from core.vectors import getPartitionVectors
+from core.vectors import get_partition_vectors
 
 T = TypeVar("T", int, str)
 
@@ -40,32 +40,28 @@ T = TypeVar("T", int, str)
 
 
 class CultivatedSolver[T](solver.AbstractSolver):
-    commonRanges: List[CommonRange]
+    common_ranges: List[CommonRange]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
-        self.commonRanges = []
+        self.common_ranges = []
 
     def process(self):
         a = self.a
         b = self.b
 
-        items = self.commonRanges  # results
-
-        commonSet = a.elements.intersection(b.elements)
+        common_set = a.elements.intersection(b.elements)
         # unique to each pair
 
-        positivePartionVectors = getPartitionVectors(a.values, commonSet, a.position)
+        positive_partion_vectors = get_partition_vectors(a.values, common_set, a.position)
         # sub-partitions of a, composed of common elements
 
-        xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
+        x_value_positions_map = to_symmetric_index(b.values, common_set)
         # value (word | token) -> position map for all common elements in b
 
-        progress: CommonRanges = (
-            dict()
-        )  # memoise (immediately/ adjacent) prior position
+        progress: CommonRanges = {}  # memoise (immediately/ adjacent) prior position
 
-        for vector in positivePartionVectors:
+        for vector in positive_partion_vectors:
             origin = vector.position
 
             for i_v in range(vector.length):
@@ -73,12 +69,12 @@ class CultivatedSolver[T](solver.AbstractSolver):
 
                 value = a.values[position]  # (word | token)
 
-                xPositions = (
-                    xValuePositionsMap.get(value) or []
+                x_positions = (
+                    x_value_positions_map.get(value) or []
                 )  # positions of the value in b: none are redundant
                 # TODO: never None - check  python equivalent for TS '!'
 
-                for xp in xPositions:
+                for xp in x_positions:
                     prior = progress.get(xp - 1)
 
                     if prior:
@@ -89,7 +85,7 @@ class CultivatedSolver[T](solver.AbstractSolver):
                     else:
                         common = CommonRange(origin, xp, [value])
 
-                        items.append(common)
+                        self.common_ranges.append(common)
 
                         progress[xp] = common
 

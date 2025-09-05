@@ -1,12 +1,10 @@
-from typing import TypeVar
-from core.range import Range
-
 import abc
 
-T = TypeVar("T", int, str)
+
+from core.range import Range
 
 
-class AbstractSolver[T](metaclass=abc.ABCMeta):
+class AbstractSolver(metaclass=abc.ABCMeta):
     count: int = 0
 
     a: Range

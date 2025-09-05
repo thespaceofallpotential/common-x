@@ -1,7 +1,7 @@
 from typing import List, TypeVar
 from core import solver
 from core.range import Range
-from core.symmetric_index import toSymmetricIndex
+from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint
 
 T = TypeVar("T", int, str)
@@ -10,33 +10,33 @@ T = TypeVar("T", int, str)
 
 
 class ConstituientSolver[T](solver.AbstractSolver):
-    commonPoints: List[CommonPoint]
+    common_points: List[CommonPoint]
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
-        self.commonRanges = []
+        self.common_ranges = []
 
     def process(self) -> solver.AbstractSolver:
-        items = self.commonPoints
+        items = self.common_points
         a = self.a
         b = self.b
 
-        commonSet = a.elements.intersection(b.elements)
+        common_set = a.elements.intersection(b.elements)
 
-        aXValuePositionMap = toSymmetricIndex(a.values, commonSet)
-        bXValuePositionMap = toSymmetricIndex(b.values, commonSet)
+        a_x_value_position_map = to_symmetric_index(a.values, common_set)
+        b_x_value_position_map = to_symmetric_index(b.values, common_set)
 
-        commonValues = list[T](commonSet)
+        common_values = list[T](common_set)
 
-        for value in commonValues:
-            aPositions = aXValuePositionMap.get(value)
-            bPositions = bXValuePositionMap.get(value)
+        for value in common_values:
+            a_positions = a_x_value_position_map.get(value)
+            b_positions = b_x_value_position_map.get(value)
 
-            if not aPositions or not bPositions:
+            if not a_positions or not b_positions:
                 continue
 
-            for ap in aPositions:
-                for bp in bPositions:
+            for ap in a_positions:
+                for bp in b_positions:
                     common = CommonPoint(ap, bp, value)
 
                     items.append(common)

@@ -1,51 +1,54 @@
-from core.commonality import CommonRange
 from typing import Dict, List, TypeVar
+
+from core.commonality import CommonRange
 
 
 T = TypeVar("T", int, str)
 
 
 class Memo[T]:
-    commonRanges: List[CommonRange]
+    common_ranges: List[CommonRange]
 
-    prior: Dict[int, CommonRange] = dict()
+    prior: Dict[int, CommonRange]
 
-    current: Dict[int, CommonRange] = dict()
+    current: Dict[int, CommonRange]
 
     def __init__(self, items: List[CommonRange]) -> None:
-        self.commonRanges = items
+        self.common_ranges = items
+        self.prior = {}
+        self.current = {}
 
-    def record(self, ai: int, bi: int, aValue: T, bValue: T):
-        if aValue != bValue:
+    def record(self, ai: int, bi: int, a_value: T, b_value: T):
+        if a_value != b_value:
             return
 
-        items = self.commonRanges
+        items = self.common_ranges
         prior = self.prior
         current = self.current
 
-        def update(bi: int, aValue: T) -> bool:
+        def update(bi: int, a_value: T) -> bool:
             existing = prior.get(bi - 1)
 
             if not existing:
                 return False
 
-            existing.values.append(aValue)
+            existing.values.append(a_value)
 
             current[bi] = existing
 
             return True
 
-        def create(ai: int, bi: int, aValue: T):
-            x = CommonRange(ai, bi, values=[aValue])
+        def create(ai: int, bi: int, a_value: T):
+            x = CommonRange(ai, bi, values=[a_value])
 
             items.append(x)
 
             current[bi] = x
 
-        if not update(bi, aValue):
-            create(ai, bi, aValue)
+        if not update(bi, a_value):
+            create(ai, bi, a_value)
 
     def next(self):
         self.prior = self.current
 
-        self.current = dict()
+        self.current = {}

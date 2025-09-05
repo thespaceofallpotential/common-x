@@ -1,27 +1,27 @@
 from typing import List, TypeVar
 from core import resolver
-from core.debug import debugValues, debugVectors
-from core.parsers import parseCheck, smartRepartition
+from core.debug import debug_values, debug_vectors
+from core.parsers import parse_check, smart_repartition
 from core.range import Range
 from core.commonality import CommonRange
 
 T = TypeVar("T", int, str)
 
 
-def isCandidate(a: Range, b: Range) -> bool:
+def is_candidate(a: Range, b: Range) -> bool:
     # customisable: dependent upon kind of problem
 
-    isSameSize = a.length == b.length
+    is_same_size = a.length == b.length
 
-    isCommon = len(a.elements.symmetric_difference(b.elements)) == 0
+    is_common = len(a.elements.symmetric_difference(b.elements)) == 0
 
-    return isSameSize & isCommon
+    return is_same_size & is_common
 
 
-def areValid(aRanges: List[Range], bRanges: List[Range]):
+def are_valid(a_ranges: List[Range], b_ranges: List[Range]):
     # customisable: dependent upon kind of problem
 
-    return len(aRanges) > 0 and len(bRanges) > 0
+    return len(a_ranges) > 0 and len(b_ranges) > 0
 
 
 # DeductiveSolver: idiomatic divide & dismiss, organic: unknown special-domain creativity/ insight
@@ -38,11 +38,11 @@ def areValid(aRanges: List[Range], bRanges: List[Range]):
 #   or expert archeological excavation & discovery
 #
 class DeductiveResolver[T](resolver.AbstractResolver):
-    commonRanges: List[CommonRange]
+    common_ranges: List[CommonRange]
 
     def __init__(self) -> None:
         super().__init__()
-        self.commonRanges = []
+        self.common_ranges = []
 
     def process(self, a: Range, b: Range, depth: int = 1) -> resolver.AbstractResolver:
         # debugVectors(a, b)
@@ -55,7 +55,7 @@ class DeductiveResolver[T](resolver.AbstractResolver):
         # recursion continues for all qualifying pairs of subpartitions
         #
         # > note: later generations will natively handle problematic edge-cases
-        result = parseCheck(a, b) if isCandidate(a, b) else smartRepartition(a, b)
+        result = parse_check(a, b) if is_candidate(a, b) else smart_repartition(a, b)
 
         if result.common:
             # debugValues(a, b)
@@ -65,10 +65,10 @@ class DeductiveResolver[T](resolver.AbstractResolver):
             #   non-candidate, but smartRepartitioning led to one-to-one partitions (a == 1 and b == 1), then parsed
             self.add(result.common)
 
-        aRanges = result.aRanges  # add filtering here: minimum length, etc
-        bRanges = result.bRanges
+        a_ranges = result.a_ranges  # add filtering here: minimum length, etc
+        b_ranges = result.b_ranges
 
-        if areValid(aRanges, bRanges):  # non-zero
+        if are_valid(a_ranges, b_ranges):  # non-zero
             # fractal recursion:
             #   this process function: 1) attempts parse; 2) repartitions ranges; 3) if partitions are valid, calls processRanges
             #   the processRanges function iteratively cross-checks partitions, by calling this function
@@ -94,12 +94,12 @@ class DeductiveResolver[T](resolver.AbstractResolver):
             # when all is said and done, i feel that "hold-up! wtf was that? i'mma take another look!"
             # is about as clear a sign of "real/organic/natural" intelligence as is possible to discern
             # from such a simple practical demonstration
-            self.processRanges(aRanges, bRanges, depth + 1)
+            self.process_ranges(a_ranges, b_ranges, depth + 1)
 
-            # self.step(len(result.aRanges) + len(result.bRanges))
+            # self.step(len(result.a_ranges) + len(result.b_ranges))
             # // TODO: need to update this value... ballpark for now; custom data-structures will significanly reduce & custom hardware will eliminate
 
         return self
 
     def add(self, common: CommonRange):
-        self.commonRanges.append(common)
+        self.common_ranges.append(common)
