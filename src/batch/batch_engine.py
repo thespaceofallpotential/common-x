@@ -24,7 +24,7 @@ class BatchEngine[T, C]:
                 if i_a >= i_b:
                     # only process a pair once
                     # no same file comparisons for now
-                    continue
+                    break
 
                 b = sequences[i_b]
 
