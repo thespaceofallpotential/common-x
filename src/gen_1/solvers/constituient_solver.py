@@ -7,14 +7,8 @@ from core.types import T
 # ConstituientSolver: structureless mass of the solution-relative general-domain
 
 
-class ConstituientSolver[T](solver.AbstractPointSolver):
-    def __init__(self, a: Sequence, b: Sequence):
-        super().__init__(a, b)
-
-    def process(self) -> solver.AbstractSolver:
-        a = self.a
-        b = self.b
-
+class ConstituientSolver[T](solver.AbstractSolver[T, CommonPoint]):
+    def process(self, a: Sequence, b: Sequence):
         common_set = a.elements.intersection(b.elements)
 
         a_x_value_position_map = to_symmetric_index(a.values, common_set)
@@ -33,7 +27,7 @@ class ConstituientSolver[T](solver.AbstractPointSolver):
                 for bp in b_positions:
                     common = CommonPoint(ap, bp, value)
 
-                    self.common_points.append(common)
+                    self.add(common)
 
                     self.step()
 

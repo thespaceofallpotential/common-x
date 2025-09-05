@@ -1,4 +1,5 @@
 from core import solver
+from core.commonality import CommonSequence
 from core.memo import Memo
 from core.sequence import Sequence
 
@@ -9,15 +10,9 @@ from core.sequence import Sequence
 #
 
 
-class BruteForceSolver[T](solver.AbstractSequenceSolver):
-    def __init__(self, a: Sequence, b: Sequence) -> None:
-        super().__init__(a, b)
-
-    def process(self) -> solver.AbstractSolver:
-        a = self.a
-        b = self.b
-
-        memo = Memo(self.common_sequences)
+class BruteForceSolver[T](solver.AbstractSolver[T, CommonSequence]):
+    def process(self, a: Sequence, b: Sequence):
+        memo = Memo(self.items)
 
         for i_a, a_value in enumerate(a.values):
             for i_b, b_value in enumerate(b.values):

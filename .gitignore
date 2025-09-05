@@ -6,6 +6,7 @@ pylinter2.sh
 pylinter3.sh
 
 __pycache__
+__init__.py
 
 .venv
 

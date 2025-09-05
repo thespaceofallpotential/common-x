@@ -37,14 +37,8 @@ from core.types import T
 #   how else might we describe the cultivated solver?
 
 
-class CultivatedSolver[T](solver.AbstractSequenceSolver):
-    def __init__(self, a: Sequence, b: Sequence):
-        super().__init__(a, b)
-
-    def process(self):
-        a = self.a
-        b = self.b
-
+class CultivatedSolver[T](solver.AbstractSolver):
+    def process(self, a: Sequence, b: Sequence):
         common_set = a.elements.intersection(b.elements)
         # unique to each pair
 
@@ -82,7 +76,7 @@ class CultivatedSolver[T](solver.AbstractSequenceSolver):
                     else:
                         common = CommonSequence(origin, xp, [value])
 
-                        self.common_sequences.append(common)
+                        self.add(common)
 
                         progress[xp] = common
 

@@ -1,4 +1,5 @@
 from core.strings import SPACE
+from data.source import Source
 
 # source: see ./data for origina and cleaned versions
 
@@ -9,3 +10,5 @@ B = "longest common subsequence lcs longest subsequence common all sequences set
 a_words = str(A).split(SPACE)
 
 b_words = str(B).split(SPACE)
+
+source = Source(a_words, b_words)

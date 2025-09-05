@@ -1,10 +1,10 @@
 from typing import List
 from core import resolver
-from utils.debug import debug_values, debug_vectors
 from core.parsers import parse_check, smart_repartition
 from core.sequence import Sequence
 from core.commonality import CommonSequence
 from core.types import T
+from utils.debug import debug_values, debug_vectors
 
 
 def is_candidate(a: Sequence, b: Sequence) -> bool:
@@ -40,13 +40,8 @@ def are_valid(a_sequences: List[Sequence], b_sequences: List[Sequence]):
 #   whittling down a piece of wood to reveal the final artefactual-form,
 #   or expert archeological excavation & discovery
 #
-class DeductiveResolver[T](resolver.AbstractSequenceResolver):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def process(
-        self, a: Sequence, b: Sequence, depth: int = 1
-    ) -> resolver.AbstractSequenceResolver:
+class DeductiveResolver[T](resolver.AbstractResolver[T, CommonSequence]):
+    def process(self, a: Sequence, b: Sequence, depth: int = 1):
         # debugVectors(a, b)
 
         # isCandidate: if sequence constituients and lengths are the same size
@@ -102,6 +97,3 @@ class DeductiveResolver[T](resolver.AbstractSequenceResolver):
             # // TODO: need to update this value... ballpark for now; custom data-structures will significanly reduce & custom hardware will eliminate
 
         return self
-
-    def add(self, common: CommonSequence):
-        self.common_sequences.append(common)
