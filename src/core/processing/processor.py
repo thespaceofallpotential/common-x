@@ -1,6 +1,6 @@
 from typing import TypeVar
 
-from core.processing.fileDomain import FileDomain
+from core.processing.file_domain import FileDomain
 from core.options import Options
 
 
