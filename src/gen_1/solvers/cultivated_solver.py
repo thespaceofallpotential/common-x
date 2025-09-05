@@ -53,7 +53,9 @@ class CultivatedSolver[T](solver.AbstractSolver):
         common_set = a.elements.intersection(b.elements)
         # unique to each pair
 
-        positive_partion_vectors = get_partition_vectors(a.values, common_set, a.position)
+        positive_partion_vectors = get_partition_vectors(
+            a.values, common_set, a.position
+        )
         # sub-partitions of a, composed of common elements
 
         x_value_positions_map = to_symmetric_index(b.values, common_set)

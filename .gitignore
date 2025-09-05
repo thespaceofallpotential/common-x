@@ -1,8 +1,9 @@
 commit.sh
-commit_only.sh
+only_commit.sh
 
 pylinter1.sh
 pylinter2.sh
+pylinter3.sh
 
 __pycache__
 
@@ -11,6 +12,7 @@ __pycache__
 draft.md
 
 .obsidian
+.ruff_cache
 
 /other
 /draft
