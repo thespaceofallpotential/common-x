@@ -13,6 +13,7 @@ draft.md
 
 .obsidian
 .ruff_cache
+.vscode
 
 /other
 /draft
