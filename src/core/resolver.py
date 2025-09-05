@@ -2,12 +2,12 @@ import abc
 
 from typing import List
 
-from core.processable import AbstractProcessable
+from core.processor import Processor
 from core.sequence import Sequence
 from core.partition_helpers import partition_on
 
 
-class AbstractResolver[T, C](AbstractProcessable[T, C]):
+class Resolver[T, C](Processor[T, C]):
     def process_sequences(
         self, a_sequences: List[Sequence], b_sequences: List[Sequence], depth: int
     ):

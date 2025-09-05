@@ -1,5 +1,5 @@
 from typing import List
-from batch.file import File
+from data.file import File
 
 
 class FileDomain:

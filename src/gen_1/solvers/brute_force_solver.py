@@ -1,4 +1,4 @@
-from core import solver
+from core.solver import Solver
 from core.commonality import CommonSequence
 from core.memo import Memo
 from core.sequence import Sequence
@@ -9,7 +9,7 @@ from core.sequence import Sequence
 # The brute force solver: unchecked/unbound enumeration of possibility-space
 
 
-class BruteForceSolver[T](solver.AbstractSolver[T, CommonSequence]):
+class BruteForceSolver[T](Solver[T, CommonSequence]):
     def process(self, a: Sequence, b: Sequence):
         memo = Memo(self.items)
 

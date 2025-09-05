@@ -12,3 +12,7 @@ class Sink[T]:
 
     def add_all(self, items: List[T]):
         self.items.extend(items)
+
+
+def sink_factory[T]() -> Sink:
+    return Sink[T]()

@@ -1,5 +1,5 @@
-from batch.processor_factory import ProcessorFactory, ProcessorTypes
-from core.processable import AbstractProcessable
+from core.processor_factory import ProcessorFactory, ProcessorTypes
+from core.processor import IProcessor
 from data.source import Source
 from utils.custom_exception import CustomException
 
@@ -9,7 +9,7 @@ class Runner[T, C]:
 
     source: Source
 
-    processor: AbstractProcessable[T, C]
+    processor: IProcessor[T, C]
 
     def __init__(self, source: Source, processor_type: ProcessorTypes) -> None:
         self.factory = ProcessorFactory(processor_type)

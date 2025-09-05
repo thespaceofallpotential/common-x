@@ -1,10 +1,9 @@
 from typing import List
-from core import resolver
+from core.resolver import Resolver
 from core.parsers import parse_check, smart_repartition
 from core.sequence import Sequence
 from core.commonality import CommonSequence
-from core.types import T
-from utils.debug import debug_values, debug_vectors
+# from utils.debug import debug_values, debug_vectors
 
 
 def is_candidate(a: Sequence, b: Sequence) -> bool:
@@ -40,7 +39,7 @@ def are_valid(a_sequences: List[Sequence], b_sequences: List[Sequence]):
 #   whittling down a piece of wood to reveal the final artefactual-form,
 #   or expert archeological excavation & discovery
 #
-class DeductiveResolver[T](resolver.AbstractResolver[T, CommonSequence]):
+class DeductiveResolver[T](Resolver[T, CommonSequence]):
     def process(self, a: Sequence, b: Sequence, depth: int = 1):
         # debugVectors(a, b)
 

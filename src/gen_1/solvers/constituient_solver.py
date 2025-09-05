@@ -1,13 +1,12 @@
-from core import solver
+from core.solver import Solver
 from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint
-from core.types import T
 
 # ConstituientSolver: structureless mass of the solution-relative general-domain
 
 
-class ConstituientSolver[T](solver.AbstractSolver[T, CommonPoint]):
+class ConstituientSolver[T](Solver[T, CommonPoint]):
     def process(self, a: Sequence, b: Sequence):
         common_set = a.elements.intersection(b.elements)
 

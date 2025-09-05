@@ -1,10 +1,8 @@
 import abc
 
-from core.processable import AbstractProcessable
+from core.processor import Processor
 
 
-class AbstractSolver[T, C](AbstractProcessable[T, C], metaclass=abc.ABCMeta):
-    pass
-
+class Solver[T, C](Processor[T, C], metaclass=abc.ABCMeta):
     def __repr__(self) -> str:
         return f"{self.__class__}"

@@ -1,0 +1,2 @@
+class SequenceFactory:
+    pass

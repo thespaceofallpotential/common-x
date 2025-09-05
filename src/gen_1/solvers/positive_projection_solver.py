@@ -1,8 +1,7 @@
-from core import solver
+from core.solver import Solver
 from core.commonality import CommonSequence
 from core.partition_helpers import partitions
 from core.sequence import Sequence
-from core.types import T
 
 from gen_1.solvers.brute_force_solver import BruteForceSolver
 
@@ -10,7 +9,7 @@ from gen_1.solvers.brute_force_solver import BruteForceSolver
 # ProjectionSolver: approximation, hallucination, anomalous
 
 
-class PositiveProjectionSolver[T](solver.AbstractSolver[T, CommonSequence]):
+class PositiveProjectionSolver[T](Solver[T, CommonSequence]):
     def process(self, a: Sequence, b: Sequence):
         common_set = a.elements.intersection(b.elements)
 

@@ -1,9 +1,8 @@
-from core import solver
+from core.solver import Solver
 from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonSequence, CommonSequences
 from core.vector import get_partition_vectors
-from core.types import T
 
 # CultivatedSolver: organic "knowledge culture" ; middle-out/through
 
@@ -37,7 +36,7 @@ from core.types import T
 #   how else might we describe the cultivated solver?
 
 
-class CultivatedSolver[T](solver.AbstractSolver):
+class CultivatedSolver[T](Solver[T, CommonSequence]):
     def process(self, a: Sequence, b: Sequence):
         common_set = a.elements.intersection(b.elements)
         # unique to each pair
