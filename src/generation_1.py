@@ -1,5 +1,5 @@
 from typing import TypeVar
-from core.source import Source
+from core.processing.source import Source
 from data.example_1_source import a_words
 from data.example_1_source import b_words
 

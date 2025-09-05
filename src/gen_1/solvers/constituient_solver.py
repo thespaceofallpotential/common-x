@@ -1,7 +1,7 @@
 from typing import List, TypeVar
-from core import solver
+from core.processing import solver
 from core.sequence import Sequence
-from core.symmetric_index import to_symmetric_index
+from core.processing.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint
 
 T = TypeVar("T", int, str)

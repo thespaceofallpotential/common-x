@@ -1,5 +1,5 @@
 from typing import TypeVar
-from core.partition_vector import vectors_str
+from core.vector import vectors_str
 from core.sequence import Sequence, sequence_values_str
 
 T = TypeVar("T", int, str)

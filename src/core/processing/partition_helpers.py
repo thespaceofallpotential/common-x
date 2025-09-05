@@ -1,6 +1,6 @@
 from typing import List, Set, Tuple, TypeVar
 from core.sequence import PartitionVector, Sequence
-from core.vectors import get_partition_vectors
+from core.vector import get_partition_vectors
 
 
 T = TypeVar("T", int, str)

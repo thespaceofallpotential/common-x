@@ -1,7 +1,7 @@
 from typing import List, TypeVar
-from core import resolver
-from core.debug import debug_values, debug_vectors
-from core.parsers import parse_check, smart_repartition
+from core.processing import resolver
+from core.utils.debug import debug_values, debug_vectors
+from core.processing.parsers import parse_check, smart_repartition
 from core.sequence import Sequence
 from core.commonality import CommonSequence
 

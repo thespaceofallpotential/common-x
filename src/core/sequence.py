@@ -1,6 +1,6 @@
 from typing import List, Set, TypeVar, cast
 
-from core.partition_vector import PartitionVector
+from core.vector import PartitionVector
 from core.types import values_str
 
 T = TypeVar("T", int, str)

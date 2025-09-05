@@ -1,7 +1,7 @@
 from typing import Tuple, TypeVar
 from core.commonality import CommonSequence, CommonalityResult
 from core.sequence import Sequence
-from core.partition_helpers import common_partitions, partition_after
+from core.processing.partition_helpers import common_partitions, partition_after
 
 T = TypeVar("T", int, str)
 
