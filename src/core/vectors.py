@@ -1,5 +1,5 @@
 from typing import List, Set
-from core.range import PartitionVector
+from core.sequence import PartitionVector
 
 
 def get_partition_vectors[T](

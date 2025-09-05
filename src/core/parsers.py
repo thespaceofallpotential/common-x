@@ -1,6 +1,6 @@
 from typing import Tuple, TypeVar
-from core.commonality import CommonRange, CommonalityResult
-from core.range import Range
+from core.commonality import CommonSequence, CommonalityResult
+from core.sequence import Sequence
 from core.partition_helpers import common_partitions, partition_after
 
 T = TypeVar("T", int, str)
@@ -9,9 +9,9 @@ I_UNSET = -1
 
 
 def strict_parser(
-    a: Range, b: Range, include_partial: bool = False
-) -> Tuple[CommonRange | None, int, int]:
-    item = CommonRange(a.position, b.position)
+    a: Sequence, b: Sequence, include_partial: bool = False
+) -> Tuple[CommonSequence | None, int, int]:
+    item = CommonSequence(a.position, b.position)
 
     avl = len(a.values)
     bvl = len(b.values)
@@ -38,7 +38,7 @@ def strict_parser(
     return (item, I_UNSET, i_default)
 
 
-def parse_check(a: Range, b: Range) -> CommonalityResult:
+def parse_check(a: Sequence, b: Sequence) -> CommonalityResult:
     [common, i_a, i_b] = strict_parser(a, b)
 
     if i_a > 0 or i_b > 0:
@@ -49,7 +49,7 @@ def parse_check(a: Range, b: Range) -> CommonalityResult:
     return CommonalityResult([], [], common)
 
 
-def parse_with_repartition(a: Range, b: Range) -> CommonalityResult:
+def parse_with_repartition(a: Sequence, b: Sequence) -> CommonalityResult:
     [common, i_a, i_b] = strict_parser(a, b)
 
     if common:
@@ -68,24 +68,24 @@ def parse_with_repartition(a: Range, b: Range) -> CommonalityResult:
     return CommonalityResult([], [], None)
 
 
-def smart_repartition(a: Range, b: Range) -> CommonalityResult:
+def smart_repartition(a: Sequence, b: Sequence) -> CommonalityResult:
     common_set = a.elements.intersection(b.elements)
 
     if len(common_set) == 0:
         return CommonalityResult([], [], None)
 
-    [a_ranges, b_ranges] = common_partitions(a, b)
+    [a_sequences, b_sequences] = common_partitions(a, b)
 
-    arl = len(a_ranges)
-    brl = len(b_ranges)
+    arl = len(a_sequences)
+    brl = len(b_sequences)
 
     if arl > 1 or brl > 1:
         # return partitions for processing
-        return CommonalityResult(a_ranges, b_ranges, None)
+        return CommonalityResult(a_sequences, b_sequences, None)
 
     if arl == 0 or brl == 0:
         # no commonality
         return CommonalityResult([], [], None)
 
     # arl == 1 and brl == 1, then might as well attempt parse
-    return parse_check(a_ranges[0], b_ranges[0])
+    return parse_check(a_sequences[0], b_sequences[0])

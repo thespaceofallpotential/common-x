@@ -2,13 +2,13 @@ from typing import List, TypeVar
 from core import resolver
 from core.debug import debug_values, debug_vectors
 from core.parsers import parse_check, smart_repartition
-from core.range import Range
-from core.commonality import CommonRange
+from core.sequence import Sequence
+from core.commonality import CommonSequence
 
 T = TypeVar("T", int, str)
 
 
-def is_candidate(a: Range, b: Range) -> bool:
+def is_candidate(a: Sequence, b: Sequence) -> bool:
     # customisable: dependent upon kind of problem
 
     is_same_size = a.length == b.length
@@ -18,10 +18,10 @@ def is_candidate(a: Range, b: Range) -> bool:
     return is_same_size & is_common
 
 
-def are_valid(a_ranges: List[Range], b_ranges: List[Range]):
+def are_valid(a_sequences: List[Sequence], b_sequences: List[Sequence]):
     # customisable: dependent upon kind of problem
 
-    return len(a_ranges) > 0 and len(b_ranges) > 0
+    return len(a_sequences) > 0 and len(b_sequences) > 0
 
 
 # DeductiveSolver: idiomatic divide & dismiss, organic: unknown special-domain creativity/ insight
@@ -38,16 +38,16 @@ def are_valid(a_ranges: List[Range], b_ranges: List[Range]):
 #   or expert archeological excavation & discovery
 #
 class DeductiveResolver[T](resolver.AbstractResolver):
-    common_ranges: List[CommonRange]
+    common_sequences: List[CommonSequence]
 
     def __init__(self) -> None:
         super().__init__()
-        self.common_ranges = []
+        self.common_sequences = []
 
-    def process(self, a: Range, b: Range, depth: int = 1) -> resolver.AbstractResolver:
+    def process(self, a: Sequence, b: Sequence, depth: int = 1) -> resolver.AbstractResolver:
         # debugVectors(a, b)
 
-        # isCandidate: if range constituients and lengths are the same size
+        # isCandidate: if sequence constituients and lengths are the same size
         # parseCheck: check the values by parsing (linear brute-force)
         # smartRepartitioning: if not, repartition based upon relative common elements (between
         # each partition's cached valueSet)
@@ -65,20 +65,20 @@ class DeductiveResolver[T](resolver.AbstractResolver):
             #   non-candidate, but smartRepartitioning led to one-to-one partitions (a == 1 and b == 1), then parsed
             self.add(result.common)
 
-        a_ranges = result.a_ranges  # add filtering here: minimum length, etc
-        b_ranges = result.b_ranges
+        a_sequences = result.a_sequences  # add filtering here: minimum length, etc
+        b_sequences = result.b_sequences
 
-        if are_valid(a_ranges, b_ranges):  # non-zero
+        if are_valid(a_sequences, b_sequences):  # non-zero
             # fractal recursion:
-            #   this process function: 1) attempts parse; 2) repartitions ranges; 3) if partitions are valid, calls processRanges
-            #   the processRanges function iteratively cross-checks partitions, by calling this function
+            #   this process function: 1) attempts parse; 2) repartitions sequences; 3) if partitions are valid, calls process_sequences
+            #   the process_sequences function iteratively cross-checks partitions, by calling this function
             #
             # explanation:
             # on each iteration (for each pair of partitions), the set of elements which drives
             # repartitioning changes, (the intersect between valueSets is relative to the pair)
             #
             # insight:
-            # this approach might seem inefficient due to the way the same ranges are checked and reduced over and over
+            # this approach might seem inefficient due to the way the same sequences are checked and reduced over and over
             # but at all times, negative-space is being elimintated by nothing other than elementary logic
             # with no knowledge of the special-domain structure (word-strings in this case), this method will
             # eliminate all negative-space, leaving only solution positive-space
@@ -94,12 +94,12 @@ class DeductiveResolver[T](resolver.AbstractResolver):
             # when all is said and done, i feel that "hold-up! wtf was that? i'mma take another look!"
             # is about as clear a sign of "real/organic/natural" intelligence as is possible to discern
             # from such a simple practical demonstration
-            self.process_ranges(a_ranges, b_ranges, depth + 1)
+            self.process_sequences(a_sequences, b_sequences, depth + 1)
 
-            # self.step(len(result.a_ranges) + len(result.b_ranges))
+            # self.step(len(result.a_sequences) + len(result.b_sequences))
             # // TODO: need to update this value... ballpark for now; custom data-structures will significanly reduce & custom hardware will eliminate
 
         return self
 
-    def add(self, common: CommonRange):
-        self.common_ranges.append(common)
+    def add(self, common: CommonSequence):
+        self.common_sequences.append(common)

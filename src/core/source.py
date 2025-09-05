@@ -1,21 +1,21 @@
 from typing import List
 from core.global_domain import GlobalDomain
-from core.range import Range
+from core.sequence import Sequence
 
 
 class Source:
-    a_words: Range
-    b_words: Range
+    a_words: Sequence
+    b_words: Sequence
 
     global_domain: GlobalDomain
 
-    a_tokens: Range
-    b_tokens: Range
+    a_tokens: Sequence
+    b_tokens: Sequence
 
     def __init__(self, a_words: List[str], b_words: List[str]) -> None:
-        self.a_words = Range(a_words)
+        self.a_words = Sequence(a_words)
 
-        self.b_words = Range(b_words)
+        self.b_words = Sequence(b_words)
 
         a_word_elements = self.a_words.elements
 
@@ -27,6 +27,6 @@ class Source:
 
         b_tokens = self.global_domain.to_tokens(self.b_words.values)
 
-        self.a_tokens = Range(a_tokens)
+        self.a_tokens = Sequence(a_tokens)
 
-        self.b_tokens = Range(b_tokens)
+        self.b_tokens = Sequence(b_tokens)

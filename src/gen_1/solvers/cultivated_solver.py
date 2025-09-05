@@ -1,8 +1,8 @@
 from typing import List, TypeVar
 from core import solver
-from core.range import Range
+from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
-from core.commonality import CommonRange, CommonRanges
+from core.commonality import CommonSequence, CommonSequences
 from core.vectors import get_partition_vectors
 
 T = TypeVar("T", int, str)
@@ -40,11 +40,11 @@ T = TypeVar("T", int, str)
 
 
 class CultivatedSolver[T](solver.AbstractSolver):
-    common_ranges: List[CommonRange]
+    common_sequences: List[CommonSequence]
 
-    def __init__(self, a: Range, b: Range):
+    def __init__(self, a: Sequence, b: Sequence):
         super().__init__(a, b)
-        self.common_ranges = []
+        self.common_sequences = []
 
     def process(self):
         a = self.a
@@ -61,7 +61,7 @@ class CultivatedSolver[T](solver.AbstractSolver):
         x_value_positions_map = to_symmetric_index(b.values, common_set)
         # value (word | token) -> position map for all common elements in b
 
-        progress: CommonRanges = {}  # memoise (immediately/ adjacent) prior position
+        progress: CommonSequences = {}  # memoise (immediately/ adjacent) prior position
 
         for vector in positive_partion_vectors:
             origin = vector.position
@@ -85,9 +85,9 @@ class CultivatedSolver[T](solver.AbstractSolver):
                         progress[xp] = prior
 
                     else:
-                        common = CommonRange(origin, xp, [value])
+                        common = CommonSequence(origin, xp, [value])
 
-                        self.common_ranges.append(common)
+                        self.common_sequences.append(common)
 
                         progress[xp] = common
 

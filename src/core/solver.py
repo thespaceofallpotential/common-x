@@ -1,16 +1,16 @@
 import abc
 
 
-from core.range import Range
+from core.sequence import Sequence
 
 
 class AbstractSolver(metaclass=abc.ABCMeta):
     count: int = 0
 
-    a: Range
-    b: Range
+    a: Sequence
+    b: Sequence
 
-    def __init__(self, a: Range, b: Range):
+    def __init__(self, a: Sequence, b: Sequence):
         self.a = a
         self.b = b
 

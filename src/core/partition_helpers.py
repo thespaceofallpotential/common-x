@@ -1,66 +1,66 @@
 from typing import List, Set, Tuple, TypeVar
-from core.range import PartitionVector, Range
+from core.sequence import PartitionVector, Sequence
 from core.vectors import get_partition_vectors
 
 
 T = TypeVar("T", int, str)
 
 
-def partition(r: Range, pv: PartitionVector) -> Range:
-    i_start = pv.position - r.position
-    i_end = pv.get_end() - r.position
+def partition(sequence: Sequence, pv: PartitionVector) -> Sequence:
+    i_start = pv.position - sequence.position
+    i_end = pv.get_end() - sequence.position
 
-    item = Range(
-        r.values[i_start:i_end],
+    item = Sequence(
+        sequence.values[i_start:i_end],
         pv.position,
     )
 
     return item
 
 
-def partitions(r: Range, common_set: Set[T]) -> List[Range]:
-    vectors = get_partition_vectors(r.values, common_set, r.position)
+def partitions(sequence: Sequence, common_set: Set[T]) -> List[Sequence]:
+    vectors = get_partition_vectors(sequence.values, common_set, sequence.position)
 
-    ranges = list(map(lambda pv: partition(r, pv), vectors))
+    sequences = list(map(lambda pv: partition(sequence, pv), vectors))
 
-    return ranges
+    return sequences
 
 
-def common_partitions(a: Range, b: Range) -> Tuple[List[Range], List[Range]]:
+def common_partitions(a: Sequence, b: Sequence) -> Tuple[List[Sequence], List[Sequence]]:
     common_set = a.elements.intersection(b.elements)
 
-    a_ranges = partitions(a, common_set)
-    b_ranges = partitions(b, common_set)
+    a_sequences = partitions(a, common_set)
+    b_sequences = partitions(b, common_set)
 
-    return (a_ranges, b_ranges)
-
-
-def partition_after(r: Range, i: int) -> Range:
-    return Range(r.values[i:], r.position + i)
+    return (a_sequences, b_sequences)
 
 
-def partition_at(r: Range, i: int) -> List[Range]:
+def partition_after(sequence: Sequence, i: int) -> Sequence:
+    return Sequence(sequence.values[i:], sequence.position + i)
+
+
+def partition_at(sequence: Sequence, i: int) -> List[Sequence]:
     # TODO: check inclusive/exclusive
-    items = [Range(r.values[0:i], r.position), partition_after(r, i)]
+    items = [Sequence(sequence.values[0:i], sequence.position), partition_after(sequence, i)]
 
     return [x for x in items if x.length > 0]
 
 
-def partition_on[T](r: Range[T], delimiter: T) -> List[Range]:
-    items: List[Range] = []
+def partition_on[T](sequence: Sequence[T], delimiter: T) -> List[Sequence]:
+    items: List[Sequence] = []
 
     p: int = 0  # position
 
-    i: int = r.get_index(delimiter)  # TODO: check inclusive/exclusive
+    i: int = sequence.get_index(delimiter)  # TODO: check inclusive/exclusive
 
     while i > -1:
-        items.append(Range(r.values[p:i], p))
+        items.append(Sequence(sequence.values[p:i], p))
 
         p = i
 
-        i = r.get_index(delimiter, i + 1)
+        i = sequence.get_index(delimiter, i + 1)
 
-        if p < r.length:
-            items.append(Range(r.values[p:], p))
+        if p < sequence.length:
+            items.append(Sequence(sequence.values[p:], p))
 
     return items

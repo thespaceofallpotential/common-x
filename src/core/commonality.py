@@ -1,9 +1,9 @@
 from typing import Dict, List, Tuple, cast
-from core.range import Range
+from core.sequence import Sequence
 from core.types import values_str
 
 
-class CommonRange[T]:
+class CommonSequence[T]:
     a_position: int
     b_position: int
 
@@ -19,7 +19,7 @@ class CommonRange[T]:
         return f"a:{self.a_position} b:{self.b_position}, v:{values_str(cast(List[str], self.values))}"
 
 
-type CommonRanges[T] = Dict[int, CommonRange]
+type CommonSequences[T] = Dict[int, CommonSequence]
 
 
 class CommonPoint[T]:
@@ -39,21 +39,21 @@ type CommonPoints[T] = List[CommonPoint]
 
 
 class CommonalityResult[T]:
-    a_ranges: List[Range]
-    b_ranges: List[Range]
+    a_sequences: List[Sequence]
+    b_sequences: List[Sequence]
 
-    common: CommonRange | None
+    common: CommonSequence | None
 
     def __init__(
         self,
-        a_ranges: List[Range],
-        b_ranges: List[Range],
-        common: CommonRange | None,
+        a_sequences: List[Sequence],
+        b_sequences: List[Sequence],
+        common: CommonSequence | None,
     ) -> None:
-        self.a_ranges = a_ranges
-        self.b_ranges = b_ranges
+        self.a_sequences = a_sequences
+        self.b_sequences = b_sequences
 
         self.common = common
 
 
-type CommonalityResult2[T] = Tuple[List[Range], List[Range], CommonRange | None]
+type CommonalityResult2[T] = Tuple[List[Sequence], List[Sequence], CommonSequence | None]

@@ -1,30 +1,12 @@
 from typing import List, Set, TypeVar, cast
 
+from core.partition_vector import PartitionVector
 from core.types import values_str
 
 T = TypeVar("T", int, str)
 
 
-class PartitionVector:
-    position: int
-    length: int
-
-    def __init__(self, position: int, length: int):
-        self.position = position
-        self.length = length
-
-    def get_end(self):
-        return self.position + self.length
-
-    def __repr__(self) -> str:
-        return f"[p:{self.position},l:{self.length}]"
-
-
-def vectors_str(a: PartitionVector, b: PartitionVector) -> str:
-    return f"a:{a} | b:{b}"
-
-
-class Range[T](PartitionVector):
+class Sequence[T](PartitionVector):
     values: List[T]
 
     elements: Set[T]
@@ -48,5 +30,5 @@ class Range[T](PartitionVector):
         return f"p:{self.position} l:{self.length} v:{self.values} e:{self.elements}"
 
 
-def range_values_str(r: Range) -> str:
-    return values_str(cast(List[str], r.values))
+def sequence_values_str(sequence: Sequence) -> str:
+    return values_str(cast(List[str], sequence.values))

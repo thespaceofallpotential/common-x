@@ -11,7 +11,7 @@ from gen_1.solvers.positive_projection_solver import PositiveProjectionSolver
 
 source = Source(a_words, b_words)  # words <-> tokens
 
-a = source.a_words  # or token ranges
+a = source.a_words  # or token sequences
 
 b = source.b_words
 
@@ -27,7 +27,7 @@ brute = BruteForceSolver(a, b)
 
 brute.process()
 
-for c in brute.common_ranges:
+for c in brute.common_sequences:
     print(c)
 
 # cultivted solver: search-free "grown" solution; growth from curated parts/ cultivated environment
@@ -38,7 +38,7 @@ cultivated = CultivatedSolver(a, b)
 
 cultivated.process()
 
-for c in cultivated.common_ranges:
+for c in cultivated.common_sequences:
     print(c)
 
 # deductive resolver: knowledge-free "whittled" solution; iterative elimination of negative-space
@@ -49,7 +49,7 @@ deductive = DeductiveResolver()
 
 deductive.process(a, b)
 
-for c in deductive.common_ranges:
+for c in deductive.common_sequences:
     print(c)
 
 # positive projecttion  solver
@@ -60,5 +60,5 @@ projection = PositiveProjectionSolver(a, b)
 
 projection.process()
 
-for c in projection.common_ranges:
+for c in projection.common_sequences:
     print(c)

@@ -1,8 +1,8 @@
 from typing import List, TypeVar
 from core import solver
 from core.memo import Memo
-from core.range import Range
-from core.commonality import CommonRange
+from core.sequence import Sequence
+from core.commonality import CommonSequence
 
 
 T = TypeVar("T", int, str)
@@ -11,17 +11,17 @@ T = TypeVar("T", int, str)
 
 
 class BruteForceSolver[T](solver.AbstractSolver):
-    common_ranges: List[CommonRange]
+    common_sequences: List[CommonSequence]
 
-    def __init__(self, a: Range, b: Range) -> None:
+    def __init__(self, a: Sequence, b: Sequence) -> None:
         super().__init__(a, b)
-        self.common_ranges = []
+        self.common_sequences = []
 
     def process(self) -> solver.AbstractSolver:
         a = self.a
         b = self.b
 
-        memo = Memo(self.common_ranges)
+        memo = Memo(self.common_sequences)
 
         for i_a, a_value in enumerate(a.values):
             for i_b, b_value in enumerate(b.values):

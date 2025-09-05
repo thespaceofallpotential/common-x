@@ -1,4 +1,4 @@
-from core.range import Range
+from core.sequence import Sequence
 
 
 class Options:
@@ -6,5 +6,5 @@ class Options:
 
     minimumSequenceLength: int = 0
 
-    def sufficient(self, r: Range) -> bool:
-        return r.length >= self.minimumSequenceLength
+    def sufficient(self, sequence: Sequence) -> bool:
+        return sequence.length >= self.minimumSequenceLength

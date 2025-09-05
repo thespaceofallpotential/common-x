@@ -1,20 +1,20 @@
 from typing import Dict, List, TypeVar
 
-from core.commonality import CommonRange
+from core.commonality import CommonSequence
 
 
 T = TypeVar("T", int, str)
 
 
 class Memo[T]:
-    common_ranges: List[CommonRange]
+    common_sequences: List[CommonSequence]
 
-    prior: Dict[int, CommonRange]
+    prior: Dict[int, CommonSequence]
 
-    current: Dict[int, CommonRange]
+    current: Dict[int, CommonSequence]
 
-    def __init__(self, items: List[CommonRange]) -> None:
-        self.common_ranges = items
+    def __init__(self, items: List[CommonSequence]) -> None:
+        self.common_sequences = items
         self.prior = {}
         self.current = {}
 
@@ -22,7 +22,7 @@ class Memo[T]:
         if a_value != b_value:
             return
 
-        items = self.common_ranges
+        items = self.common_sequences
         prior = self.prior
         current = self.current
 
@@ -39,7 +39,7 @@ class Memo[T]:
             return True
 
         def create(ai: int, bi: int, a_value: T):
-            x = CommonRange(ai, bi, values=[a_value])
+            x = CommonSequence(ai, bi, values=[a_value])
 
             items.append(x)
 
