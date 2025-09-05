@@ -1,30 +1,24 @@
 from core.processor_factory import ProcessorFactory, ProcessorTypes
 from core.processor import IProcessor
-from data.source import Source
+from core.sequence import Sequence
 from utils.custom_exception import CustomException
 
 
 class Runner[T, C]:
     factory: ProcessorFactory[T, C]
 
-    source: Source
-
     processor: IProcessor[T, C]
 
-    def __init__(self, source: Source, processor_type: ProcessorTypes) -> None:
+    def __init__(self, processor_type: ProcessorTypes) -> None:
         self.factory = ProcessorFactory(processor_type)
-        self.source = source
 
-    def run(self):
+    def run(self, a: Sequence, b: Sequence):
         processor = self.factory.build()
 
         if not processor:
             raise CustomException("processor factory")
 
         self.processor = processor
-
-        a = self.source.a_words
-        b = self.source.b_words
 
         processor.process(a, b)
 
@@ -34,6 +28,12 @@ class Runner[T, C]:
         for c in self.processor.items:
             print(c)
 
-    def run_and_print(self):
-        self.run()
+    def run_and_print(self, a: Sequence, b: Sequence):
+        self.run(a, b)
         self.print()
+
+
+def runner_factory[T, C](processor_type: ProcessorTypes) -> Runner:
+    runner = Runner[T, C](processor_type)
+
+    return runner
