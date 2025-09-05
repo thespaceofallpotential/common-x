@@ -2,17 +2,12 @@ import abc
 
 from typing import List
 
-from core.commonality import CommonSequence
 from core.processable import AbstractProcessable
 from core.sequence import Sequence
 from core.partition_helpers import partition_on
-from core.types import T
 
 
 class AbstractResolver[T, C](AbstractProcessable[T, C]):
-    def __init__(self):
-        super().__init__()
-
     def process_sequences(
         self, a_sequences: List[Sequence], b_sequences: List[Sequence], depth: int
     ):

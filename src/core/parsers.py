@@ -2,7 +2,6 @@ from typing import Tuple
 from core.commonality import CommonSequence, CommonalityResult
 from core.sequence import Sequence
 from core.partition_helpers import common_partitions, partition_after
-from core.types import T
 
 
 I_UNSET = -1

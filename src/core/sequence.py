@@ -2,7 +2,6 @@ from typing import List, Set, cast
 
 from core.vector import PartitionVector
 from core.types import values_str
-from core.types import T
 
 
 class BasicSequence[T](PartitionVector):
