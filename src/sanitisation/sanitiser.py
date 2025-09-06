@@ -2,10 +2,14 @@ from sanitisation.markdown_links import strip_links
 from sanitisation.stopwords import remove_stopwords
 from sanitisation.string_helpers import (
     clean_str,
+    get_frontmatter,
+    pad_new_lines,
     periods_to_new_line,
     prepare_str,
+    shrink_whitespace,
     strip_frontmatter,
 )
+from core.strings import EMPTY, SPACE
 
 
 class SanitiserOptions:
@@ -13,6 +17,8 @@ class SanitiserOptions:
         self.stopwords = stopwords
 
     clean: bool = True
+
+    pad_new_line: bool = True
 
     periods_to_new_line: bool = True
 
@@ -25,24 +31,37 @@ class SanitiserOptions:
     strip_links: bool = True
 
 
+class SanitiserResult:
+    content: str = EMPTY
+    frontmatter: str | None = None
+
+
 class Sanitiser:
     options: SanitiserOptions
 
     def __init__(self, options: SanitiserOptions) -> None:
         self.options = options
 
-    def sanitise(self, content: str) -> str:
+    def sanitise(self, content: str) -> SanitiserResult:
         _ = self.options
+
         x = content
+
+        result = SanitiserResult()
+
+        if _.strip_frontmatter:
+            frontmatter = get_frontmatter(x)
+
+            if frontmatter:
+                result.frontmatter = frontmatter
+
+            x = strip_frontmatter(x)
 
         if _.prepare:
             x = prepare_str(x)
 
         if _.stopwords:
             x = remove_stopwords(x, _.stopwords)
-
-        if _.strip_frontmatter:
-            x = strip_frontmatter(x)
 
         if _.strip_links:
             x = strip_links(x)
@@ -57,7 +76,12 @@ class Sanitiser:
         if _.clean:
             x = clean_str(x)
 
-        return x
+        if _.pad_new_line:
+            x = pad_new_lines(x)
+
+        result.content = shrink_whitespace(x)
+
+        return result
 
 
 # const lines = value.split(NEWLINE);

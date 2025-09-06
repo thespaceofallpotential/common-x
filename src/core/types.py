@@ -6,6 +6,13 @@ T = TypeVar("T")
 type TPositionMap[T] = Dict[T, int]
 
 
+def index_withoutexception(x: str, y: str):
+    try:
+        return x.index(y)
+    except:  # noqa: E722
+        return -1
+
+
 # export type CommonPoint<T extends Token | Word> = [ap: Position, bp: Position, v: T];
 # export type CommonPoints<T extends Token | Word> = CommonPoint<T>[];
 

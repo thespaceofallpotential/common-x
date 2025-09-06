@@ -23,7 +23,7 @@ class SourceHelper:
 
         self.relative_paths.extend(paths)
 
-    def get_file(self, path: str) -> File[str]:
+    def get_file(self, path: str) -> File:
         return self.file_helper.get_file(path)
 
     def get_files(self):

@@ -1,7 +1,6 @@
 def strip_links(x: str) -> str:
     return x
 
-
 # export const stripLinks = (value: string): string => {
 #     let plain = "";
 #     // let isLink = false;

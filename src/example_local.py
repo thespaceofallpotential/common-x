@@ -7,11 +7,13 @@ helper = SourceHelper("data/local/aeim")
 
 options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
 
-print("add all")
 
 helper.add_all(options)
 
 file_count = len(helper.relative_paths)
+
+
+print("set files")
 
 source = Source(helper)
 
@@ -35,9 +37,19 @@ print(f"{file_count} {sequence_count} {word_count}")
 
 # 5331 5331 291817
 # TODO: need to get word count down (sanitisation issue)
+# 
+# 5331 5215 135703
+#   basic sanitiser frontmatter check
+# 5331 5160 123196
+#   large word
+# 5331 4932 21695
+#   more than x numbers
+# 5331 4874 20055
+#   pad new lines
+# 5331 4874 19925
+#   strip numbers
 
-
-# print(word_domain.values)
+print(word_domain.values)
 
 # sanitised = source.get_sanitised()
 

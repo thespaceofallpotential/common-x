@@ -12,7 +12,7 @@ class FileHelper(PathHelper):
 
         self.io_helper = IOHelper()
 
-    def get_file(self, path: str) -> File[str]:
+    def get_file(self, path: str) -> File:
         full_path = self.get_absolute_path(path)
 
         content = self.io_helper.get_content(full_path)

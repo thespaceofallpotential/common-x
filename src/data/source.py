@@ -1,10 +1,11 @@
 from typing import List
 from core.sequence import Sequence
-from data.file import File
+from data.file import File, are_ok
 from data.source_helper import SourceHelper
 from sanitisation.sanitiser import SanitiserOptions
 from sanitisation.sanitiser_factory import build_sanitiser
 from sanitisation.string_helpers import to_words
+from sanitisation.sanitiser_helpers import sanitise_files
 from utils.io_helper import ScanOptions
 
 
@@ -25,15 +26,17 @@ class Source:
 
         sanitiser = build_sanitiser(sanitiser_options)
 
-        sanitised = list(map(lambda x: sanitiser.sanitise(x.content), self.__files))
+        sanitise_files(sanitiser, self.__files)
+
+        sanitised = are_ok(self.__files)
 
         return sanitised
 
-    def get_sequences(self, sanitised: List[str] | None = None) -> List[Sequence]:
+    def get_sequences(self, sanitised: List[File] | None = None) -> List[Sequence]:
         if not sanitised:
             sanitised = self.get_sanitised()
 
-        return list(map(lambda x: Sequence(to_words(x)), sanitised))
+        return list(map(lambda x: Sequence(to_words(x.content)), sanitised))
 
     def list_file_paths(self, options: ScanOptions):
         paths = self.__helper.file_helper.get_file_paths(options)
