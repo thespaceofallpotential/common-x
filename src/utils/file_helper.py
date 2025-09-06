@@ -1,5 +1,6 @@
 from typing import List
 from data.file import File
+from core.strings import EMPTY
 from utils.path_helper import PathHelper
 from utils.io_helper import IOHelper, ScanOptions
 
@@ -15,9 +16,9 @@ class FileHelper(PathHelper):
     def get_file(self, path: str) -> File:
         full_path = self.get_absolute_path(path)
 
-        content = self.io_helper.get_content(full_path)
+        content = self.io_helper.get_content(full_path) or EMPTY
 
-        file = File(path, content)
+        file = File(path, content )
 
         return file
 

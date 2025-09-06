@@ -48,6 +48,10 @@ print(f"{file_count} {sequence_count} {word_count}")
 #   pad new lines
 # 5331 4874 19925
 #   strip numbers
+# 5331 4892 18164
+#   strip markdown links, callouts
+# 5331 4892 13102
+#   string any isdigit
 
 print(word_domain.values)
 

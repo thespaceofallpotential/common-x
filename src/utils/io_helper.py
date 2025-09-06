@@ -24,9 +24,12 @@ class ScanOptions:
 
 
 class IOHelper:
-    def get_content(self, path: str) -> str:
-        with open(path, READ, encoding="utf-8") as io:
-            return io.read()
+    def get_content(self, path: str) -> str | None:
+        try:
+            with open(path, READ, encoding="utf-8") as io:
+                return io.read()
+        except:  # noqa: E722
+            return None
 
     def get_file_paths(self, options: ScanOptions) -> list[str]:
         paths: list[str] = []

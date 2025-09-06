@@ -6,9 +6,9 @@ T = TypeVar("T")
 type TPositionMap[T] = Dict[T, int]
 
 
-def index_withoutexception(x: str, y: str):
+def index_withoutexception(value: str, pattern: str, i_from: int = 0):
     try:
-        return x.index(y)
+        return value.index(pattern, i_from)
     except:  # noqa: E722
         return -1
 

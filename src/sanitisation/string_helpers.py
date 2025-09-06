@@ -5,7 +5,7 @@ from core.strings import (
     FRONTMATTER,
     LT,
     NEWLINE,
-    OPEN_SQUARE_BRACKET,
+    OPEN_SQUARE_BRACKET_PAIR,
     SPACE,
     SVG,
 )
@@ -29,7 +29,7 @@ def is_frontmatter(x: str) -> bool:
 
 
 def has_links(x: str) -> bool:
-    return x.index(OPEN_SQUARE_BRACKET) > -1
+    return x.index(OPEN_SQUARE_BRACKET_PAIR) > -1
 
 
 def clean_str(x: str) -> str:

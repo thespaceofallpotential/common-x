@@ -6,7 +6,19 @@ from core.strings import SPACE
 
 
 def strip_numbers(x: str) -> str:
-    return str.join(SPACE, list(filter(lambda y: not y.isnumeric(), x.split(SPACE))))
+    return str.join(
+        SPACE,
+        list(
+            filter(
+                lambda y: not (y.isnumeric() or any(char.isdigit() for char in x)),
+                x.split(SPACE),
+            )
+        ),
+    )
+
+
+# def strip_if_numbers(x: str) -> str:
+#     return str.join(SPACE, list(filter(lambda y: not re y.isnumeric(), x.split(SPACE))))
 
 
 def only_numbers(x: str) -> list[str]:

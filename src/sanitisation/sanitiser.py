@@ -1,4 +1,4 @@
-from sanitisation.markdown_links import strip_links
+from sanitisation.markdown_helpers import strip_markdown
 from sanitisation.stopwords import remove_stopwords
 from sanitisation.string_helpers import (
     clean_str,
@@ -30,6 +30,10 @@ class SanitiserOptions:
 
     strip_links: bool = True
 
+    strip_callouts: bool = True
+
+    strip_any_numeric: bool = True
+
 
 class SanitiserResult:
     content: str = EMPTY
@@ -55,7 +59,11 @@ class Sanitiser:
             if frontmatter:
                 result.frontmatter = frontmatter
 
-            x = strip_frontmatter(x)
+                x = strip_frontmatter(x)
+
+        if _.strip_links or _.strip_callouts:
+            x = strip_markdown(x)
+            # TODO: simplify this...
 
         if _.prepare:
             x = prepare_str(x)
@@ -64,7 +72,7 @@ class Sanitiser:
             x = remove_stopwords(x, _.stopwords)
 
         if _.strip_links:
-            x = strip_links(x)
+            x = strip_markdown(x)
 
         if _.periods_to_new_line:
             x = periods_to_new_line(x)
