@@ -19,15 +19,8 @@ class ProcessorTypes(Enum):
 
 
 class ProcessorFactory[T, C]:
-    processor_type: ProcessorTypes
-    
-    # TODO: move type param to build method- what  happened?! 🤪
-
-    def __init__(self, processor_type: ProcessorTypes) -> None:
-        self.processor_type = processor_type
-
-    def build(self) -> IProcessor[T, C]:
-        match self.processor_type.value:
+    def build(self, processor_type: ProcessorTypes) -> IProcessor[T, C]:
+        match processor_type.value:
             case 1:
                 return cast(IProcessor[T, C], BruteForceSolver[T]())
             case 2:

@@ -1,8 +1,9 @@
 from batch.batch_engine import batch_run_and_print
 from core.processor_factory import ProcessorTypes
-from data.example_1_source import source
+from example_1_source import source
 
-sequences = [source.a_words, source.b_words]
+
+sequences = source.get_sequences()
 
 batch_run_and_print(ProcessorTypes.BRUTE_FORCE, sequences)
 

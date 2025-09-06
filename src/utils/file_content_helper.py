@@ -3,6 +3,5 @@ READ = "r"
 
 class FileContentHelper:
     def get_content(self, path: str) -> str:
-        io = open(path, READ)
-
-        return io.read()
+        with open(path, READ, encoding="utf-8") as io:
+            return io.read()

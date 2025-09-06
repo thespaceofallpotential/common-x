@@ -1,5 +1,13 @@
 EMPTY = ""
-
 SPACE = " "
-
 NEWLINE = "\n"
+
+OPEN_SQUARE_BRACKET = "[["
+CLOSE_SQUARE_BRACKET = "]]"
+
+SVG = "<svg"
+LT = "<"
+
+TRIDASH = "---"
+
+FRONTMATTER = TRIDASH

@@ -1,10 +1,10 @@
 from typing import List
 
 # from batch.file_domain import FileDomain
+from batch.batch import Batch
 from core.sequence import Sequence
 from core.sink import Sink, sink_factory
 from core.processor import IProcessor
-from batch.batch import Batch
 from core.processor_factory import ProcessorFactory, ProcessorTypes
 
 
@@ -21,7 +21,7 @@ class BatchEngine[T, C]:
             a = sequences[i_a]
 
             for i_b in range(length):
-                if i_a >= i_b:
+                if i_b >= i_a:
                     # only process a pair once
                     # no same file comparisons for now
                     break
@@ -40,9 +40,9 @@ def batch_runner[C](
     sequences: List[Sequence],
     sink: Sink[Batch[C]],
 ):
-    factory = ProcessorFactory(processor_type)
+    factory = ProcessorFactory()
 
-    processor = factory.build()
+    processor = factory.build(processor_type)
 
     engine = BatchEngine()
 

@@ -34,5 +34,5 @@ class Processor[T, C](IProcessor[T, C], Sink[C], metaclass=abc.ABCMeta):
         batch = Batch[C](ai, bi, cast(list[C], self.items))
 
         self.items = []
-        
+
         return batch

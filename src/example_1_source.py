@@ -1,6 +1,6 @@
 from core.strings import SPACE
 from data.source import Source
-from data.file import FileHelper
+from data.source_helper import SourceHelper
 
 # source: see ./data for original & cleaned versions
 
@@ -8,12 +8,16 @@ A = "computer science longest common substring two more strings longest string s
 
 B = "longest common subsequence lcs longest subsequence common all sequences set sequences often just two sequences it differs from longest common substring unlike substrings subsequences are not required occupy consecutive positions within original sequences"
 
-file_helper = FileHelper("../../data/example_1")
-
-a_file = file_helper.get_file("a-clean.txt")
-
 a_words = str(A).split(SPACE)
 
 b_words = str(B).split(SPACE)
 
-source = Source(a_words, b_words)
+helper = SourceHelper("data/example_1")
+
+helper.add("a.txt")
+helper.add("b.txt")
+
+source = Source(helper)
+
+# sanitised = source.get_sanitised()
+# sequences = source.get_sequences()

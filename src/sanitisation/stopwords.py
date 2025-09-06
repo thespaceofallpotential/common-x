@@ -17,3 +17,11 @@ class StopwordRemover:
         lines = list(map(lambda x: process_line(x), lines))
 
         return str.join(NEWLINE, lines)
+
+
+def remove_stopwords(x: str, stopwords: str) -> str:
+    stopword_remover = StopwordRemover()
+
+    x = stopword_remover.process(x, stopwords)
+
+    return x
