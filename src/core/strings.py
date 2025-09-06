@@ -1,6 +1,8 @@
 EMPTY = ""
 SPACE = " "
 NEWLINE = "\n"
+SLASH = "/"
+PERIOD = "."
 
 OPEN_SQUARE_BRACKET = "[["
 CLOSE_SQUARE_BRACKET = "]]"

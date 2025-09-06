@@ -1,4 +1,4 @@
-from data.file import FileHelper
+from utils.file_helper import FileHelper
 from data.source import Source, SourceHelper
 
 source_helper = SourceHelper("data/example_1")

@@ -1,21 +1,30 @@
 from typing import List
-from data.file import File, FileHelper
+from data.file import File
+from utils.io_helper import ScanOptions
+from utils.file_helper import FileHelper
 
 
 class SourceHelper:
     file_helper: FileHelper
 
-    names: List[str]
+    relative_paths: List[str]
 
-    def __init__(self, path: str) -> None:
-        self.file_helper = FileHelper(path)
-        self.names = []
+    def __init__(self, root: str) -> None:
+        self.file_helper = FileHelper(root)
+        self.relative_paths = []
 
-    def add(self, name: str):
-        self.names.append(name)
+    def add(self, relative_path: str):
+        self.relative_paths.append(relative_path)
 
-    def get_files(self) -> List[File]:
-        return list(map(self.file_helper.get_file, self.names))
+    def add_all(self, options: ScanOptions):
+        options.relative = True
 
-    def get_file(self, name: str) -> File:
-        return self.file_helper.get_file(name)
+        paths = self.file_helper.get_file_paths(options)
+
+        self.relative_paths.extend(paths)
+
+    def get_file(self, path: str) -> File[str]:
+        return self.file_helper.get_file(path)
+
+    def get_files(self):
+        return self.file_helper.get_files(self.relative_paths)
