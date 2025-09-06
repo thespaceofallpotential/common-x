@@ -1,6 +1,6 @@
 from typing import Dict, List, Tuple, cast
 from core.sequence import Sequence
-from core.types import values_str
+from core.value_helpers import values_str
 
 
 class CommonSequence[T]:

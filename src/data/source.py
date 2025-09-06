@@ -1,5 +1,4 @@
 from typing import List
-from batch.ordered_domain import OrderedDomain
 from core.sequence import Sequence
 from data.file import File
 from data.source_helper import SourceHelper
@@ -34,32 +33,3 @@ class Source:
             sanitised = self.get_sanitised()
 
         return list(map(lambda x: Sequence(to_words(x)), sanitised))
-
-
-class Source2:
-    a_words: Sequence
-    b_words: Sequence
-
-    ordered_domain: OrderedDomain
-
-    a_tokens: Sequence
-    b_tokens: Sequence
-
-    def __init__(self, a_words: List[str], b_words: List[str]) -> None:
-        self.a_words = Sequence(a_words)
-
-        self.b_words = Sequence(b_words)
-
-        a_word_elements = self.a_words.elements
-
-        b_word_elements = self.b_words.elements
-
-        self.ordered_domain = OrderedDomain(a_word_elements.union(b_word_elements))
-
-        a_tokens = self.ordered_domain.to_tokens(self.a_words.values)
-
-        b_tokens = self.ordered_domain.to_tokens(self.b_words.values)
-
-        self.a_tokens = Sequence(a_tokens)
-
-        self.b_tokens = Sequence(b_tokens)

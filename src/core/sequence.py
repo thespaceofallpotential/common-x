@@ -1,7 +1,7 @@
 from typing import List, Set, cast
 
 from core.vector import PartitionVector
-from core.types import values_str
+from core.value_helpers import as_str, to_str, values_str
 
 
 class BasicSequence[T](PartitionVector):
@@ -33,7 +33,11 @@ class Sequence[T](BasicSequence):
         return self.values.index(value, start)
 
     def __repr__(self) -> str:
-        return f"p:{self.position} l:{self.length} v:{values_str(cast(List[str], self.values))} e:{self.elements}"
+        values = self.values if isinstance(T, str) else to_str(self.values)
+
+        elements = list(self.elements) if isinstance(T, str) else as_str(self.elements)
+
+        return f"p:{self.position} l:{self.length} v:{values_str(values)} e:{elements}"
 
 
 def sequence_values_str(sequence: Sequence) -> str:

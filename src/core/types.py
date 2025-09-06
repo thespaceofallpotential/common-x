@@ -1,21 +1,9 @@
-from typing import Dict, List, Set, TypeVar, cast
-
-from core.strings import SPACE
+from typing import Dict, TypeVar
 
 
 T = TypeVar("T")
-# T = TypeVar("T", int, str)
-
 
 type TPositionMap[T] = Dict[T, int]
-
-
-def values_str(values: List[T]) -> str:
-    return str.join(SPACE, cast(List[str], values))
-
-
-def elements_str(elements: Set[T]) -> str:
-    return str.join(SPACE, cast(List[str], list(elements)))
 
 
 # export type CommonPoint<T extends Token | Word> = [ap: Position, bp: Position, v: T];
