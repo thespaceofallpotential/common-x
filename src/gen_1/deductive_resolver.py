@@ -22,8 +22,14 @@ def are_valid(a_sequences: List[Sequence], b_sequences: List[Sequence]):
     return len(a_sequences) > 0 and len(b_sequences) > 0
 
 
-# DeductiveSolver: idiomatic divide & dismiss
+# DeductiveResolver
+# for use, see: src/generation_1_runner.py
+
+
+# the deductive resolver: idiomatic divide & dismiss
 # > organic: unknown-special-domain creativity/ insight
+
+# for use, see: src/generation_1_runner.py
 
 
 # DeductiveResolver (generation 1: general case)

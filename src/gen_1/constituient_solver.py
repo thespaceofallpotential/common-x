@@ -3,8 +3,11 @@ from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint
 
-# ConstituientSolver: structureless mass of the solution-relative general-domain
+# ConstituientSolver
+# for use, see: src/generation_1_runner.py
 
+
+# The constituient solver: structureless mass of the solution-relative general-domain
 
 class ConstituientSolver[T](Solver[T, CommonPoint]):
     def process(self, a: Sequence, b: Sequence):

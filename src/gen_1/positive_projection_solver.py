@@ -5,8 +5,11 @@ from core.sequence import Sequence
 
 from gen_1.brute_force_solver import BruteForceSolver
 
+# PositiveProjectionSolver
+# for use, see: src/generation_1_runner.py
 
-# ProjectionSolver: approximation, hallucination, anomalous
+# The positive projection solver: approximation, hallucination, anomalous
+
 
 
 class PositiveProjectionSolver[T](Solver[T, CommonSequence]):

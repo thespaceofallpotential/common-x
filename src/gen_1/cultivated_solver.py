@@ -4,9 +4,10 @@ from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonSequence, CommonSequences
 from core.vector import get_partition_vectors
 
-# CultivatedSolver: organic "knowledge culture" ; middle-out/through
+# CultivatedSolver
+# for use, see: src/generation_1_runner.py
 
-# CultivtedSolver
+# The cultivted solver: organic "knowledge culture" ; middle-out/through
 # > search-free "grown" solution; growth from curated parts/ cultivated environment
 
 # The Cultivated Solver will solve the common-substring problem without touching any

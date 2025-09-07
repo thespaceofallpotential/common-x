@@ -5,6 +5,7 @@ from core.sequence import Sequence
 
 
 # BruteForceSolver
+# for use, see: src/generation_1_runner.py
 
 # The brute force solver: unchecked/unbound enumeration of possibility-space
 
