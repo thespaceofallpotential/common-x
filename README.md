@@ -17,7 +17,7 @@ Terms:-
 Quick Links:
 
 1. [generation 1](/notes/generation%201.md)
-2. [basic batching](/src/batch.py) *(need to match solver/processor type with record type for the time being)*
+2. [basic batching](/src/example_batch.py)
 
 
 ---
@@ -29,7 +29,7 @@ This repository ~~describes~~ *will eventually describe*:-
 
 2. problem background, & motivation
 
-3. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.py))*
+3. a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1_runner.py))*
 
 4. detail on approach & algorithmic extensibility *(& transformation)*, to handle different kinds of *"common-x"* problems
 
@@ -38,21 +38,20 @@ This repository ~~describes~~ *will eventually describe*:-
 6. an account of the ways in which all "*problem-space problems*" are reformulable in terms of *"common-x"*; and a discussion on the approach and significance of reformulating problems to *"well-formed common-x"*
 
 > Practical demonstrations:
-> - [generation 1: basic substring — *(natural language)*](./src/generation_1.py)
+> - [generation 1: basic substring — *(natural language)*](./src/generation_1_runner.py)
 > - generation 2: substring — *(DNA)*
 > - generation ...: subsequence
 > - generation ...: artefacts
 > - generation ...: problem-space reformulation 
 > 
 > Solvers *(generation 1)*:
->  - [Cultivated Runner](./src/gen_1/runners/cultivatedRunner.py) | [Solver](./src/gen_1/solvers/CultivatedSolver.py)
->  - [Deductive Runner](./src/gen_1/runners/deductiveRunner.py) | [Solver](./src/gen_1/solvers/DeductiveResolver.py)
+>  - [Cultivated Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1/cultivated_solver.py)
+>  - [Deductive Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1/deductive_resolver.py)
 > 
 > Not yet ported to python:
->  - [Brute Force Runner](./src/gen_1/runners/bruteForceRunner.py) | [Solver](./src/gen_1/solvers/BruteForceSolver.py)
->  - [Constituent Runner](./src/gen_1/runners/constituientRunner.py) | [Solver](./src/gen_1/solvers/ConstituientSolver.py)
->  - [(Lazy Fake) Suffix-Tree Runner](./src/gen_1/runners/lazyFakeSuffixTreeRunner.py) | [Solver](./src/gen_1/solvers/LazyFakeSuffixTreeSolver.py)
->  - [Positive Projection Runner](./src/gen_1/runners/projectionSolver.py) | [Solver](./src/gen_1/solvers/ProjectionSolver.py)
+>  - [Brute Force Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1/brute_force_solver.py)
+>  - [Constituent Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1/constituient_solver.py)
+>  - [Positive Projection Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1/positive_projection_solver.py)
 
 ---
 
@@ -87,7 +86,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 > 
 > *musing:*
 > 
-> 	*consider, that with the [Cultivated Solver](./src/gen_1/runners/cultivatedRunner.py), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
+> 	*consider, that with the [Cultivated Solver](./src/gen_1/cultivated_solver.py), **might** we be looking at **the domestication of "wild-knowledge"** (almost as a physical biological artefact) — albeit one cultivated, grown (farmed?!), and evolved (bred?), within abstract realms... ([notes](./notes/cultivated%20solver.md))*
 
 ---
 ## problem background, & motivation
@@ -96,7 +95,7 @@ Learning, it seems, depends upon situationally appropriate *"knowledge culture"*
 ---
 ## generalised approach & method
 
-> note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1.py))*
+> note: a generalised approach & method for solving *"common-x"* type problems — *(like "common-substring" and "common-subsequence")* — *([generation 1](./src/generation_1_runner.py))*
 
 
 ---

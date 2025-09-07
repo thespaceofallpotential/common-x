@@ -3,7 +3,7 @@ from core.commonality import CommonSequence
 from core.partition_helpers import partitions
 from core.sequence import Sequence
 
-from gen_1.solvers.brute_force_solver import BruteForceSolver
+from gen_1.brute_force_solver import BruteForceSolver
 
 
 # ProjectionSolver: approximation, hallucination, anomalous

@@ -3,11 +3,11 @@ from typing import cast
 from utils.custom_exception import CustomException
 
 from core.processor import IProcessor
-from gen_1.solvers.brute_force_solver import BruteForceSolver
-from gen_1.solvers.constituient_solver import ConstituientSolver
-from gen_1.solvers.cultivated_solver import CultivatedSolver
-from gen_1.solvers.deductive_resolver import DeductiveResolver
-from gen_1.solvers.positive_projection_solver import PositiveProjectionSolver
+from gen_1.brute_force_solver import BruteForceSolver
+from gen_1.constituient_solver import ConstituientSolver
+from gen_1.cultivated_solver import CultivatedSolver
+from gen_1.deductive_resolver import DeductiveResolver
+from gen_1.positive_projection_solver import PositiveProjectionSolver
 
 
 class ProcessorTypes(Enum):
