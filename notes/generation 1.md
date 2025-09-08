@@ -75,7 +75,7 @@ In *(very casual)* mathematical terms, *(indexing in)* lower-dimensional space i
 ## solvers
 
 ### brute-force
-> *[solver](/src/gen_1/brute_force_solver.py) | [runner](/src/generation_1_runner.py)*
+> *[solver](/src/gen_1_solvers/brute_force_solver.py) | [runner](/src/generation_1_runner.py)*
 
 The brute-force solver:-
 1. does not pre-filter *"polarity"* *(ignore negative-space)*, and;
@@ -91,7 +91,7 @@ $$a \times b = 924$$
 
 ---
 ### positive projection
-> *[solver](/src/gen_1/positive_projection_solver.py) | [runner](/src/generation_1_runner.py)*
+> *[solver](/src/gen_1_solvers/positive_projection_solver.py) | [runner](/src/generation_1_runner.py)*
 
 The positive projection solver:-
 1. pre-filters *"polarity"* *(ignores negative-space)*, but;
@@ -114,7 +114,7 @@ $$= 90$$
 
 ---
 ### cultivated
-> *[solver](/src/gen_1/cultivated_solver.py) | [runner](/src/generation_1_runner.py)*
+> *[solver](/src/gen_1_solvers/cultivated_solver.py) | [runner](/src/generation_1_runner.py)*
 
 The cultivated solver:-
 1. pre-filters *"polarity"* *(ignores negative-space)*, and;

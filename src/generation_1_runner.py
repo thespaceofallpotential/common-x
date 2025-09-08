@@ -7,7 +7,7 @@ sequences = source.get_sequences()
 
 a, b = sequences
 
-# all solvers ./gen_1/*
+# all solvers ./gen_1_solvers/*
 
 # brute-force solver
 # > basic naieve
