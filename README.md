@@ -47,8 +47,6 @@ This repository ~~describes~~ *will eventually describe*:-
 > Solvers *(generation 1)*:
 >  - [Cultivated Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1_solvers/cultivated_solver.py)
 >  - [Deductive Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1_solvers/deductive_resolver.py)
-> 
-> Not yet ported to python:
 >  - [Brute Force Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1_solvers/brute_force_solver.py)
 >  - [Constituent Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1_solvers/constituient_solver.py)
 >  - [Positive Projection Runner](./src/generation_1_runner.py) | [Solver](./src/gen_1_solvers/positive_projection_solver.py)
