@@ -7,11 +7,7 @@ helper = SourceHelper("data/local/aeim")
 
 options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
 
-
 helper.add_all(options)
-
-file_count = len(helper.relative_paths)
-
 
 print("set files")
 
@@ -25,19 +21,15 @@ print("get sequences")
 
 sequences = source.get_sequences()
 
-sequence_count = len(sequences)
-
 print("word domain")
 
 word_domain = WordDomain(sequences)
 
-word_count = len(word_domain.values)
-
-print(f"{file_count} {sequence_count} {word_count}")
+print(f"{len(helper.relative_paths)} {len(sequences)} {len(word_domain.values)}")
 
 # 5331 5331 291817
 # TODO: need to get word count down (sanitisation issue)
-# 
+#
 # 5331 5215 135703
 #   basic sanitiser frontmatter check
 # 5331 5160 123196
@@ -61,3 +53,5 @@ print(word_domain.values)
 # b = "longest common subsequence lcs longest subsequence common all sequences set sequences often just two sequences it differs from longest common substring unlike substrings subsequences are not required occupy consecutive positions within original sequences"
 
 # sequences = source.get_sequences()
+
+# print('Downloading File FooFile.txt [%d%%]\r'%i, end="")

@@ -1,9 +1,18 @@
 import abc
+from enum import Enum
 from typing import List, cast
 
 from batch.batch import Batch
 from core.sequence import Sequence
 from core.sink import Sink
+
+
+class ProcessorTypes(Enum):
+    BRUTE_FORCE = 1
+    CONSTITUENT = 2
+    CULTIVATED = 3
+    DEDUCTIVE = 4
+    POSITIVE_PROJECTION = 5
 
 
 class IProcessor[T, C](metaclass=abc.ABCMeta):
@@ -22,6 +31,12 @@ class IProcessor[T, C](metaclass=abc.ABCMeta):
 
 class Processor[T, C](IProcessor[T, C], Sink[C], metaclass=abc.ABCMeta):
     count: int = 0
+
+    items: List[C]
+
+    def __init__(self) -> None:
+        super(Sink).__init__()
+        self.items = []
 
     def step(self, value: int = 1):
         self.count += value

@@ -2,7 +2,7 @@ import abc
 
 from typing import List
 
-from core.processor import Processor
+from batch.processor import Processor
 from core.sequence import Sequence
 from core.partition_helpers import partition_on
 

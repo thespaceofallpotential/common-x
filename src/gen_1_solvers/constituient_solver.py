@@ -1,4 +1,4 @@
-from core.solver import Solver
+from batch.solver import Solver
 from core.sequence import Sequence
 from core.symmetric_index import to_symmetric_index
 from core.commonality import CommonPoint

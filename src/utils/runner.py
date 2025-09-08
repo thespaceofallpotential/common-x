@@ -1,5 +1,5 @@
-from core.processor_factory import ProcessorFactory, ProcessorTypes
-from core.processor import IProcessor
+from batch.processor_factory import ProcessorFactory, ProcessorTypes
+from batch.processor import IProcessor
 from core.sequence import Sequence
 from utils.custom_exception import CustomException
 

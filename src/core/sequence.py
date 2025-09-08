@@ -19,6 +19,8 @@ class BasicSequence[T](PartitionVector):
 class Sequence[T](BasicSequence):
     elements: Set[T]
 
+    size: int
+
     def __init__(
         self,
         values: List[T],
@@ -28,6 +30,8 @@ class Sequence[T](BasicSequence):
         super().__init__(position, values)
 
         self.elements = elements if elements else set[T](values)
+
+        self.size = len(self.elements)
 
     def get_index(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)

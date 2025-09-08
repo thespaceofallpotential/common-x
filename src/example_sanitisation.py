@@ -27,7 +27,7 @@ if sanitised[1] != b_clean.content:
     print(sanitised[1])
     print(b_clean.content)
 
-text = """---
+MARKDOWN = """---
 aliases:
   - clean-knowledge
 ---
@@ -47,6 +47,6 @@ options = SanitiserOptions()
 
 sanitiser = sanitiser_factory.build_sanitiser(options)
 
-result = sanitiser.sanitise(text)
+result = sanitiser.sanitise(MARKDOWN)
 
 print(result)

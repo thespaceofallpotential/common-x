@@ -2,10 +2,10 @@ from typing import List
 
 # from batch.file_domain import FileDomain
 from batch.batch import Batch
+from batch.processor import IProcessor
+from batch.processor_factory import ProcessorFactory, ProcessorTypes
 from core.sequence import Sequence
 from core.sink import Sink, sink_factory
-from core.processor import IProcessor
-from core.processor_factory import ProcessorFactory, ProcessorTypes
 
 
 class BatchEngine[T, C]:
@@ -17,10 +17,15 @@ class BatchEngine[T, C]:
     ):
         length = len(sequences)
 
+        total = length * length / 2
+        count = 0
+
         for i_a in range(length):
             a = sequences[i_a]
 
             for i_b in range(length):
+                print("progress [%d%%]\r" % (count / total * 100), end="")
+
                 if i_b >= i_a:
                     # only process a pair once
                     # no same file comparisons for now
@@ -33,6 +38,8 @@ class BatchEngine[T, C]:
                 batch = processor.get_batch(i_a, i_b)
 
                 sink.add(batch)
+
+                count += 1
 
 
 def batch_runner[C](

@@ -19,6 +19,12 @@ class Source:
 
         self.__files = self.__helper.get_files()
 
+    def get_content(self):
+        return list(map(lambda x: x.content.lower(), self.__files))
+
+    def get_textual_sequences(self):
+        return list(map(lambda x: Sequence(list(x.content.lower())), self.__files))
+
     def get_sanitised(self):
         stopwords_file = self.__helper.get_file("../stopwords.txt")
 

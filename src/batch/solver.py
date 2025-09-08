@@ -1,6 +1,6 @@
 import abc
 
-from core.processor import Processor
+from batch.processor import Processor
 
 
 class Solver[T, C](Processor[T, C], metaclass=abc.ABCMeta):

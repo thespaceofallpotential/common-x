@@ -1,21 +1,14 @@
-from enum import Enum
 from typing import cast
+
 from utils.custom_exception import CustomException
 
-from core.processor import IProcessor
-from gen_1.brute_force_solver import BruteForceSolver
-from gen_1.constituient_solver import ConstituientSolver
-from gen_1.cultivated_solver import CultivatedSolver
-from gen_1.deductive_resolver import DeductiveResolver
-from gen_1.positive_projection_solver import PositiveProjectionSolver
+from batch.processor import IProcessor, ProcessorTypes
 
-
-class ProcessorTypes(Enum):
-    BRUTE_FORCE = 1
-    CONSTITUENT = 2
-    CULTIVATED = 3
-    DEDUCTIVE = 4
-    POSITIVE_PROJECTION = 5
+from gen_1_solvers.brute_force_solver import BruteForceSolver
+from gen_1_solvers.constituient_solver import ConstituientSolver
+from gen_1_solvers.cultivated_solver import CultivatedSolver
+from gen_1_solvers.deductive_resolver import DeductiveResolver
+from gen_1_solvers.positive_projection_solver import PositiveProjectionSolver
 
 
 class ProcessorFactory[T, C]:

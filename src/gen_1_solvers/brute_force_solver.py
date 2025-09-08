@@ -1,4 +1,4 @@
-from core.solver import Solver
+from batch.solver import Solver
 from core.commonality import CommonSequence
 from core.memo import Memo
 from core.sequence import Sequence

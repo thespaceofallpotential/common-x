@@ -1,5 +1,5 @@
 from typing import List
-from core.resolver import Resolver
+from batch.resolver import Resolver
 from core.parsers import parse_check, smart_repartition
 from core.sequence import Sequence
 from core.commonality import CommonSequence

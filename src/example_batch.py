@@ -1,5 +1,5 @@
 from batch.batch_engine import batch_run_and_print
-from core.processor_factory import ProcessorTypes
+from batch.processor_factory import ProcessorTypes
 
 from example_1_source import source as example_1_source
 
