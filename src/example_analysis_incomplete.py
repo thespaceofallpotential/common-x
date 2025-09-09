@@ -6,7 +6,9 @@ from sanitisation.analyser import AnalyserType
 from sanitisation.analysis_engine import analysis_runner
 from sanitisation.qualitative_sequence import QualitativeSequence
 from sanitisation.elemental_culture import curate_elements
-from sanitisation.elemental_sanitisers import BasicElementalSanitiser
+from sanitisation.elemental_sanitisers import (
+    StructuredElementalSanitiser,
+)
 from utils.timer import Timer
 from utils.io_helper import ScanOptions
 
@@ -14,17 +16,20 @@ from utils.io_helper import ScanOptions
 # using approach & methods consistent with common-x solvers
 
 # ---
-# 
-# 1. make it work  <--- we are here
-# 2. make it right  
-# 
+#
+# 1. make it work  <--- WE ARE HERE!
+# 2. make it right
+#
 # ;)
-# 
+#
 # ---
 
 helper = SourceHelper("data/local/aeim")
 
-options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
+# options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
+options = ScanOptions(
+    helper.file_helper.root, ext=".md", relative=True, recursive=False
+)
 
 helper.add_all(options)
 
@@ -62,15 +67,13 @@ all_element_list = list(all_elements)
 
 all_element_list.sort()
 
-# ws = list(filter(lambda x: re.sub(r"[^\w\s]|_", EMPTY, x), all_characters))
-
 sequence = QualitativeSequence(all_element_list)
 
 print("curate")
 
 culture = curate_elements(sequence.elements)
 
-sanitiser = BasicElementalSanitiser(culture)
+sanitiser = StructuredElementalSanitiser(culture)
 
 print("build sanitiser")
 

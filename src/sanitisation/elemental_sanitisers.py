@@ -1,24 +1,42 @@
-from typing import Callable
+from typing import Callable, Dict
 
 from core.strings import EMPTY
 from sanitisation.elemental_culture import ElementalCulture
 from sanitisation.sanitisation_regex import SanitisationTypes
 
 
+def is_match(content: str, i: int, pattern: str) -> bool:
+    for i_i in range(len(pattern)):
+        if content[i + i_i] != pattern[i_i]:
+            return False
+
+    return True
+
+
 def sanitise(content: str, fn: Callable[..., bool]) -> str:
     items: list[str] = []
 
-    for x in content:
-        if fn(x):
-            items.append(x)
+    for i, character in enumerate(content):
+        if fn(i, character):
+            items.append(character)
 
     return str.join(EMPTY, items)
+
+
+class QualityClass:
+    structures: Dict[SanitisationTypes, str]
+
+    def __init__(self) -> None:
+        self.structures = {}
+
+    def isStructured(self):
+        return len(self.structures) > 0
 
 
 class BasicElementalSanitiser:
     culture: ElementalCulture
 
-    key_space: dict[str, str]
+    key_space: dict[str, QualityClass | None]
 
     def __init__(self, culture: ElementalCulture) -> None:
         self.culture = culture
@@ -26,15 +44,47 @@ class BasicElementalSanitiser:
         self.key_space = {}
 
     def build(self):
-        elements = self.culture.curated_elements[SanitisationTypes.WS]
-        elements = self.culture.curated_elements[SanitisationTypes.WS]
+        for key in self.culture.curated_elements:
+            elements = self.culture.curated_elements[key]
 
-        for element in elements:
-            self.key_space[element] = "OK"
+            regex = self.culture.regex_map[key]
+
+            for element in elements:
+                current = self.key_space.get(element)
+
+                if current and regex.positive:
+                    continue
+
+                if current and not regex.positive:
+                    print("uh oh")
+
+                self.key_space[element] = QualityClass() if regex.positive else None
 
     def sanitise(self, content: str) -> str:
-        def is_good(element: str) -> bool:
-            return bool(self.key_space.get(element))
+        def is_good(i: int, character: str) -> bool:
+            if character == "[":
+                print("herere")
+
+            state = self.key_space.get(character)
+
+            if not state:
+                return False
+
+            if not state.isStructured():
+                return True
+
+            for structure in state.structures:
+                structured = self.culture.structured_elements[structure]
+
+                first = structured.get("first")
+
+                if first and character == first:
+                    start = structured.get("start")
+
+                    if start and is_match(content, i, start):
+                        print(f"\nstart:{start}")
+
+            return True
 
         sanitised = sanitise(content, is_good)
 
@@ -42,16 +92,31 @@ class BasicElementalSanitiser:
 
 
 class StructuredElementalSanitiser(BasicElementalSanitiser):
+    def __init__(self, culture: ElementalCulture) -> None:
+        super().__init__(culture)
+
     def build(self):
-        elements = self.culture.curated_elements[SanitisationTypes.WS]
+        super().build()
 
-        for element in elements:
-            self.key_space[element] = "OK"
+        for key in self.culture.structured_elements:
+            elements = self.culture.structured_elements[key]
 
-    def sanitise(self, content: str) -> str:
-        def is_good(element: str) -> bool:
-            return bool(self.key_space.get(element))
+            first = elements.get("first")
 
-        sanitised = sanitise(content, is_good)
+            if first:
+                current = self.key_space.get(first)
 
-        return sanitised
+                if not current:
+                    current = QualityClass()
+                    self.key_space[first] = current
+
+                current.structures[key] = f"{key}"
+
+    # def sanitise(self, content: str) -> str:
+    #     su
+    #     def is_good(element: str) -> bool:
+    #         return bool(self.key_space.get(element))
+
+    #     sanitised = sanitise(content, is_good)
+
+    #     return sanitised
