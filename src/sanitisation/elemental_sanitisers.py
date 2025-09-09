@@ -29,6 +29,7 @@ class BasicElementalSanitiser:
 
     def build(self):
         elements = self.culture.curated_elements[SanitisationTypes.WS]
+        elements = self.culture.curated_elements[SanitisationTypes.WS]
 
         for element in elements:
             self.key_space[element] = "OK"

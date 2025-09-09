@@ -1,10 +1,12 @@
 from typing import Dict
 
+
 from sanitisation.sanitisation_regex import (
     SanitisationTypes,
     re_match,
     sanitisation_regex_map,
 )
+from sanitisation.regex import IRegex
 
 
 def assess(elements: set[str], pattern: str) -> set[str]:
@@ -20,16 +22,16 @@ def assess(elements: set[str], pattern: str) -> set[str]:
 class ElementalCulture:
     elements: set[str]
 
-    map: Dict[SanitisationTypes, str]
+    map: Dict[SanitisationTypes, IRegex]
 
-    patterns: Dict[SanitisationTypes, str]
+    patterns: Dict[SanitisationTypes, IRegex]
 
     curated_elements: Dict[SanitisationTypes, set[str]]
 
     def __init__(
         self,
         elements: set,
-        map: Dict[SanitisationTypes, str],
+        map: Dict[SanitisationTypes, IRegex],
     ) -> None:
         self.elements = elements
         self.map = map
@@ -38,19 +40,20 @@ class ElementalCulture:
         self.curated_elements = dict()
 
     def curate(self, sanitisation_type: SanitisationTypes):
-        pattern = self.map[sanitisation_type]
+        regex = self.map[sanitisation_type]
 
-        curated = assess(self.elements, pattern)
+        self.patterns[sanitisation_type] = regex
 
-        self.patterns[sanitisation_type] = pattern
+        if regex.type == "basic":
+            curated = assess(self.elements, regex.pattern)
 
-        self.curated_elements[sanitisation_type] = curated
+            self.curated_elements[sanitisation_type] = curated
 
 
 def curate_elements(elements: set[str]) -> ElementalCulture:
     culture = ElementalCulture(elements, sanitisation_regex_map)
 
-    culture.curate(SanitisationTypes.WS)
-    culture.curate(SanitisationTypes.D)
+    for key in sanitisation_regex_map.keys():
+        culture.curate(key)
 
     return culture

@@ -3,6 +3,9 @@ from typing import Dict
 
 import re
 
+from core.strings import FRONTMATTER
+from sanitisation.regex import BasicRegex, IRegex, StructuredRegex
+
 
 class SanitisationTypes(Enum):
     NONE = 0
@@ -17,11 +20,10 @@ class SanitisationTypes(Enum):
     S_W = 20
     S_P = 21
 
-    S_F = 30
-    S_FC = 31
+    S_FM = 30
 
-    S_MIO = 32
-    S_MIC = 33
+    S_MIL = 31
+    S_MEL = 32
 
 
 RE_WS = r"[\w\s]"  # positive: [a-zA-Z0-9_]
@@ -36,18 +38,21 @@ RE_A = r"[']"  # negative: apostrophe
 
 RE_S_W = r"(\s{2,})"  # structured: whitespace
 
-RE_S_F = r"^---"  # structured: frontmatter (open/ close)
+RE_S_F = r"^---[^-]"  # structured: frontmatter (open/ close)
 
-RE_S_FC = r"\n---"  # structured: frontmatter close
+RE_S_FC = r"\n---[^-]"  # structured: frontmatter close
 
 RE_S_P = r"\. "  # structured: period space
 
 RE_S_MIO = r"\[\["  # structured: markdown internal link open
 RE_S_MIC = r"\]\]"  # structured: markdown internal link open
 
+RE_S_FM = r"^---[^-]+\n---(\n)"
+
 RE_S_MI = r"(\[\[)[^\[\]]+(\]\])"
 
-RS_S_MO = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
+RE_S_ME = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
+
 
 # don't need/ want regex for a bunch of this....
 # time for zzz...
@@ -57,7 +62,16 @@ def re_match(r: str, x: str) -> bool:
     return bool(re.match(r, x))
 
 
-sanitisation_regex_map: Dict[SanitisationTypes, str] = {
-    SanitisationTypes.WS: RE_WS,
-    SanitisationTypes.D: RE_D,
+sanitisation_regex_map: Dict[SanitisationTypes, IRegex] = {
+    SanitisationTypes.WS: BasicRegex(RE_WS),
+    SanitisationTypes.D: BasicRegex(RE_D),
+    SanitisationTypes.NL: BasicRegex(RE_NL),
+    SanitisationTypes.U: BasicRegex(RE_U),
+    SanitisationTypes.A: BasicRegex(RE_A, positive=False),
+    SanitisationTypes.S_W: StructuredRegex(RE_S_W, all=r"\s"),
+    SanitisationTypes.S_FM: StructuredRegex(
+        RE_S_FM, start=FRONTMATTER, end=FRONTMATTER
+    ),
+    SanitisationTypes.S_MIL: StructuredRegex(RE_S_MI, start="[[", end="]]"),
+    SanitisationTypes.S_MEL: StructuredRegex(RE_S_ME, start="[]", mid="](", end=")"),
 }
