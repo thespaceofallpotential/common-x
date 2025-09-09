@@ -6,9 +6,10 @@ from sanitisation.analysis import Analysis
 
 class AnalyserType(Enum):
     NONE = 0
-    CHARACTER = 1
-    WORD = 2
-    PHRASE = 3
+    LENGTH = 1
+    CHARACTER = 2
+    WORD = 3
+    PHRASE = 4
 
 
 class IAnalyser(metaclass=abc.ABCMeta):

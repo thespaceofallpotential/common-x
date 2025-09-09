@@ -17,10 +17,6 @@ def strip_numbers(x: str) -> str:
     )
 
 
-# def strip_if_numbers(x: str) -> str:
-#     return str.join(SPACE, list(filter(lambda y: not re y.isnumeric(), x.split(SPACE))))
-
-
 def only_numbers(x: str) -> list[str]:
     return list(filter(lambda y: y.isnumeric(), x.split(SPACE)))
 

@@ -41,6 +41,8 @@ class BatchEngine[T, C]:
 
                 count += 1
 
+        print("")  # move cursor to next line
+
 
 def batch_runner[C](
     processor_type: ProcessorTypes,

@@ -24,6 +24,8 @@ class AnalysisEngine[T]:
 
             sink.add(analysis)
 
+        print("") # move cursor to next line
+
 
 def analysis_runner[T](
     analyser_type: AnalyserType,

@@ -63,6 +63,10 @@ def shrink_whitespace(x: str) -> str:
 frontmatter_delimiter = f"{NEWLINE}{FRONTMATTER}"
 
 
+def has_frontmatter(x: str):
+    return is_frontmatter(x)
+
+
 def get_frontmatter(x: str) -> str:
     if not is_frontmatter(x):
         return EMPTY
