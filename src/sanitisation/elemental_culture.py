@@ -6,7 +6,7 @@ from sanitisation.sanitisation_regex import (
     re_match,
     sanitisation_regex_map,
 )
-from sanitisation.regex import IRegex, RegexTypes, StructuredRegex
+from sanitisation.regex import FragmentTypes, IRegex, RegexTypes, StructuredRegex
 
 
 def assess_basic(elements: set[str], pattern: str, positive: bool = True) -> set[str]:
@@ -28,7 +28,7 @@ class ElementalCulture:
 
     curated_elements: Dict[SanitisationTypes, set[str]]
 
-    structured_elements: Dict[SanitisationTypes, dict[str, str]]
+    structured_elements: Dict[SanitisationTypes, Dict[FragmentTypes, str]]
 
     def __init__(
         self,
@@ -54,13 +54,11 @@ class ElementalCulture:
 
         if regex.type == RegexTypes.STRUCTURED:
             structured_regex = cast(StructuredRegex, regex)
-            
-            first = structured_regex.keys.get("first")
-            
+
+            first = structured_regex.keys.get(FragmentTypes.FIRST)
+
             if first:
-                self.curated_elements[sanitisation_type] = set(
-                    first
-                )
+                self.curated_elements[sanitisation_type] = set(first)
 
             self.structured_elements[sanitisation_type] = structured_regex.keys
 

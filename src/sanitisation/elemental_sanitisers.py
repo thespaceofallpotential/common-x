@@ -3,12 +3,18 @@ from typing import Callable, Dict
 from core.strings import EMPTY
 from sanitisation.elemental_culture import ElementalCulture
 from sanitisation.sanitisation_regex import SanitisationTypes
+from sanitisation.regex import FragmentTypes
 
 
-def is_match(content: str, i: int, pattern: str) -> bool:
-    for i_i in range(len(pattern)):
-        if content[i + i_i] != pattern[i_i]:
-            return False
+def is_match(content: str, i_c: int, pattern: str) -> bool:
+    content_length = len(content)
+
+    for i_p, pattern_character in enumerate(pattern):
+        i_i = i_c + i_p
+
+        if i_i < content_length:
+            if content[i_i] != pattern_character:
+                return False
 
     return True
 
@@ -29,7 +35,7 @@ class QualityClass:
     def __init__(self) -> None:
         self.structures = {}
 
-    def isStructured(self):
+    def is_structured(self):
         return len(self.structures) > 0
 
 
@@ -73,10 +79,10 @@ class BasicElementalSanitiser:
             for structure in state.structures:
                 structured = self.culture.structured_elements[structure]
 
-                first = structured.get("first") # TODO: rethink this dict, etc. lol, looks around... 
+                first = structured.get(FragmentTypes.FIRST)
 
                 if first and character == first:
-                    start = structured.get("start")
+                    start = structured.get(FragmentTypes.START)
 
                     if start and is_match(content, i, start):
                         print(f"\nstart:{start}")
@@ -92,16 +98,13 @@ class BasicElementalSanitiser:
 
 
 class StructuredElementalSanitiser(BasicElementalSanitiser):
-    def __init__(self, culture: ElementalCulture) -> None:
-        super().__init__(culture)
-
     def build(self):
         super().build()
 
         for key in self.culture.structured_elements:
             elements = self.culture.structured_elements[key]
 
-            first = elements.get("first")
+            first = elements.get(FragmentTypes.FIRST)
 
             if first:
                 current = self.key_space.get(first)
