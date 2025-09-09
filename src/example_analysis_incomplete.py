@@ -13,6 +13,14 @@ from utils.io_helper import ScanOptions
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
 # using approach & methods consistent with common-x solvers
 
+# ---
+# 
+# 1. make it work  <--- we are here
+# 2. make it right  
+# 
+# ;)
+# 
+# ---
 
 helper = SourceHelper("data/local/aeim")
 
