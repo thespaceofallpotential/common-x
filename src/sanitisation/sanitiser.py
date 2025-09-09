@@ -9,7 +9,7 @@ from sanitisation.string_helpers import (
     shrink_whitespace,
     strip_frontmatter,
 )
-from core.strings import EMPTY, SPACE
+from core.strings import EMPTY
 
 
 class SanitiserOptions:

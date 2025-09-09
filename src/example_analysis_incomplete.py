@@ -1,6 +1,3 @@
-import re
-
-from core.strings import EMPTY
 from core.sink import sink_factory
 from data.source_helper import SourceHelper
 from data.source import Source
@@ -47,19 +44,19 @@ elements = get_elements(sink.items)
 
 print(f"union ({len(elements)})")
 
-all = set()
+all_elements = set()
 
 for x in elements:
-    all = all.union(x)
+    all_elements = all_elements.union(x)
 
 
-all_characters = list(all)
+all_element_list = list(all_elements)
 
-all_characters.sort()
+all_element_list.sort()
 
 # ws = list(filter(lambda x: re.sub(r"[^\w\s]|_", EMPTY, x), all_characters))
 
-sequence = QualitativeSequence(all_characters)
+sequence = QualitativeSequence(all_element_list)
 
 print("curate")
 
@@ -82,7 +79,8 @@ timer = Timer()
 timer.start()
 
 for i, content in enumerate(contents):
-    print("progress [%d%%]\r" % ((i + 1) / length * 100), end="")
+    print(f"{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+
     sanitised = sanitiser.sanitise(content)
 
     all_sanitised.append(sanitised)

@@ -3,6 +3,7 @@ from typing import List
 from core.strings import (
     EMPTY,
     FRONTMATTER,
+    FRONTMATTER_CLOSE,
     LT,
     NEWLINE,
     OPEN_SQUARE_BRACKET_PAIR,
@@ -60,9 +61,6 @@ def shrink_whitespace(x: str) -> str:
     return re.sub(r"(\s{2,})", SPACE, x).strip()
 
 
-frontmatter_delimiter = f"{NEWLINE}{FRONTMATTER}"
-
-
 def has_frontmatter(x: str):
     return is_frontmatter(x)
 
@@ -71,12 +69,12 @@ def get_frontmatter(x: str) -> str:
     if not is_frontmatter(x):
         return EMPTY
 
-    i = index_withoutexception(x, frontmatter_delimiter)
+    i = index_withoutexception(x, FRONTMATTER_CLOSE)
 
     if i < 0:
         return EMPTY
 
-    i_end = i + len(frontmatter_delimiter)
+    i_end = i + len(FRONTMATTER_CLOSE)
 
     x = x[:i_end]
 
@@ -87,9 +85,9 @@ def strip_frontmatter(x: str) -> str:
     if not is_frontmatter(x):
         return x
 
-    i = index_withoutexception(x, frontmatter_delimiter)
+    i = index_withoutexception(x, FRONTMATTER_CLOSE)
 
-    i_end = i + len(frontmatter_delimiter)
+    i_end = i + len(FRONTMATTER_CLOSE)
 
     x = f"{SPACE * i_end} {x[i_end:]}"
 

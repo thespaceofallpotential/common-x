@@ -28,14 +28,14 @@ class StructuredRegex(BasicRegex):
         start: str | None = None,
         mid: str | None = None,
         end: str | None = None,
-        all: str | None = None,
+        body: str | None = None,
     ) -> None:
         super().__init__(pattern, positive)
 
         self.start = start
         self.mid = mid
         self.end = end
-        self.all = all
+        self.body = body
 
         self.type = "structured"
 
@@ -48,8 +48,8 @@ class StructuredRegex(BasicRegex):
                 y.append(f"m:{self.mid}")
             if self.end:
                 y.append(f"e:{self.end}")
-            if self.all:
-                y.append(f"a:{self.all}")
+            if self.body:
+                y.append(f"b:{self.body}")
 
             return str.join(SPACE, y)
 

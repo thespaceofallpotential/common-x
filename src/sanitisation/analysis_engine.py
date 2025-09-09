@@ -14,7 +14,7 @@ class AnalysisEngine[T]:
         length = len(contents)
 
         for i in range(length):
-            print("progress [%d%%]\r" % ((i + 1) / length * 100), end="")
+            print("{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
 
             content = contents[i]
 
@@ -24,7 +24,7 @@ class AnalysisEngine[T]:
 
             sink.add(analysis)
 
-        print("") # move cursor to next line
+        print("")  # move cursor to next line
 
 
 def analysis_runner[T](

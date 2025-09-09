@@ -58,8 +58,8 @@ RE_S_ME = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
 # time for zzz...
 
 
-def re_match(r: str, x: str) -> bool:
-    return bool(re.match(r, x))
+def re_match(r: str, x: str, positive: bool = True) -> bool:
+    return bool(re.match(r, x)) and positive
 
 
 sanitisation_regex_map: Dict[SanitisationTypes, IRegex] = {
@@ -68,7 +68,7 @@ sanitisation_regex_map: Dict[SanitisationTypes, IRegex] = {
     SanitisationTypes.NL: BasicRegex(RE_NL),
     SanitisationTypes.U: BasicRegex(RE_U),
     SanitisationTypes.A: BasicRegex(RE_A, positive=False),
-    SanitisationTypes.S_W: StructuredRegex(RE_S_W, all=r"\s"),
+    SanitisationTypes.S_W: StructuredRegex(RE_S_W, body=r"\s"),
     SanitisationTypes.S_FM: StructuredRegex(
         RE_S_FM, start=FRONTMATTER, end=FRONTMATTER
     ),

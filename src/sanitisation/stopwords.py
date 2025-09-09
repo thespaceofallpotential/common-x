@@ -14,7 +14,7 @@ class StopwordRemover:
 
             return str.join(SPACE, words)
 
-        lines = list(map(lambda x: process_line(x), lines))
+        lines = list(map(process_line, lines))
 
         return str.join(NEWLINE, lines)
 

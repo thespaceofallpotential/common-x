@@ -8,9 +8,7 @@ from sanitisation.sanitisation_regex import SanitisationTypes
 def sanitise(content: str, fn: Callable[..., bool]) -> str:
     items: list[str] = []
 
-    for i in range(len(content)):
-        x = content[i]
-
+    for x in content:
         if fn(x):
             items.append(x)
 
@@ -25,7 +23,7 @@ class BasicElementalSanitiser:
     def __init__(self, culture: ElementalCulture) -> None:
         self.culture = culture
 
-        self.key_space = dict()
+        self.key_space = {}
 
     def build(self):
         elements = self.culture.curated_elements[SanitisationTypes.WS]
@@ -44,9 +42,6 @@ class BasicElementalSanitiser:
 
 
 class StructuredElementalSanitiser(BasicElementalSanitiser):
-    def __init__(self, culture: ElementalCulture) -> None:
-        super().__init__(culture)
-
     def build(self):
         elements = self.culture.curated_elements[SanitisationTypes.WS]
 
