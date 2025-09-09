@@ -73,7 +73,7 @@ class BasicElementalSanitiser:
             for structure in state.structures:
                 structured = self.culture.structured_elements[structure]
 
-                first = structured.get("first") # TODO: rethink this dict, etc. lol, looks around...
+                first = structured.get("first") # TODO: rethink this dict, etc. lol, looks around... 
 
                 if first and character == first:
                     start = structured.get("start")
