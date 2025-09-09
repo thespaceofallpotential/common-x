@@ -9,7 +9,8 @@ from sanitisation.analyser import AnalyserType
 from sanitisation.analysis_engine import analysis_runner
 from sanitisation.qualitative_sequence import QualitativeSequence
 from sanitisation.elemental_culture import curate_elements
-from sanitisation.elemental_sanitisers import ElementalSanitiser
+from sanitisation.elemental_sanitisers import BasicElementalSanitiser
+from utils.timer import Timer
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
@@ -64,7 +65,7 @@ print("curate")
 
 culture = curate_elements(sequence.elements)
 
-sanitiser = ElementalSanitiser(culture)
+sanitiser = BasicElementalSanitiser(culture)
 
 print("build sanitiser")
 
@@ -76,12 +77,17 @@ all_sanitised: list[str] = []
 
 length = len(contents)
 
+timer = Timer()
+
+timer.start()
+
 for i, content in enumerate(contents):
     print("progress [%d%%]\r" % ((i + 1) / length * 100), end="")
     sanitised = sanitiser.sanitise(content)
 
     all_sanitised.append(sanitised)
 
+print(f"\nt:{timer.end()}")
 
 print("end")
 

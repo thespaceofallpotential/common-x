@@ -1,34 +1,53 @@
 from enum import Enum
-import re
 from typing import Dict
+
+import re
 
 
 class SanitisationTypes(Enum):
     NONE = 0
+
     WS = 1
     D = 2
+    NL = 3
+    U = 4
+
+    A = 10
+
+    S_W = 20
+    S_P = 21
+
+    S_F = 30
+    S_FC = 31
+
+    S_MIO = 32
+    S_MIC = 33
 
 
-RE_WS = r"[\w\s]"  # [a-zA-Z0-9_]
+RE_WS = r"[\w\s]"  # positive: [a-zA-Z0-9_]
 
-RE_D = r"[\d]"  # [0-9]
+RE_D = r"[\d]"  # positive: [0-9]
 
-RE_A = r"[']"  # apostrophe
+RE_NL = r"\n"  # positive: new line
 
-RE_U = r"[_]"  # underscore
+RE_U = r"[_]"  # positive? underscore
 
-RE_N = r"\n"  # new line
+RE_A = r"[']"  # negative: apostrophe
 
-RE_W = r"(\s{2,})"  # whitespace
+RE_S_W = r"(\s{2,})"  # structured: whitespace
 
-RE_F = r"^(-{3})"  # frontmatter (open/ close)
+RE_S_F = r"^---"  # structured: frontmatter (open/ close)
 
-RE_FC = r"[\n](-{3})"  # frontmatter close
+RE_S_FC = r"\n---"  # structured: frontmatter close
 
-RE_P = r"[\. ]"  # period space
+RE_S_P = r"\. "  # structured: period space
 
-RE_MIO = r"(\[{2}])"  # markdown internal link open
-RE_MIC = r"(\]{2}])"  # markdown internal link open
+RE_S_MIO = r"\[\["  # structured: markdown internal link open
+RE_S_MIC = r"\]\]"  # structured: markdown internal link open
+
+RE_S_MI = r"(\[\[)[^\[\]]+(\]\])"
+
+RS_S_MO = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
 
 # don't need/ want regex for a bunch of this....
 # time for zzz...
