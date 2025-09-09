@@ -19,6 +19,48 @@ def is_match(content: str, i_c: int, pattern: str) -> bool:
     return True
 
 
+class Fetched:
+    i_start: int = 0
+    i_end: int = 0
+    value: str = EMPTY
+
+    def __repr__(self) -> str:
+        return f"s:{self.i_start} e:{self.i_end} v:{self.value}"
+
+
+def is_fetched(
+    content: str, i_c: int, fragments: Dict[FragmentTypes, str], fetched: Fetched
+):
+    start = fragments.get(FragmentTypes.START)
+
+    end = fragments.get(FragmentTypes.END)
+
+    if not start or not end:
+        return False
+
+    content_length = len(content)
+
+    i_f = i_c + len(start)
+
+    end_first = end[0:1]
+
+    while i_f < content_length:
+        character = content[i_f]
+
+        if character == end_first and is_match(content, i_f, end):
+            i_f += len(end)
+
+            fetched.i_start = i_c
+            fetched.i_end = i_f
+            fetched.value = content[i_c:i_f]
+
+            return True
+
+        i_f += 1
+
+    return False
+
+
 def sanitise(content: str, fn: Callable[..., bool]) -> str:
     items: list[str] = []
 
@@ -30,13 +72,13 @@ def sanitise(content: str, fn: Callable[..., bool]) -> str:
 
 
 class QualityClass:
-    structures: Dict[SanitisationTypes, str]
+    structured_sanitisation: Dict[SanitisationTypes, str]
 
     def __init__(self) -> None:
-        self.structures = {}
+        self.structured_sanitisation = {}
 
     def is_structured(self):
-        return len(self.structures) > 0
+        return len(self.structured_sanitisation) > 0
 
 
 class BasicElementalSanitiser:
@@ -50,10 +92,10 @@ class BasicElementalSanitiser:
         self.key_space = {}
 
     def build(self):
-        for key in self.culture.curated_elements:
-            elements = self.culture.curated_elements[key]
+        for sanitisation_key in self.culture.curated_elements:
+            elements = self.culture.curated_elements[sanitisation_key]
 
-            regex = self.culture.regex_map[key]
+            regex = self.culture.regex_map[sanitisation_key]
 
             for element in elements:
                 current = self.key_space.get(element)
@@ -68,24 +110,30 @@ class BasicElementalSanitiser:
 
     def sanitise(self, content: str) -> str:
         def is_good(i: int, character: str) -> bool:
-            if character == "[":
-                print("herere")
-
             state = self.key_space.get(character)
 
             if not state:
                 return False
 
-            for structure in state.structures:
-                structured = self.culture.structured_elements[structure]
+            for structured_sanitisation_key in state.structured_sanitisation:
+                fragments = self.culture.structured_fragments[
+                    structured_sanitisation_key
+                ]
 
-                first = structured.get(FragmentTypes.FIRST)
+                first = fragments.get(FragmentTypes.FIRST)
 
                 if first and character == first:
-                    start = structured.get(FragmentTypes.START)
+                    start = fragments.get(FragmentTypes.START)
 
                     if start and is_match(content, i, start):
                         print(f"\nstart:{start}")
+
+                        fetched = Fetched()
+
+                        if is_fetched(content, i, fragments, fetched):
+                            print(f"{structured_sanitisation_key}: {fetched}")
+
+                        # walk to end
 
             # if not state.isStructured():
             #     return True
@@ -101,8 +149,8 @@ class StructuredElementalSanitiser(BasicElementalSanitiser):
     def build(self):
         super().build()
 
-        for key in self.culture.structured_elements:
-            elements = self.culture.structured_elements[key]
+        for key in self.culture.structured_fragments:
+            elements = self.culture.structured_fragments[key]
 
             first = elements.get(FragmentTypes.FIRST)
 
@@ -113,7 +161,7 @@ class StructuredElementalSanitiser(BasicElementalSanitiser):
                     current = QualityClass()
                     self.key_space[first] = current
 
-                current.structures[key] = f"{key}"
+                current.structured_sanitisation[key] = f"{key}"
 
     # def sanitise(self, content: str) -> str:
     #     su

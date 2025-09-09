@@ -28,7 +28,7 @@ class ElementalCulture:
 
     curated_elements: Dict[SanitisationTypes, set[str]]
 
-    structured_elements: Dict[SanitisationTypes, Dict[FragmentTypes, str]]
+    structured_fragments: Dict[SanitisationTypes, Dict[FragmentTypes, str]]
 
     def __init__(
         self,
@@ -40,7 +40,7 @@ class ElementalCulture:
 
         self.patterns = {}
         self.curated_elements = {}
-        self.structured_elements = {}
+        self.structured_fragments = {}
 
     def curate(self, sanitisation_type: SanitisationTypes):
         regex = self.regex_map[sanitisation_type]
@@ -60,7 +60,7 @@ class ElementalCulture:
             if first:
                 self.curated_elements[sanitisation_type] = set(first)
 
-            self.structured_elements[sanitisation_type] = structured_regex.keys
+            self.structured_fragments[sanitisation_type] = structured_regex.keys
 
 
 def curate_elements(elements: set[str]) -> ElementalCulture:
