@@ -70,9 +70,6 @@ class BasicElementalSanitiser:
             if not state:
                 return False
 
-            if not state.isStructured():
-                return True
-
             for structure in state.structures:
                 structured = self.culture.structured_elements[structure]
 
@@ -83,6 +80,9 @@ class BasicElementalSanitiser:
 
                     if start and is_match(content, i, start):
                         print(f"\nstart:{start}")
+
+            # if not state.isStructured():
+            #     return True
 
             return True
 
