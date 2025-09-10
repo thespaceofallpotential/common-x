@@ -1,5 +1,7 @@
 import abc
 from enum import Enum
+import re
+from typing import Callable
 
 
 class FragmentTypes(Enum):
@@ -25,6 +27,7 @@ class StructuredRegexFragments:
     end_before: str | None
     all: str | None
     body: str | None
+    transform: Callable[..., str] | None = None
 
     def __init__(
         self,
@@ -36,6 +39,7 @@ class StructuredRegexFragments:
         end_before: str | None = None,
         all: str | None = None,
         body: str | None = None,
+        transform: Callable[..., str] | None = None,
     ) -> None:
         self.first = first
         self.start = start
@@ -45,6 +49,7 @@ class StructuredRegexFragments:
         self.end_before = end_before
         self.all = all
         self.body = body
+        self.transform = transform
 
 
 class IRegex(metaclass=abc.ABCMeta):
@@ -91,6 +96,21 @@ class StructuredRegex(BasicRegex):
 
     def is_index_ok(self, i: int):
         return self.fixed_index is None or self.fixed_index == i
+
+    def get_fragment_pattern(self):
+        fragments = self.fragments
+
+        if (
+            fragments.start is not None
+            and fragments.middle is not None
+            and fragments.end is not None
+        ):
+            return f"{re.escape(fragments.start)}|{re.escape(fragments.middle)}|{re.escape(fragments.end)}"
+
+        if fragments.start is not None and fragments.end is not None:
+            return f"{re.escape(fragments.start)}|{re.escape(fragments.end)}"
+
+        return None
 
     def __repr__(self) -> str:
         def parts() -> str:

@@ -5,11 +5,10 @@ from sanitisation.analyser import AnalyserType
 from sanitisation.content_analysis_engine import content_analysis_runner
 from sanitisation.elemental_curator import (
     curate_and_collect,
-    map_content_elements,
-    map_content_elements2,
-    map_contents,
 )
 
+from sanitisation.map_content import map_contents
+from sanitisation.sanitise_contents import sanitise_contents
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
@@ -22,7 +21,7 @@ from utils.io_helper import ScanOptions
 #
 # fucking hell, python loop performance...
 #
-# 
+#
 # ---
 
 
@@ -42,13 +41,6 @@ def map_content():
 
     files = helper.get_files()
 
-    i_i = 0
-
-    for i, x in enumerate(files):
-        if "pdf" in x.path:
-            i_i = i
-            break
-
     # item = next(filter(lambda x: "pdf" in x.path, files))
     # if item is not None:
     #     print("here")
@@ -61,7 +53,13 @@ def map_content():
 
     contents = source.get_content()
 
-    contents = list([contents[i_i]])
+    # i_i = 0
+
+    # for i, x in enumerate(files):
+    #     if "pdf" in x.path:
+    #         i_i = i
+    #         break
+    # contents = list([contents[i_i]])
 
     print("character analysis")
 
@@ -77,12 +75,12 @@ def map_content():
 
     print("sanitise")
 
-    # maps = map_contents(curator, contents)
-    maps = map_content_elements2(curator, contents)
+    # mapped = map_contents(curator, contents)
+    # maps = map_content_elements2(curator, contents)
 
-    # sanitised = sanitise_contents(curator, contents)
+    sanitised = sanitise_contents(curator, contents)
 
-    print(f"{len(maps)}")
+    print(f"{len(sanitised)}")
 
     # 1. make it work  <--- STILL HERE! ;)
 

@@ -1,15 +1,14 @@
-from typing import List
 from sanitisation.sanitisation_regex import (
     re_match,
 )
 from sanitisation.regex import StructuredRegexFragments
 from sanitisation.sanitisation import Fetched
-from sanitisation.positive_vectors import (
-    PositiveVector,
-    TStepAssessor,
-    get_positive_vectors,
-    print_vectors,
-)
+# from sanitisation.positive_vectors import (
+#     PositiveVector,
+#     TStepAssessor,
+#     get_positive_vectors,
+#     print_vectors,
+# )
 
 
 def assess_elements(
@@ -72,28 +71,45 @@ def fetch_for(
     return None
 
 
-def sanitise(content: str, assessor: TStepAssessor) -> str:
-    vectors = get_positive_vectors(content, assessor)
+class StructuredPatternMap:
+    items: dict[str, list[int]]
 
-    return print_vectors(content, vectors)
+    def __init__(self) -> None:
+        self.items = {}
+
+    def add(self, pattern: str, i: int):
+        if pattern not in self.items:
+            self.items[pattern] = [i]
+            return
+
+        self.items[pattern].append(i)
 
 
-class ElementMap:
-    elements: list[str]
+# def sanitise(curator: ElementalCurator, content: str) -> str:
 
-    positive_vectors: List[PositiveVector]
+#     content = assessor(content)
 
-    content: str | None
+#     vectors = get_positive_vectors(content, assessor)
 
-    def __init__(
-        self, elements: list[str], vectors: List[PositiveVector], content: str | None = None
-    ) -> None:
-        self.elements = elements
-        self.positive_vectors = vectors
-        self.content = content
+#     return print_vectors(content, vectors)
 
-    def __repr__(self) -> str:
-        return f"e:{self.elements} v:{self.positive_vectors} c:{self.content}"
+
+# class ElementMap:
+#     elements: list[str]
+
+#     positive_vectors: List[PositiveVector]
+
+#     content: str | None
+
+#     def __init__(
+#         self, elements: list[str], vectors: List[PositiveVector], content: str | None = None
+#     ) -> None:
+#         self.elements = elements
+#         self.positive_vectors = vectors
+#         self.content = content
+
+#     def __repr__(self) -> str:
+#         return f"e:{self.elements} v:{self.positive_vectors} c:{self.content}"
 
 # class WordElementMap:
 #     elements: list[str]
