@@ -82,6 +82,16 @@ def map_content():
 
     print(f"{len(sanitised)}")
 
+    filtered = list(filter(lambda x: "](" in x, sanitised))
+
+    character_analysis2 = content_analysis_runner(AnalyserType.CHARACTER, sanitised)
+
+    character_list2 = to_character_list(character_analysis2)
+
+    characters2 = set(character_list2)
+
+    print(f"{len(sanitised)}")
+
     # 1. make it work  <--- STILL HERE! ;)
 
 

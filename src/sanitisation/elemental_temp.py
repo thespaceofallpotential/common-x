@@ -1,7 +1,7 @@
 import re
 
 from core.strings import ASTERISK, COMMA, EMPTY, EXCLAMATION, NEWLINE, SPACE
-from core.types import index_withoutexception
+from core.types import safe_index
 from sanitisation.curation_helpers import (
     ElementMap,
 )
@@ -98,7 +98,7 @@ def map_content_elements2(
         for match in matches:
             print(match.start(), match.group())
 
-        i_i = index_withoutexception(content, character)
+        i_i = safe_index(content, character)
 
         while i_i > -1 and i_i < len(content):
             current = temp.get(character)
@@ -108,7 +108,7 @@ def map_content_elements2(
             else:
                 temp[character].append(i_i)
 
-            i_i = index_withoutexception(content, character, i_i + 1)
+            i_i = safe_index(content, character, i_i + 1)
 
             print(i_i)
 

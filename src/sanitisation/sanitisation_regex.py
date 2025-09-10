@@ -41,75 +41,55 @@ def re_match(r: str, x: str, positive: bool = True) -> bool:
 
 def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
     # whitespace = r"[\w\s]"  # positive: [a-zA-Z0-9_]
-
     # digits = r"[\d]"  # positive: [0-9]
-
     # newline = r"\n"  # positive: new line
-
     # underscore = r"[_]"  # positive? underscore
-
     # apostrophe = r"[']"  # negative: apostrophe
-
     # structured_whitepace = r"(\s{2,})"  # structured: whitespace
-
     # structured_whitespace_fragments: TFragments = {
     #     FragmentTypes.START: r"\s",
     #     FragmentTypes.BODY: r"\s",
     #     FragmentTypes.END_BEFORE: r"[^\s]",
     # }
-
     # structured_whitespace_fragments2 = StructuredRegexFragments(
     #     start=r"\s",
     #     body=r"\s",
     #     end_before=r"[^\s]",
     # )
-
     # STRUCTURED_FRONTMATTER = r"^---[^-]"  # structured: frontmatter (open/ close)
-
     # STRUCTURED_FRONTMATTER_CLOSE = r"\n---[^-]"  # structured: frontmatter close
-
     # structured_period_space = r"\. "  # structured: period space
-
     # structured_period_space_fragments: TFragments = {
     #     FragmentTypes.START: r"\.",
     #     FragmentTypes.END: r" ",
     # }
-
     # structured_period_space_fragments2 = StructuredRegexFragments(
     #     start=r"\.",
     #     end=r" ",
     # )
+    # -----------------
 
-    # STRUCTURED_MARKDOWN_INTERNAL_LINK_OPEN = (
-    #     r"\[\["  # structured: markdown internal link open
-    # )
-    # STRUCTURED_MARKDOWN_INTERNAL_LINK_CLOSE = (
-    #     r"\]\]"  # structured: markdown internal link open
-    # )
+    # FRONTMATTER
 
-    structured_frontmatter = r"^---[^-]+\n---(\n)"
+    # structured_frontmatter = r"^---\n[^(---)]+\n---(\n)"
 
-    # stuctured_frontmatter_fragments: TFragments = {
-    #     FragmentTypes.START: FRONTMATTER,
-    #     FragmentTypes.END: FRONTMATTER,
-    # }
+    structured_frontmatter = r"^(---\n)((.|\s)*?)(\n---)"
 
     def transform_frontmatter(x: str) -> str:
         return str.join(NEWLINE, list(map(lambda x: EMPTY, x.split(NEWLINE))))
 
-    stuctured_frontmatter_fragments2 = StructuredRegexFragments(
-        start=FRONTMATTER, end=FRONTMATTER, transform=transform_frontmatter
+    stuctured_frontmatter_fragments = StructuredRegexFragments(
+        start=f"{FRONTMATTER}{NEWLINE}",
+        end=f"{NEWLINE}{FRONTMATTER}",
+        transform=transform_frontmatter,
     )
+
+    # MARKDOWN INTERNAL
 
     structured_markdown_internal_link = r"(\[\[)[^\[\]]+(\]\])"
 
-    # structured_markdown_internal_linke_fragments: TFragments = {
-    #     FragmentTypes.START: "[[",
-    #     FragmentTypes.END: "]]",
-    # }
-
     def transform_markdown_internal(x: str) -> str:
-        x = x[0:2]
+        x = x[2:]
         x = x[0:-2]
 
         if "|" in x:
@@ -117,17 +97,19 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
 
         return x
 
-    structured_markdown_internal_linke_fragments2 = StructuredRegexFragments(
+    structured_markdown_internal_link_fragments = StructuredRegexFragments(
         start="[[", end="]]", transform=transform_markdown_internal
     )
 
-    structured_markdown_external_link = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
+    # MARKDOWN EXTERNAL
 
-    # structured_markdown_external_link_fragments: TFragments = {
-    #     FragmentTypes.START: "[]",
-    #     FragmentTypes.MIDDLE: "](",
-    #     FragmentTypes.END: ")",
-    # }
+    # structured_markdown_external_link = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
+    structured_markdown_external_link = r"(\[)[^( )]?((.|\n)*?)([^\[]\]\()((.|\n)*?)(\))"
+    # structured_markdown_external_link = r"(\[)[^( )]?((.|\n|[^\(])*?)(\]\()((.|\n)*?)(\))"
+    
+    # 
+
+    # [^( )]?
 
     def transform_markdown_external(x: str) -> str:
         x = x[0:2]
@@ -138,9 +120,11 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
 
         return x
 
-    structured_markdown_external_link_fragments2 = StructuredRegexFragments(
+    structured_markdown_external_link_fragments = StructuredRegexFragments(
         start="[", middle="](", end=")", transform=transform_markdown_external
     )
+
+    # MARKDOWN_RAW HTML
 
     structured_raw_html = r"({{< rawhtml >}})(.*?)({{< /rawhtml >}})"
 
@@ -160,17 +144,17 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
     # )
 
     structured_frontmatter = StructuredRegex(
-        structured_frontmatter, stuctured_frontmatter_fragments2, fixed_index=0
+        structured_frontmatter, stuctured_frontmatter_fragments, fixed_index=0
     )
 
     structured_markdown_internal = StructuredRegex(
         structured_markdown_internal_link,
-        structured_markdown_internal_linke_fragments2,
+        structured_markdown_internal_link_fragments,
     )
 
     structured_markdown_external = StructuredRegex(
         structured_markdown_external_link,
-        structured_markdown_external_link_fragments2,
+        structured_markdown_external_link_fragments,
     )
 
     structured_rawhtml = StructuredRegex(

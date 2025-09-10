@@ -10,7 +10,7 @@ from core.strings import (
     MIDDLE_BRACKET_PAIR,
     CLOSE_BRACKET,
 )
-from core.types import index_withoutexception
+from core.types import safe_index
 
 
 def get_internal_link_text(link: str):
@@ -20,7 +20,7 @@ def get_internal_link_text(link: str):
 
 
 def parse_internal_links(line: str) -> str:
-    i_start = index_withoutexception(line, OPEN_PAIR)
+    i_start = safe_index(line, OPEN_PAIR)
 
     if i_start < 0:
         return line
@@ -28,7 +28,7 @@ def parse_internal_links(line: str) -> str:
     line_parts: list[str] = []
 
     while i_start > 0:
-        i_end = index_withoutexception(line, CLOSE_PAIR, i_start)
+        i_end = safe_index(line, CLOSE_PAIR, i_start)
 
         if i_end < 0:
             line_parts.append(line)
@@ -42,7 +42,7 @@ def parse_internal_links(line: str) -> str:
 
         after = line[i_end + len(CLOSE_PAIR) :]
 
-        i_start = index_withoutexception(after, OPEN_PAIR)
+        i_start = safe_index(after, OPEN_PAIR)
 
         line_parts.extend([before, link_text])
 
@@ -62,7 +62,7 @@ def get_external_link_text(link: str):
 
 
 def parse_externals_links(line: str) -> str:
-    i_start = index_withoutexception(line, OPEN_SQUARE_BRACKET)
+    i_start = safe_index(line, OPEN_SQUARE_BRACKET)
 
     if i_start < 0:
         return line
@@ -70,8 +70,8 @@ def parse_externals_links(line: str) -> str:
     line_parts: list[str] = []
 
     while i_start > 0:
-        i_middle = index_withoutexception(line, MIDDLE_BRACKET_PAIR, i_start)
-        i_end = index_withoutexception(line, CLOSE_BRACKET, i_middle)
+        i_middle = safe_index(line, MIDDLE_BRACKET_PAIR, i_start)
+        i_end = safe_index(line, CLOSE_BRACKET, i_middle)
 
         if i_end < 0:
             line_parts.append(line)
@@ -85,7 +85,7 @@ def parse_externals_links(line: str) -> str:
 
         after = line[i_end + len(CLOSE_BRACKET) :]
 
-        i_start = index_withoutexception(after, OPEN_SQUARE_BRACKET)
+        i_start = safe_index(after, OPEN_SQUARE_BRACKET)
 
         line_parts.extend([before, link_text])
 
@@ -102,7 +102,7 @@ def parse_callouts(line: str) -> str:
     if not line.startswith(OPEN_CALLOUT):
         return line
 
-    i_end = index_withoutexception(line, CLOSE_CALLOUT, len(OPEN_CALLOUT))
+    i_end = safe_index(line, CLOSE_CALLOUT, len(OPEN_CALLOUT))
 
     if i_end < 0:
         return line

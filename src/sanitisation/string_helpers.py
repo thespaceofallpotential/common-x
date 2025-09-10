@@ -10,7 +10,7 @@ from core.strings import (
     SPACE,
     SVG,
 )
-from core.types import index_withoutexception
+from core.types import safe_index
 
 
 def is_svg(x: str) -> bool:
@@ -69,7 +69,7 @@ def get_frontmatter(x: str) -> str:
     if not is_frontmatter(x):
         return EMPTY
 
-    i = index_withoutexception(x, FRONTMATTER_CLOSE)
+    i = safe_index(x, FRONTMATTER_CLOSE)
 
     if i < 0:
         return EMPTY
@@ -85,7 +85,7 @@ def strip_frontmatter(x: str) -> str:
     if not is_frontmatter(x):
         return x
 
-    i = index_withoutexception(x, FRONTMATTER_CLOSE)
+    i = safe_index(x, FRONTMATTER_CLOSE)
 
     i_end = i + len(FRONTMATTER_CLOSE)
 
