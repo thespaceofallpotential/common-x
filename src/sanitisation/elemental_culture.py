@@ -1,22 +1,10 @@
-from typing import Dict, cast
+from typing import Dict
 
 
 from sanitisation.sanitisation_regex import (
     SanitisationTypes,
-    re_match,
-    sanitisation_regex_map,
 )
-from sanitisation.regex import FragmentTypes, IRegex, RegexTypes, StructuredRegex
-
-
-def assess_basic(elements: set[str], pattern: str, positive: bool = True) -> set[str]:
-    items: set[str] = set()
-
-    for element in elements:
-        if re_match(pattern, element, positive):
-            items.add(element)
-
-    return items
+from sanitisation.regex import FragmentTypes, IRegex
 
 
 class ElementalCulture:
@@ -41,32 +29,3 @@ class ElementalCulture:
         self.patterns = {}
         self.curated_elements = {}
         self.structured_fragments = {}
-
-    def curate(self, sanitisation_type: SanitisationTypes):
-        regex = self.regex_map[sanitisation_type]
-
-        self.patterns[sanitisation_type] = regex
-
-        if regex.type == RegexTypes.BASIC:
-            curated = assess_basic(self.elements, regex.pattern, regex.positive)
-
-            self.curated_elements[sanitisation_type] = curated
-
-        if regex.type == RegexTypes.STRUCTURED:
-            structured_regex = cast(StructuredRegex, regex)
-
-            first = structured_regex.keys.get(FragmentTypes.FIRST)
-
-            if first:
-                self.curated_elements[sanitisation_type] = set(first)
-
-            self.structured_fragments[sanitisation_type] = structured_regex.keys
-
-
-def curate_elements(elements: set[str]) -> ElementalCulture:
-    culture = ElementalCulture(elements, sanitisation_regex_map)
-
-    for key in sanitisation_regex_map:
-        culture.curate(key)
-
-    return culture

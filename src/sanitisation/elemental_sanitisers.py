@@ -1,9 +1,12 @@
 from typing import Callable, Dict
 
-from core.strings import EMPTY
 from sanitisation.elemental_culture import ElementalCulture
-from sanitisation.sanitisation_regex import SanitisationTypes
 from sanitisation.regex import FragmentTypes
+from sanitisation.sanitisation import Fetched, QualityClass
+from sanitisation.sanitise_helpers import sanitise
+from sanitisation.elemental_curator import ElementalCurator
+
+type Curator = Dict[str, QualityClass | None]
 
 
 def is_match(content: str, i_c: int, pattern: str) -> bool:
@@ -17,15 +20,6 @@ def is_match(content: str, i_c: int, pattern: str) -> bool:
                 return False
 
     return True
-
-
-class Fetched:
-    i_start: int = 0
-    i_end: int = 0
-    value: str = EMPTY
-
-    def __repr__(self) -> str:
-        return f"s:{self.i_start} e:{self.i_end} v:{self.value}"
 
 
 def is_fetched(
@@ -61,64 +55,28 @@ def is_fetched(
     return False
 
 
-def sanitise(content: str, fn: Callable[..., bool]) -> str:
-    items: list[str] = []
-
-    for i, character in enumerate(content):
-        if fn(i, character):
-            items.append(character)
-
-    return str.join(EMPTY, items)
-
-
-class QualityClass:
-    structured_sanitisation: Dict[SanitisationTypes, str]
-
-    def __init__(self) -> None:
-        self.structured_sanitisation = {}
-
-    def is_structured(self):
-        return len(self.structured_sanitisation) > 0
-
-
 class BasicElementalSanitiser:
     culture: ElementalCulture
 
-    key_space: dict[str, QualityClass | None]
+    curator: ElementalCurator
 
-    def __init__(self, culture: ElementalCulture) -> None:
-        self.culture = culture
+    def __init__(self, curator: ElementalCurator) -> None:
+        self.culture = curator.culture
 
-        self.key_space = {}
+        self.curator = curator
 
-    def build(self):
-        for sanitisation_key in self.culture.curated_elements:
-            elements = self.culture.curated_elements[sanitisation_key]
+    def is_good(self) -> Callable[..., bool]:
+        culture = self.culture
+        curator = self.curator
 
-            regex = self.culture.regex_map[sanitisation_key]
-
-            for element in elements:
-                current = self.key_space.get(element)
-
-                if current and regex.positive:
-                    continue
-
-                if current and not regex.positive:
-                    print("uh oh")
-
-                self.key_space[element] = QualityClass() if regex.positive else None
-
-    def sanitise(self, content: str) -> str:
-        def is_good(i: int, character: str) -> bool:
-            state = self.key_space.get(character)
+        def is_good(content: str, i: int, character: str) -> bool:
+            state = curator.collection.get(character)
 
             if not state:
                 return False
 
             for structured_sanitisation_key in state.structured_sanitisation:
-                fragments = self.culture.structured_fragments[
-                    structured_sanitisation_key
-                ]
+                fragments = culture.structured_fragments[structured_sanitisation_key]
 
                 first = fragments.get(FragmentTypes.FIRST)
 
@@ -134,40 +92,23 @@ class BasicElementalSanitiser:
                             print(f"{structured_sanitisation_key}: {fetched}")
 
                         # walk to end
+            return True  # if state and not state.isStructured(): return True
 
-            # if not state.isStructured():
-            #     return True
+        return is_good
 
-            return True
+    def sanitise(self, content: str) -> str:
+        # vectors: list[PositiveVector] = []
 
-        sanitised = sanitise(content, is_good)
+        sanitised2 = sanitise(content, self.is_good())
 
-        return sanitised
+        return sanitised2
+
+    def get_positive_vectors(self, content: str) -> str:
+        # vectors: list[PositiveVector] = []
+        sanitised2 = sanitise(content, self.is_good())
+
+        return sanitised2
 
 
 class StructuredElementalSanitiser(BasicElementalSanitiser):
-    def build(self):
-        super().build()
-
-        for key in self.culture.structured_fragments:
-            elements = self.culture.structured_fragments[key]
-
-            first = elements.get(FragmentTypes.FIRST)
-
-            if first:
-                current = self.key_space.get(first)
-
-                if not current:
-                    current = QualityClass()
-                    self.key_space[first] = current
-
-                current.structured_sanitisation[key] = f"{key}"
-
-    # def sanitise(self, content: str) -> str:
-    #     su
-    #     def is_good(element: str) -> bool:
-    #         return bool(self.key_space.get(element))
-
-    #     sanitised = sanitise(content, is_good)
-
-    #     return sanitised
+    pass

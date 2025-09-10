@@ -5,7 +5,7 @@ from sanitisation.character_analyser import get_elements
 from sanitisation.analyser import AnalyserType
 from sanitisation.analysis_engine import analysis_runner
 from sanitisation.qualitative_sequence import QualitativeSequence
-from sanitisation.elemental_culture import curate_elements
+from sanitisation.elemental_curator import curate_elements
 from sanitisation.elemental_sanitisers import (
     StructuredElementalSanitiser,
 )
@@ -69,15 +69,11 @@ all_element_list.sort()
 
 sequence = QualitativeSequence(all_element_list)
 
-print("curate")
+print("curate & collect")
 
-culture = curate_elements(sequence.elements)
+curator = curate_elements(sequence.elements)
 
-sanitiser = StructuredElementalSanitiser(culture)
-
-print("build sanitiser")
-
-sanitiser.build()
+sanitiser = StructuredElementalSanitiser(curator)
 
 print("sanitise")
 
