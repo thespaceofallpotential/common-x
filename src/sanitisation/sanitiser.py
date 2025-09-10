@@ -56,7 +56,7 @@ class Sanitiser:
         if _.strip_frontmatter:
             frontmatter = get_frontmatter(x)
 
-            if frontmatter:
+            if frontmatter is not None:
                 result.frontmatter = frontmatter
 
                 x = strip_frontmatter(x)

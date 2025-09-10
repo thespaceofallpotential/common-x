@@ -51,7 +51,7 @@ def parse_check(a: Sequence, b: Sequence) -> CommonalityResult:
 def parse_with_repartition(a: Sequence, b: Sequence) -> CommonalityResult:
     [common, i_a, i_b] = strict_parser(a, b)
 
-    if common:
+    if common is not None:
         if i_a > 0:
             # common partition with
             return CommonalityResult([partition_after(a, i_a)], [b], common)

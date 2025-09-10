@@ -26,7 +26,7 @@ def sanitise_file(sanitiser: Sanitiser, file: File):
 
     file.state = FileState.OK
 
-    if result.frontmatter:
+    if result.frontmatter is not None:
         if EXCALIDRAW_PLUGIN in result.frontmatter:
             file.state = FileState.ERROR
             file.frontmatter = result.frontmatter

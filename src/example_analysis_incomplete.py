@@ -3,8 +3,11 @@ from data.source import Source
 from sanitisation.character_analyser import to_character_list
 from sanitisation.analyser import AnalyserType
 from sanitisation.content_analysis_engine import content_analysis_runner
-from sanitisation.elemental_curator import curate_and_collect
-from sanitisation.elemental_sanitisers import sanitise_contents
+from sanitisation.elemental_curator import (
+    curate_and_collect,
+    map_content_elements,
+    map_contents,
+)
 
 from utils.io_helper import ScanOptions
 
@@ -20,45 +23,66 @@ from utils.io_helper import ScanOptions
 #
 # ---
 
-helper = SourceHelper("data/local/aeim")
 
-# options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
-options = ScanOptions(
-    helper.file_helper.root, ext=".md", relative=True, recursive=False
-)
+def map_content():
+    helper = SourceHelper("data/local/aeim")
 
-helper.add_all(options)
+    # options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
+    options = ScanOptions(
+        helper.file_helper.root, ext=".md", relative=True, recursive=False
+    )
 
-print(f"{len(helper.relative_paths)} files")
+    helper.add_all(options)
 
-print("retrieving content...")
+    print(f"{len(helper.relative_paths)} files")
 
-files = helper.get_files()
+    print("retrieving content...")
 
-print(f"content retrieved ({len(files)})")
+    files = helper.get_files()
 
-print("building textual sequences")
+    i_i = 0
 
-source = Source(helper)
+    for i, x in enumerate(files):
+        if "pdf" in x.path:
+            i_i = i
+            break
 
-contents = source.get_content()
+    # item = next(filter(lambda x: "pdf" in x.path, files))
+    # if item is not None:
+    #     print("here")
 
-print("character analysis")
+    print(f"content retrieved ({len(files)})")
 
-character_analysis = content_analysis_runner(AnalyserType.CHARACTER, contents)
+    print("building textual sequences")
 
-character_list = to_character_list(character_analysis)
+    source = Source(helper)
 
-characters = set(character_list)
+    contents = source.get_content()
 
-print("curate & collect")
+    contents = list([contents[i_i]])
 
-curator = curate_and_collect(characters)
+    print("character analysis")
 
-print("sanitise")
+    character_analysis = content_analysis_runner(AnalyserType.CHARACTER, contents)
 
-sanitised = sanitise_contents(contents, curator)
+    character_list = to_character_list(character_analysis)
 
-print("end")
+    characters = set(character_list)
 
-# 1. make it work  <--- STILL HERE! ;)
+    print("curate & collect")
+
+    curator = curate_and_collect(characters)
+
+    print("sanitise")
+
+    # maps = map_contents(curator, contents)
+    maps = map_content_elements(curator, contents)
+
+    # sanitised = sanitise_contents(curator, contents)
+
+    print(f"{len(maps)}")
+
+    # 1. make it work  <--- STILL HERE! ;)
+
+
+map_content()

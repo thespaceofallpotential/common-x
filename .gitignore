@@ -24,3 +24,8 @@ draft.md
 archive
 
 /src/adhoc.py
+
+
+.prof_stats
+profiler.py
+profiling_stats.txt

@@ -59,7 +59,7 @@ class DeductiveResolver[T](Resolver[T, CommonSequence]):
         # > note: later generations will natively handle problematic edge-cases
         result = parse_check(a, b) if is_candidate(a, b) else smart_repartition(a, b)
 
-        if result.common:
+        if result.common is not None:
             # debugValues(a, b)
 
             # either:

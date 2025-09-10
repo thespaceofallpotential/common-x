@@ -68,7 +68,7 @@ class CultivatedSolver[T](Solver[T, CommonSequence]):
                 for xp in x_positions:
                     prior = progress.get(xp - 1)
 
-                    if prior:
+                    if prior is not None:
                         prior.values.append(value)
 
                         progress[xp] = prior

@@ -1,22 +1,22 @@
-from typing import Dict
+from typing import Dict, Set, cast
 
 
 from sanitisation.sanitisation_regex import (
     SanitisationTypes,
 )
-from sanitisation.regex import FragmentTypes, IRegex
+from sanitisation.regex import IRegex, StructuredRegex
 
 
 class ElementalCulture:
     elements: set[str]
 
-    regex_map: Dict[SanitisationTypes, IRegex]
+    regexes: Dict[SanitisationTypes, IRegex]
 
     patterns: Dict[SanitisationTypes, IRegex]
 
     curated_elements: Dict[SanitisationTypes, set[str]]
 
-    structured_fragments: Dict[SanitisationTypes, Dict[FragmentTypes, str]]
+    structured: Set[SanitisationTypes]
 
     def __init__(
         self,
@@ -24,8 +24,16 @@ class ElementalCulture:
         regex_map: Dict[SanitisationTypes, IRegex],
     ) -> None:
         self.elements = elements
-        self.regex_map = regex_map
+
+        self.regexes = regex_map
 
         self.patterns = {}
+
         self.curated_elements = {}
-        self.structured_fragments = {}
+
+        self.structured = set()
+
+    def get_structured_regex(
+        self, sanitisation_type: SanitisationTypes
+    ) -> StructuredRegex:
+        return cast(StructuredRegex, self.regexes[sanitisation_type])

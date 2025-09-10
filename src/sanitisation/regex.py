@@ -1,12 +1,5 @@
 import abc
 from enum import Enum
-from typing import Dict
-
-
-class RegexTypes(Enum):
-    NONE = 0
-    BASIC = 1
-    STRUCTURED = 2
 
 
 class FragmentTypes(Enum):
@@ -17,14 +10,45 @@ class FragmentTypes(Enum):
     MIDDLE = 3
     END = 4
     LAST = 5
+    END_BEFORE = 6
 
     ALL = 10
     BODY = 11
 
 
+class StructuredRegexFragments:
+    first: str | None
+    start: str | None
+    middle: str | None
+    end: str | None
+    last: str | None
+    end_before: str | None
+    all: str | None
+    body: str | None
+
+    def __init__(
+        self,
+        first: str | None = None,
+        start: str | None = None,
+        middle: str | None = None,
+        end: str | None = None,
+        last: str | None = None,
+        end_before: str | None = None,
+        all: str | None = None,
+        body: str | None = None,
+    ) -> None:
+        self.first = first
+        self.start = start
+        self.middle = middle
+        self.end = end
+        self.last = last
+        self.end_before = end_before
+        self.all = all
+        self.body = body
+
+
 class IRegex(metaclass=abc.ABCMeta):
     pattern: str
-    type: RegexTypes
     positive: bool
 
 
@@ -33,37 +57,43 @@ class BasicRegex(IRegex):
         self.pattern = regex
         self.positive = positive
 
-        self.type = RegexTypes.BASIC
-
     def __repr__(self) -> str:
         return f"r:{self.pattern} p:{self.positive}"
 
 
 class StructuredRegex(BasicRegex):
-    keys: Dict[FragmentTypes, str]
+    fragments: StructuredRegexFragments  # Dict[FragmentTypes, str]
+
+    fixed_index: int | None
 
     def __init__(
         self,
         pattern: str,
-        keys: Dict[FragmentTypes, str] | None = None,
+        fragments: StructuredRegexFragments | None = None,
+        fixed_index: int | None = None,
         positive: bool = True,
     ) -> None:
         super().__init__(pattern, positive)
 
-        self.keys = keys if keys is not None else {}
+        self.fragments = (
+            fragments if fragments is not None else StructuredRegexFragments()
+        )
 
-        self.type = RegexTypes.STRUCTURED
+        self.fixed_index = fixed_index
 
         self.__initialise()
 
     def __initialise(self):
-        start = self.keys.get(FragmentTypes.START)
+        start = self.fragments.start
 
-        if start:
-            self.keys[FragmentTypes.FIRST] = start[0:1]
+        if start is not None:
+            self.fragments.first = start[0:1]
+
+    def is_index_ok(self, i: int):
+        return self.fixed_index is None or self.fixed_index == i
 
     def __repr__(self) -> str:
         def parts() -> str:
-            return f"{self.keys}"
+            return f"{self.fragments}"
 
-        return f"r:{self.pattern} p:{self.positive} {parts()}".strip()
+        return f"r:{self.pattern} fi:{self.fixed_index} p:{self.positive} {parts()}".strip()

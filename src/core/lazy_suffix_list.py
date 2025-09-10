@@ -15,7 +15,7 @@ class LazyFakeLightweightSuffixList[T]:
 
         self.symmetric_map = to_symmetric_index(sequence.values, sequence.elements)
 
-        if cache:
+        if cache is not None:
             self.cache = {}
 
     def get_suffixes(self, value: T) -> list[BasicSequence] | None:
@@ -23,12 +23,12 @@ class LazyFakeLightweightSuffixList[T]:
         symmetric_map = self.symmetric_map
         r = self.sequence
 
-        if cache:
+        if cache is not None:
             return cache.get(value)
 
         value_positions = symmetric_map.get(value)
 
-        if value_positions:
+        if value_positions is not None:
             return list(map(lambda p: BasicSequence(p, r.values[p]), value_positions))
 
         return None

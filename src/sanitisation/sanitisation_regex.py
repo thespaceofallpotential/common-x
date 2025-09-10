@@ -4,7 +4,13 @@ from typing import Dict
 import re
 
 from core.strings import FRONTMATTER
-from sanitisation.regex import BasicRegex, FragmentTypes, IRegex, StructuredRegex
+from sanitisation.regex import (
+    BasicRegex,
+    FragmentTypes,
+    IRegex,
+    StructuredRegex,
+    StructuredRegexFragments,
+)
 
 type TFragments = Dict[FragmentTypes, str]
 
@@ -45,18 +51,33 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
 
     structured_whitepace = r"(\s{2,})"  # structured: whitespace
 
-    structured_whitespace_fragments: TFragments = {FragmentTypes.BODY: r"\s"}
+    structured_whitespace_fragments: TFragments = {
+        FragmentTypes.START: r"\s",
+        FragmentTypes.BODY: r"\s",
+        FragmentTypes.END_BEFORE: r"[^\s]",
+    }
+
+    structured_whitespace_fragments2 = StructuredRegexFragments(
+        start=r"\s",
+        body=r"\s",
+        end_before=r"[^\s]",
+    )
 
     # STRUCTURED_FRONTMATTER = r"^---[^-]"  # structured: frontmatter (open/ close)
 
     # STRUCTURED_FRONTMATTER_CLOSE = r"\n---[^-]"  # structured: frontmatter close
 
-    structured_preiod_space = r"\. "  # structured: period space
+    structured_period_space = r"\. "  # structured: period space
 
     structured_period_space_fragments: TFragments = {
         FragmentTypes.START: r"\.",
         FragmentTypes.END: r" ",
     }
+
+    structured_period_space_fragments2 = StructuredRegexFragments(
+        start=r"\.",
+        end=r" ",
+    )
 
     # STRUCTURED_MARKDOWN_INTERNAL_LINK_OPEN = (
     #     r"\[\["  # structured: markdown internal link open
@@ -72,12 +93,22 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
         FragmentTypes.END: FRONTMATTER,
     }
 
+    stuctured_frontmatter_fragments2 = StructuredRegexFragments(
+        start=FRONTMATTER,
+        end=FRONTMATTER,
+    )
+
     structured_markdown_internal_link = r"(\[\[)[^\[\]]+(\]\])"
 
     structured_markdown_internal_linke_fragments: TFragments = {
         FragmentTypes.START: "[[",
         FragmentTypes.END: "]]",
     }
+
+    structured_markdown_internal_linke_fragments2 = StructuredRegexFragments(
+        start="[[",
+        end="]]",
+    )
 
     structured_markdown_external_link = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
 
@@ -87,26 +118,32 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
         FragmentTypes.END: ")",
     }
 
+    structured_markdown_external_link_fragments2 = StructuredRegexFragments(
+        start="[]",
+        middle="](",
+        end=")",
+    )
+
     structured_whitespace = StructuredRegex(
-        structured_whitepace, structured_whitespace_fragments
+        structured_whitepace, structured_whitespace_fragments2
     )
 
     structured_period_space = StructuredRegex(
-        structured_preiod_space, structured_period_space_fragments
+        structured_period_space, structured_period_space_fragments2
     )
 
     structured_frontmatter = StructuredRegex(
-        structured_frontmatter, stuctured_frontmatter_fragments
+        structured_frontmatter, stuctured_frontmatter_fragments2, fixed_index=0
     )
 
     structured_markdown_internal = StructuredRegex(
         structured_markdown_internal_link,
-        structured_markdown_internal_linke_fragments,
+        structured_markdown_internal_linke_fragments2,
     )
 
     structured_markdown_external = StructuredRegex(
         structured_markdown_external_link,
-        structured_markdown_external_link_fragments,
+        structured_markdown_external_link_fragments2,
     )
 
     return {

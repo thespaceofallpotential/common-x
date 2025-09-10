@@ -12,7 +12,7 @@ class Runner[T, C]:
 
         processor = factory.build(processor_type)
 
-        if not processor:
+        if processor is None:
             raise CustomException("processor factory")
 
         self.processor = processor
