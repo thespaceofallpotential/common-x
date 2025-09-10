@@ -9,6 +9,7 @@ from sanitisation.elemental_curator import (
 
 from sanitisation.map_content import map_contents
 from sanitisation.sanitise_contents import sanitise_contents
+from sanitisation.markkdown_sanitiser_helper import EXCALIDRAW_PLUGIN
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
@@ -30,7 +31,7 @@ def map_content():
 
     # options = ScanOptions(helper.file_helper.root, ext=".md", relative=True, recursive=True)
     options = ScanOptions(
-        helper.file_helper.root, ext=".md", relative=True, recursive=False
+        helper.file_helper.root, ext=".md", relative=True, recursive=True
     )
 
     helper.add_all(options)
@@ -52,6 +53,10 @@ def map_content():
     source = Source(helper)
 
     contents = source.get_content()
+
+    # content exclusion
+    
+    contents = list(filter(lambda x: EXCALIDRAW_PLUGIN not in x, contents))
 
     # i_i = 0
 
@@ -82,7 +87,7 @@ def map_content():
 
     print(f"{len(sanitised)}")
 
-    filtered = list(filter(lambda x: "](" in x, sanitised))
+    # filtered = list(filter(lambda x: "](" in x, sanitised))
 
     character_analysis2 = content_analysis_runner(AnalyserType.CHARACTER, sanitised)
 

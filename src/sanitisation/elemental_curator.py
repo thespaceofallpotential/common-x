@@ -109,6 +109,7 @@ def curate_and_collect(elements: set[str]) -> ElementalCurator:
 
     structured_regex_order = [
         SanitisationTypes.STRUCTURED_FRONTMATTER,
+        SanitisationTypes.STRUCTURED_CALLOUT,
         SanitisationTypes.STRUCTURED_RAWHTML,
         SanitisationTypes.STRUCTURED_MARKDOWN_INTERNAL_LINK,
         SanitisationTypes.STRUCTURED_MARKDOWN_EXTERNAL_LINK,

@@ -19,7 +19,7 @@ def map_contents(
     timer = Timer(True)
 
     for i, content in enumerate(contents):
-        print(f"{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+        print(f"{'map content progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
 
         ordered_keys = list(curator.structured_regex_order)
 
@@ -34,18 +34,20 @@ def map_contents(
 
             pattern = structured_regex.get_fragment_pattern()
 
-            if pattern is not None:
-                matches = re.finditer(pattern, content)
+            if pattern is None:
+                continue
 
-                for match in matches:
-                    i_m = match.start()
-                    group = match.group()
+            matches = re.finditer(pattern, content)
 
-                    if structured_regex.fixed_index is not None:
-                        if structured_regex.is_index_ok(i_m):
-                            structured_pattern_map.add(group, i_m)
-                    else:
+            for match in matches:
+                i_m = match.start()
+                group = match.group()
+
+                if structured_regex.fixed_index is not None:
+                    if structured_regex.is_index_ok(i_m):
                         structured_pattern_map.add(group, i_m)
+                else:
+                    structured_pattern_map.add(group, i_m)
 
         items[i] = structured_pattern_map
 

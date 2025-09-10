@@ -7,6 +7,11 @@ from sanitisation.curation_helpers import (
 )
 from sanitisation.elemental_curator import ElementalCurator
 from core.types import safe_index
+from sanitisation.sanitisation_regex import (
+    transform,
+    space_translations,
+    blank_translations,
+)
 from utils.timer import Timer
 
 
@@ -18,7 +23,9 @@ def sanitise_contents(curator: ElementalCurator, contents: list[str]) -> list[st
     timer = Timer(True)
 
     for i, content in enumerate(contents):
-        print(f"{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+        print(
+            f"{'sanitise content progress [%d%%]\r'}" % ((i + 1) / length * 100), end=""
+        )
 
         ordered_keys = list(curator.structured_regex_order)
 
@@ -36,32 +43,38 @@ def sanitise_contents(curator: ElementalCurator, contents: list[str]) -> list[st
             pattern = structured_regex.pattern
             fragments = structured_regex.fragments
 
-            if pattern is not None:
-                matches = re.finditer(pattern, content)
+            if pattern is None:
+                continue
 
-                if i == 3:
-                    print("sfds")
+            matches = re.finditer(pattern, content)
 
-                for match in matches:
-                    i_m = match.start()
-                    group = match.group()
+            for match in matches:
+                i_m = match.start()
+                group = match.group()
 
-                    if structured_regex.fixed_index is not None:
-                        if not structured_regex.is_index_ok(i_m):
-                            continue
+                is_index_ok = (
+                    structured_regex.fixed_index is None
+                    or structured_regex.is_index_ok(i_m)
+                )
 
-                    structured_pattern_map.add(group, i_m)
+                if not is_index_ok:
+                    continue
 
-                    if fragments.transform is not None:
-                        replacement = fragments.transform(group)
+                structured_pattern_map.add(group, i_m)
 
-                        content = content.replace(group, replacement)
+                if fragments.transform is None:
+                    continue
 
-                        i_r = safe_index(content, group)
+                replacement = fragments.transform(group)
 
-                        if i_r > -1:
-                            print("here")
+                content = content.replace(group, replacement)
 
+                # i_r = safe_index(content, group)
+
+                # if i_r > -1:
+                #     print("here")
+
+        content = transform(content, space_translations, blank_translations)
         # sanitised = sanitise(content, assessor)
 
         if content == original:

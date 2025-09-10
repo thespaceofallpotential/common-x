@@ -3,7 +3,7 @@ from typing import Dict
 
 import re
 
-from core.strings import EMPTY, FRONTMATTER, NEWLINE, SPACE
+from core.strings import CLOSE_CALLOUT, EMPTY, FRONTMATTER, NEWLINE, OPEN_CALLOUT, SPACE
 from sanitisation.regex import (
     FragmentTypes,
     IRegex,
@@ -28,6 +28,7 @@ class SanitisationTypes(Enum):
     STRUCTURED_PERIOD_SPACE = 21
 
     STRUCTURED_FRONTMATTER = 30
+    STRUCTURED_CALLOUT = 31
 
     STRUCTURED_MARKDOWN_INTERNAL_LINK = 31
     STRUCTURED_MARKDOWN_EXTERNAL_LINK = 32
@@ -73,7 +74,7 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
 
     # structured_frontmatter = r"^---\n[^(---)]+\n---(\n)"
 
-    structured_frontmatter = r"^(---\n)((.|\s)*?)(\n---)"
+    structured_frontmatter_pattern = r"^(---\n)((.|\s)*?)(\n---)"
 
     def transform_frontmatter(x: str) -> str:
         return str.join(NEWLINE, list(map(lambda x: EMPTY, x.split(NEWLINE))))
@@ -84,9 +85,22 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
         transform=transform_frontmatter,
     )
 
+    # MARKDOWN CALLOUT
+
+    structured_callout_pattern = r"^(\> \[\!)((.|\s)*?)(\])[^(+|-)]?"
+
+    def transform_callout(x: str) -> str:
+        return EMPTY
+
+    stuctured_callout_fragments = StructuredRegexFragments(
+        start=f"{OPEN_CALLOUT}",
+        end=f"{CLOSE_CALLOUT}",
+        transform=transform_callout,
+    )
+
     # MARKDOWN INTERNAL
 
-    structured_markdown_internal_link = r"(\[\[)[^\[\]]+(\]\])"
+    structured_markdown_internal_pattern = r"(\[\[)[^\[\]]+(\]\])"
 
     def transform_markdown_internal(x: str) -> str:
         x = x[2:]
@@ -104,12 +118,10 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
     # MARKDOWN EXTERNAL
 
     # structured_markdown_external_link = r"\[[^\[\]\(\)]+\]\([^\[\]\(\)]+\)"
-    structured_markdown_external_link = r"(\[)[^( )]?((.|\n)*?)([^\[]\]\()((.|\n)*?)(\))"
+    structured_markdown_external_pattern = (
+        r"(\[)[^( )]?((.|\n)*?)([^\[]\]\()((.|\n)*?)(\))"
+    )
     # structured_markdown_external_link = r"(\[)[^( )]?((.|\n|[^\(])*?)(\]\()((.|\n)*?)(\))"
-    
-    # 
-
-    # [^( )]?
 
     def transform_markdown_external(x: str) -> str:
         x = x[0:2]
@@ -135,25 +147,21 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
         start="{{< rawhtml >}}", end="{{< /rawhtml >}}", transform=transform_raw_html
     )
 
-    # structured_whitespace = StructuredRegex(
-    #     structured_whitepace, structured_whitespace_fragments2
-    # )
-
-    # structured_period_space = StructuredRegex(
-    #     structured_period_space, structured_period_space_fragments2
-    # )
-
     structured_frontmatter = StructuredRegex(
-        structured_frontmatter, stuctured_frontmatter_fragments, fixed_index=0
+        structured_frontmatter_pattern, stuctured_frontmatter_fragments, fixed_index=0
+    )
+
+    structured_callout = StructuredRegex(
+        structured_callout_pattern, stuctured_callout_fragments, fixed_index=0
     )
 
     structured_markdown_internal = StructuredRegex(
-        structured_markdown_internal_link,
+        structured_markdown_internal_pattern,
         structured_markdown_internal_link_fragments,
     )
 
     structured_markdown_external = StructuredRegex(
-        structured_markdown_external_link,
+        structured_markdown_external_pattern,
         structured_markdown_external_link_fragments,
     )
 
@@ -170,6 +178,7 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
         # SanitisationTypes.STRUCTURED_WHITESPACE: structured_whitespace,
         # SanitisationTypes.STRUCTURED_PERIOD_SPACE: structured_period_space,
         SanitisationTypes.STRUCTURED_FRONTMATTER: structured_frontmatter,
+        SanitisationTypes.STRUCTURED_CALLOUT: structured_callout,
         SanitisationTypes.STRUCTURED_MARKDOWN_INTERNAL_LINK: structured_markdown_internal,
         SanitisationTypes.STRUCTURED_MARKDOWN_EXTERNAL_LINK: structured_markdown_external,
         SanitisationTypes.STRUCTURED_RAWHTML: structured_rawhtml,
@@ -178,7 +187,7 @@ def build_sanitisation_map() -> Dict[SanitisationTypes, IRegex]:
 
 sanitisation_regex_map = build_sanitisation_map()
 
-space_translations = {
+space_translations = [
     ":",
     ";",
     "<",
@@ -192,9 +201,11 @@ space_translations = {
     "=",
     "|",
     "\\",
-}
+    "~",
+    "_",
+]
 
-blank_translations = {
+blank_translations = [
     ",",
     "*",
     "!",
@@ -209,7 +220,11 @@ blank_translations = {
     "}",
     "[",
     "]",
-}
+    "^",
+    "%",
+    "@",
+    "`",
+]
 
 
 def transform(content: str, spaced: list[str], blanked: list[str]):
@@ -223,7 +238,12 @@ def transform(content: str, spaced: list[str], blanked: list[str]):
 
     translations = str.maketrans(items)
 
-    translated = content.translate(translations).replace(r"( {2,})", " ")
+    translated = content.translate(translations)
+
+    translated = re.sub(r"\.", r"\n", translated)
+    translated = re.sub(r"\n( ){1,}\n", r"\n", translated)  #
+    translated = re.sub(r"(\n){2,}", r"\n", translated)
+    translated = re.sub(r"( ){2,}", " ", translated).strip()
 
     return translated
 

@@ -4,6 +4,11 @@
 
 # type TStepAssessor = Callable[..., int]
 
+# ----
+# horribly slow compared to re functions...
+# not possible to practically implement common-x idiomatic sanitisation in python...
+# nevermind - will address seperately
+# ----
 
 # class PositiveVector:
 #     i: int
@@ -19,10 +24,7 @@
 
 # def get_positive_vectors(content: str, assessor: TStepAssessor) -> list[PositiveVector]:
 #     vectors: list[PositiveVector] = []
-    
-#     # horribly slow compared to re functions...
-#     # not possible to implement common-x idiomatic sanitisation in python...
-#     # nevermind - will address seperately
+
 
 #     current: PositiveVector | None = None
 

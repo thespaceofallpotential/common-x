@@ -14,7 +14,9 @@ class ContentAnalysisEngine[T]:
         length = len(contents)
 
         for i in range(length):
-            print("{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+            print(
+                "content analysis progress [%d%%]\r" % ((i + 1) / length * 100), end=""
+            )
 
             content = contents[i]
 
@@ -48,4 +50,4 @@ def content_analysis_runner(
 def run_and_print(analyser_type: AnalyserType, contents: list[str]):
     characters = content_analysis_runner(analyser_type, contents)
 
-    print(f"{characters}")
+    print(f"\n{characters}")

@@ -24,7 +24,7 @@ class BatchEngine[T, C]:
             a = sequences[i_a]
 
             for i_b in range(length):
-                print(f"{'progress [%d%%]\r'}" % (count / total * 100), end="")
+                print(f"{'batch progress [%d%%]\r'}" % (count / total * 100), end="")
 
                 if i_b >= i_a:
                     # only process a pair once
