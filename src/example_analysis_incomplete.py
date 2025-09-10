@@ -6,6 +6,7 @@ from sanitisation.content_analysis_engine import content_analysis_runner
 from sanitisation.elemental_curator import (
     curate_and_collect,
     map_content_elements,
+    map_content_elements2,
     map_contents,
 )
 
@@ -19,8 +20,9 @@ from utils.io_helper import ScanOptions
 # 1. make it work  <--- WE ARE HERE!
 # 2. make it right
 #
-# ;)
+# fucking hell, python loop performance...
 #
+# 
 # ---
 
 
@@ -76,7 +78,7 @@ def map_content():
     print("sanitise")
 
     # maps = map_contents(curator, contents)
-    maps = map_content_elements(curator, contents)
+    maps = map_content_elements2(curator, contents)
 
     # sanitised = sanitise_contents(curator, contents)
 

@@ -79,14 +79,14 @@ def sanitise(content: str, assessor: TStepAssessor) -> str:
 
 
 class ElementMap:
-    elements: str
+    elements: list[str]
 
     positive_vectors: List[PositiveVector]
 
     content: str | None
 
     def __init__(
-        self, elements: str, vectors: List[PositiveVector], content: str | None = None
+        self, elements: list[str], vectors: List[PositiveVector], content: str | None = None
     ) -> None:
         self.elements = elements
         self.positive_vectors = vectors
@@ -94,3 +94,20 @@ class ElementMap:
 
     def __repr__(self) -> str:
         return f"e:{self.elements} v:{self.positive_vectors} c:{self.content}"
+
+# class WordElementMap:
+#     elements: list[str]
+
+#     positive_vectors: List[PositiveVector]
+
+#     content: str | None
+
+#     def __init__(
+#         self, elements: list[str], vectors: List[PositiveVector], content: str | None = None
+#     ) -> None:
+#         self.elements = elements
+#         self.positive_vectors = vectors
+#         self.content = content
+
+#     def __repr__(self) -> str:
+#         return f"e:{self.elements} v:{self.positive_vectors} c:{self.content}"

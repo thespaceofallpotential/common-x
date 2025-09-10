@@ -27,3 +27,16 @@ def to_character_list(items: list[Analysis]):
     character_list.sort()
 
     return character_list
+
+
+def to_character_list2(words: list[str]):
+    characters = set()
+
+    for word in words:
+        characters = characters.union(set(list(word)))
+
+    character_list = list(characters)
+
+    character_list.sort()
+
+    return character_list
