@@ -4,7 +4,7 @@ from sanitisation.analysis import Analysis
 from sanitisation.analyser_factory import AnalyserFactory
 
 
-class AnalysisEngine[T]:
+class ContentAnalysisEngine[T]:
     def process(
         self,
         contents: list[str],
@@ -27,23 +27,25 @@ class AnalysisEngine[T]:
         print("")  # move cursor to next line
 
 
-def analysis_runner[T](
+def content_analysis_runner(
     analyser_type: AnalyserType,
     contents: list[str],
-    sink: Sink[Analysis[T]],
-):
+    # sink: Sink[Analysis[T]],
+) -> list[Analysis]:
     factory = AnalyserFactory()
 
     processor = factory.build(analyser_type)
 
-    engine = AnalysisEngine()
+    engine = ContentAnalysisEngine()
+
+    sink = sink_factory()
 
     engine.process(contents, processor, sink)
 
+    return sink.items
+
 
 def run_and_print(analyser_type: AnalyserType, contents: list[str]):
-    sink = sink_factory()
+    characters = content_analysis_runner(analyser_type, contents)
 
-    analysis_runner(analyser_type, contents, sink)
-
-    print(f"{sink.items}")
+    print(f"{characters}")

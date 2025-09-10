@@ -1,15 +1,11 @@
-from core.sink import sink_factory
 from data.source_helper import SourceHelper
 from data.source import Source
-from sanitisation.character_analyser import get_elements
+from sanitisation.character_analyser import to_character_list
 from sanitisation.analyser import AnalyserType
-from sanitisation.analysis_engine import analysis_runner
-from sanitisation.qualitative_sequence import QualitativeSequence
-from sanitisation.elemental_curator import curate_elements
-from sanitisation.elemental_sanitisers import (
-    StructuredElementalSanitiser,
-)
-from utils.timer import Timer
+from sanitisation.content_analysis_engine import content_analysis_runner
+from sanitisation.elemental_curator import curate_and_collect
+from sanitisation.elemental_sanitisers import sanitise_contents
+
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
@@ -45,63 +41,24 @@ print("building textual sequences")
 
 source = Source(helper)
 
-sink = sink_factory()
-
 contents = source.get_content()
 
-analysis_runner(AnalyserType.CHARACTER, contents, sink)
+print("character analysis")
 
-print(f"{len(sink.items)}")
+character_analysis = content_analysis_runner(AnalyserType.CHARACTER, contents)
 
-elements = get_elements(sink.items)
+character_list = to_character_list(character_analysis)
 
-print(f"union ({len(elements)})")
-
-all_elements = set()
-
-for x in elements:
-    all_elements = all_elements.union(x)
-
-
-all_element_list = list(all_elements)
-
-all_element_list.sort()
-
-sequence = QualitativeSequence(all_element_list)
+characters = set(character_list)
 
 print("curate & collect")
 
-curator = curate_elements(sequence.elements)
-
-sanitiser = StructuredElementalSanitiser(curator)
+curator = curate_and_collect(characters)
 
 print("sanitise")
 
-all_sanitised: list[str] = []
-
-length = len(contents)
-
-timer = Timer()
-
-timer.start()
-
-for i, content in enumerate(contents):
-    print(f"{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
-
-    sanitised = sanitiser.sanitise(content)
-
-    all_sanitised.append(sanitised)
-
-print(f"\nt:{timer.end()}")
+sanitised = sanitise_contents(contents, curator)
 
 print("end")
 
-# sequences = source.get_textual_sequences()
-
-# print(f"{len(sequences)}")
-
-# sizes = list(map(lambda x: x.size, sequences))
-
-# sizes.sort(reverse=True)
-
-# print(f"max: {max(sizes)}")
+# 1. make it work  <--- STILL HERE! ;)

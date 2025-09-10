@@ -14,5 +14,5 @@ class Sink[T]:
         self.items.extend(items)
 
 
-def sink_factory[T]() -> Sink:
+def sink_factory[T]() -> Sink[T]:
     return Sink[T]()

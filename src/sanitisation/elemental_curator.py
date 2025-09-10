@@ -4,12 +4,11 @@ from sanitisation.elemental_culture import ElementalCulture
 from sanitisation.sanitisation import QualityClass
 from sanitisation.regex import FragmentTypes, RegexTypes, StructuredRegex
 from sanitisation.sanitisation_regex import SanitisationTypes
-from utils.custom_exception import CustomException
-
 from sanitisation.sanitisation_regex import (
     re_match,
     sanitisation_regex_map,
 )
+from utils.custom_exception import CustomException
 
 
 def assess_basic(elements: set[str], pattern: str, positive: bool = True) -> set[str]:
@@ -101,7 +100,7 @@ class ElementalCurator:
         collect_structured_elements()
 
 
-def curate_elements(elements: set[str]) -> ElementalCurator:
+def curate_and_collect(elements: set[str]) -> ElementalCurator:
     culture = ElementalCulture(elements, sanitisation_regex_map)
 
     curator = ElementalCurator(culture)

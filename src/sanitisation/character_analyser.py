@@ -12,3 +12,18 @@ class CharacterAnalyser(Analyser):
 
 def get_elements(items: List[Analysis[Sequence]]) -> List[set]:
     return list(map(lambda x: x.item.elements, items))
+
+
+def to_character_list(items: list[Analysis]):
+    character_sets = get_elements(items)
+
+    characters = set()
+
+    for x in character_sets:
+        characters = characters.union(x)
+
+    character_list = list(characters)
+
+    character_list.sort()
+
+    return character_list

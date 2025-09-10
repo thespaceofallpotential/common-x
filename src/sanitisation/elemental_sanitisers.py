@@ -5,6 +5,7 @@ from sanitisation.regex import FragmentTypes
 from sanitisation.sanitisation import Fetched, QualityClass
 from sanitisation.sanitise_helpers import sanitise
 from sanitisation.elemental_curator import ElementalCurator
+from utils.timer import Timer
 
 type Curator = Dict[str, QualityClass | None]
 
@@ -55,7 +56,7 @@ def is_fetched(
     return False
 
 
-class BasicElementalSanitiser:
+class ElementalSanitiser:
     culture: ElementalCulture
 
     curator: ElementalCurator
@@ -110,5 +111,24 @@ class BasicElementalSanitiser:
         return sanitised2
 
 
-class StructuredElementalSanitiser(BasicElementalSanitiser):
-    pass
+def sanitise_contents(contents: list[str], curator: ElementalCurator) -> list[str]:
+    sanitiser = ElementalSanitiser(curator)
+
+    all_sanitised: list[str] = []
+
+    length = len(contents)
+
+    timer = Timer()
+
+    timer.start()
+
+    for i, content in enumerate(contents):
+        print(f"{'progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+
+        sanitised = sanitiser.sanitise(content)
+
+        all_sanitised.append(sanitised)
+
+    print(f"\nt:{timer.end()}")
+
+    return all_sanitised
