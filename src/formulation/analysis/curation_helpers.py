@@ -1,7 +1,7 @@
 import re
 
 from formulation.sanitisation.regex import StructuredRegexFragments
-from formulation.sanitisation.regex_fetched import Fetched
+from formulation.analysis.regex_fetched import Fetched
 # from formulation.sanitisation.positive_vectors import (
 #     PositiveVector,
 #     TStepAssessor,

@@ -1,7 +1,7 @@
 from typing import Dict, Set, cast
 
 
-from formulation.sanitisation.sanitisation_regex import (
+from formulation.analysis.structured_regex import (
     SanitisationTypes,
 )
 from formulation.sanitisation.regex import IRegex, StructuredRegex

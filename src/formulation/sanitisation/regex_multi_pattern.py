@@ -1,6 +1,6 @@
 import re
 
-from formulation.sanitisation.curation_helpers import StructuredPatternMap
+from formulation.analysis.curation_helpers import StructuredPatternMap
 
 
 def get_pattern(items: list[str]) -> str:

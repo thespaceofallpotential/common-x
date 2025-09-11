@@ -2,7 +2,7 @@ import re
 
 from typing import Dict
 
-from formulation.sanitisation.curation_helpers import (
+from formulation.analysis.curation_helpers import (
     StructuredPatternMap,
 )
 from formulation.analysis.elemental_curator import ElementalCurator

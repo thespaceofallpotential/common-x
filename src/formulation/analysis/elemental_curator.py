@@ -1,13 +1,13 @@
 from typing import Dict, List, cast
 
 from formulation.analysis.elemental_culture import ElementalCulture
-from formulation.sanitisation.director import Director
+from formulation.analysis.director import Director
 from formulation.sanitisation.regex import BasicRegex, StructuredRegex
 from formulation.sanitisation.sanitisation_types import SanitisationTypes
-from formulation.sanitisation.sanitisation_regex import (
+from formulation.analysis.structured_regex import (
     structured_regex_map,
 )
-from formulation.sanitisation.curation_helpers import (
+from formulation.analysis.curation_helpers import (
     StructuredPatternMap,
     assess_elements,
 )
