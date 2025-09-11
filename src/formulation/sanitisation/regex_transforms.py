@@ -43,7 +43,7 @@ BLANK_TRANSLATIONS = [
 ]
 
 
-def transform(content: str, spaced: list[str], blanked: list[str]):
+def regex_transform(content: str, spaced: list[str], blanked: list[str]):
     items: dict[str, str] = {}
 
     for x in spaced:

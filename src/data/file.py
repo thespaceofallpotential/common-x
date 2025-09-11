@@ -29,5 +29,5 @@ class File:
         return self.state == FileState.OK
 
 
-# def are_ok(files: List[File]) -> List[File]:
-#     return list(filter(lambda x: x.ok(), files))
+def are_ok(files: List[File]) -> List[File]:
+    return list(filter(lambda x: x.ok(), files))

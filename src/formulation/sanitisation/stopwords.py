@@ -1,11 +1,30 @@
-from core.strings import NEWLINE, SPACE
+import re
+from core.strings import EMPTY, NEWLINE, SPACE
+from formulation.sanitisation.regex_transforms import regex_transform
+from formulation.sanitisation.regex_multi_pattern import (
+    get_pattern,
+    get_structured_pattern_list,
+    get_structured_pattern_map,
+)
 
 
 class StopwordRemover:
-    def process(self, content: str, stopwords: str) -> str:
-        lines = content.split(NEWLINE)
+    def process_regex(self, content: str, stopwords: str) -> str:
+        exclude = stopwords.split(NEWLINE)
 
+        patterns = get_pattern(exclude)
+
+        items = get_structured_pattern_list(content, patterns)
+
+        for item in items:
+            content = re.sub(item, EMPTY, content)
+
+        return content
+
+    def process(self, content: str, stopwords: str) -> str:
         exclude = set(stopwords.split(NEWLINE))
+
+        lines = content.split(NEWLINE)
 
         def process_line(line: str) -> str:
             words = line.split(SPACE)

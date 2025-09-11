@@ -82,7 +82,7 @@ class Source:
 def get_sanitised_contents(
     source: Source, curator: ElementalCurator | None = None
 ) -> list[str]:
-    stopwords_file = source.helper.get_file("../stopwords.txt")
+    stopwords_file = source.helper.get_file("stopwords.txt")
 
     sanitiser_options = SanitiserOptions(stopwords_file.content)
 

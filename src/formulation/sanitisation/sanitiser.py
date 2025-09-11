@@ -10,9 +10,10 @@ from formulation.sanitisation.elemental_curator import ElementalCurator
 from formulation.sanitisation.regex_transforms import (
     SPACE_TRANSLATIONS,
     BLANK_TRANSLATIONS,
-    transform,
+    regex_transform,
 )
 from data.file import File
+from formulation.sanitisation.stopwords import StopwordRemover
 from utils.progress import TimedProgress
 
 
@@ -78,7 +79,7 @@ class Sanitiser(ISanitiser):
                 # if i_r > -1:
                 #     print("here")
 
-        content = transform(content, SPACE_TRANSLATIONS, BLANK_TRANSLATIONS)
+        content = regex_transform(content, SPACE_TRANSLATIONS, BLANK_TRANSLATIONS)
 
         if content == original:
             c_e = set(list(content))
@@ -86,6 +87,11 @@ class Sanitiser(ISanitiser):
             diff = c_e.symmetric_difference(o_e)
             if len(diff) > 0:
                 print("here")
+
+        if self.options.stopwords is not None:
+            stopword_remover = StopwordRemover()
+
+            content = stopword_remover.process(content, self.options.stopwords)
 
         result.content = content
 

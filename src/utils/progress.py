@@ -7,7 +7,7 @@ def progress(message: str, i: int, length: int):
 
 def progress_complete(message: str, time: float):
     print(f"{message} [100%] t: {time:.4f}s")
-    
+
 
 class TimedProgress:
     timer: Timer
@@ -15,7 +15,7 @@ class TimedProgress:
     message: str
     length: int
 
-    def __init__(self, message: str, length: int, start: bool = True) -> None:
+    def __init__(self, message: str, length: int) -> None:
         self.message = message
         self.length = length
 
