@@ -2,10 +2,10 @@ from typing import List
 from data.file import File
 from formulation.sanitisation.sanitiser import (
     ISanitiser,
-    SanitiserKind,
     SanitiserOptions,
     SanitiserResult,
 )
+from formulation.sanitisation.sanitiser_kind import SanitiserKind
 from utils.progress import TimedProgress
 
 

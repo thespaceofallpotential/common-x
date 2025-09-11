@@ -1,6 +1,6 @@
 from typing import List
 from data.file import File, FileState
-from formulation.sanitisation.markdown_sanitiser import ISanitiser
+from formulation.sanitisation.markdown.markdown_sanitiser import ISanitiser
 from core.strings import SPACE
 from formulation.sanitisation.sanitiser import ISanitiser
 from utils.progress import TimedProgress

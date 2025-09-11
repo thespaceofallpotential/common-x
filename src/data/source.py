@@ -6,7 +6,7 @@ from data.file import File
 from data.source_helper import SourceHelper
 from formulation.sanitisation.sanitiser import SanitiserOptions
 from formulation.sanitisation.string_helpers import to_words
-from formulation.sanitisation.elemental_curator import (
+from formulation.analysis.elemental_curator import (
     ElementalCurator,
     curate_and_collect,
 )
@@ -84,10 +84,8 @@ def get_sanitised_contents(
     curator: ElementalCurator | None = None,
     sanitiser_options: SanitiserOptions | None = None,
 ) -> list[str]:
-    stopwords_file = source.helper.get_file("stopwords.txt")
-
     if sanitiser_options is None:
-        sanitiser_options = SanitiserOptions(stopwords_file.content)
+        sanitiser_options = SanitiserOptions()
 
     contents = source.get_all_contents()
 
@@ -97,10 +95,6 @@ def get_sanitised_contents(
         character_list = to_character_list(character_analysis)
 
         characters = set(character_list)
-
-        print(f"{characters}")
-
-        print("curate & collect")
 
         curator = curate_and_collect(characters)
 

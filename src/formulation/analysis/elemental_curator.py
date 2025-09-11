@@ -1,6 +1,6 @@
 from typing import Dict, List, cast
 
-from formulation.sanitisation.elemental_culture import ElementalCulture
+from formulation.analysis.elemental_culture import ElementalCulture
 from formulation.sanitisation.director import Director
 from formulation.sanitisation.regex import BasicRegex, StructuredRegex
 from formulation.sanitisation.sanitisation_types import SanitisationTypes

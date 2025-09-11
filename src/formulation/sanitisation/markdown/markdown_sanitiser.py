@@ -6,7 +6,7 @@ from formulation.sanitisation.sanitiser import (
     SanitiserResult,
 )
 from formulation.sanitisation.curation_helpers import StructuredPatternMap
-from formulation.sanitisation.elemental_curator import ElementalCurator
+from formulation.analysis.elemental_curator import ElementalCurator
 from formulation.sanitisation.regex_transforms import (
     SPACE_TRANSLATIONS,
     BLANK_TRANSLATIONS,

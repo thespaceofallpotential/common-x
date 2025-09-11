@@ -3,7 +3,7 @@ from data.source import Source
 from formulation.analysis.character_analyser import to_character_list
 from formulation.analysis.analyser import AnalyserType
 from formulation.analysis.content_analysis_engine import content_analysis_runner
-from formulation.sanitisation.elemental_curator import (
+from formulation.analysis.elemental_curator import (
     curate_and_collect,
 )
 

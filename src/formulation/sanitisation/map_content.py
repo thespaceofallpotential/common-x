@@ -5,7 +5,7 @@ from typing import Dict
 from formulation.sanitisation.curation_helpers import (
     StructuredPatternMap,
 )
-from formulation.sanitisation.elemental_curator import ElementalCurator
+from formulation.analysis.elemental_curator import ElementalCurator
 from utils.progress import TimedProgress
 
 

@@ -1,12 +1,12 @@
 from formulation.sanitisation.sanitiser import (
     ISanitiser,
-    SanitiserKind,
     SanitiserOptions,
 )
-from formulation.sanitisation.markdown_sanitiser import MarkdownSanitiser
-from formulation.sanitisation.elemental_curator import ElementalCurator
+from formulation.sanitisation.markdown.markdown_sanitiser import MarkdownSanitiser
+from formulation.analysis.elemental_curator import ElementalCurator
 from formulation.sanitisation.basic_sanitiser import BasicSanitiser
 from formulation.sanitisation.stopword_sanitiser import StopwordSanitiser
+from formulation.sanitisation.sanitiser_kind import SanitiserKind
 from utils.custom_exception import CustomException
 
 
