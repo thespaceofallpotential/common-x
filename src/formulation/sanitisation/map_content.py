@@ -2,11 +2,11 @@ import re
 
 from typing import Dict
 
-from sanitisation.curation_helpers import (
+from formulation.sanitisation.curation_helpers import (
     StructuredPatternMap,
 )
-from sanitisation.elemental_curator import ElementalCurator
-from utils.timer import Timer
+from formulation.sanitisation.elemental_curator import ElementalCurator
+from utils.progress import TimedProgress
 
 
 def map_contents(
@@ -16,10 +16,11 @@ def map_contents(
 
     length = len(contents)
 
-    timer = Timer(True)
+    progress = TimedProgress("map content", length)
 
     for i, content in enumerate(contents):
-        print(f"{'map content progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
+        progress.update(i)
+        # print(f"{'map content progress [%d%%]\r'}" % ((i + 1) / length * 100), end="")
 
         ordered_keys = list(curator.structured_regex_order)
 
@@ -51,6 +52,6 @@ def map_contents(
 
         items[i] = structured_pattern_map
 
-    print(f"\nt:{timer.end()}")
+    progress.complete()
 
     return items

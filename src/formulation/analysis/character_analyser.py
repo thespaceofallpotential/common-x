@@ -1,8 +1,8 @@
 from typing import List
 
 from core.sequence import Sequence
-from sanitisation.analyser import Analyser
-from sanitisation.analysis import Analysis
+from formulation.analysis.analyser import Analyser
+from formulation.analysis.analysis import Analysis
 
 
 class CharacterAnalyser(Analyser):

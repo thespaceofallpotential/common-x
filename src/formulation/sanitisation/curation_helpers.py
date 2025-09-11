@@ -1,14 +1,17 @@
-from sanitisation.sanitisation_regex import (
-    re_match,
-)
-from sanitisation.regex import StructuredRegexFragments
-from sanitisation.sanitisation import Fetched
-# from sanitisation.positive_vectors import (
+import re
+
+from formulation.sanitisation.regex import StructuredRegexFragments
+from formulation.sanitisation.regex_fetched import Fetched
+# from formulation.sanitisation.positive_vectors import (
 #     PositiveVector,
 #     TStepAssessor,
 #     get_positive_vectors,
 #     print_vectors,
 # )
+
+
+def re_match(r: str, x: str, positive: bool = True) -> bool:
+    return bool(re.match(r, x)) and positive
 
 
 def assess_elements(

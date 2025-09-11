@@ -1,13 +1,13 @@
 from typing import Dict, List, cast
 
-from sanitisation.elemental_culture import ElementalCulture
-from sanitisation.sanitisation import Director
-from sanitisation.regex import BasicRegex, StructuredRegex
-from sanitisation.sanitisation_regex import SanitisationTypes
-from sanitisation.sanitisation_regex import (
-    sanitisation_regex_map,
+from formulation.sanitisation.elemental_culture import ElementalCulture
+from formulation.sanitisation.director import Director
+from formulation.sanitisation.regex import BasicRegex, StructuredRegex
+from formulation.sanitisation.sanitisation_types import SanitisationTypes
+from formulation.sanitisation.sanitisation_regex import (
+    structured_regex_map,
 )
-from sanitisation.curation_helpers import (
+from formulation.sanitisation.curation_helpers import (
     StructuredPatternMap,
     assess_elements,
 )
@@ -105,7 +105,7 @@ class ElementalCurator:
 
 
 def curate_and_collect(elements: set[str]) -> ElementalCurator:
-    culture = ElementalCulture(elements, sanitisation_regex_map)
+    culture = ElementalCulture(elements, structured_regex_map)
 
     structured_regex_order = [
         SanitisationTypes.STRUCTURED_FRONTMATTER,
@@ -117,7 +117,7 @@ def curate_and_collect(elements: set[str]) -> ElementalCurator:
 
     curator = ElementalCurator(culture, structured_regex_order)
 
-    for key in sanitisation_regex_map:
+    for key in structured_regex_map:
         curator.curate(key)
 
     curator.collect()

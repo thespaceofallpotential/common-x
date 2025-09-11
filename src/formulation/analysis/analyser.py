@@ -1,7 +1,8 @@
 import abc
+
 from enum import Enum
 
-from sanitisation.analysis import Analysis
+from formulation.analysis.analysis import Analysis
 
 
 class AnalyserType(Enum):

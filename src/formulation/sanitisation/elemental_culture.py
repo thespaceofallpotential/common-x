@@ -1,10 +1,10 @@
 from typing import Dict, Set, cast
 
 
-from sanitisation.sanitisation_regex import (
+from formulation.sanitisation.sanitisation_regex import (
     SanitisationTypes,
 )
-from sanitisation.regex import IRegex, StructuredRegex
+from formulation.sanitisation.regex import IRegex, StructuredRegex
 
 
 class ElementalCulture:

@@ -12,10 +12,17 @@ class Timer:
             self.start()
 
     def start(self):
-        self.__start = time.time()
+        self.__start = time.time_ns()
 
-    def end(self) -> int:
-        value = math.floor(time.time() - self.__start)
+    def duration(self) -> int:
+        difference = time.time_ns() - self.__start
+
+        value = math.floor(difference)
+
+        return value
+
+    def duration_stop(self) -> int:
+        value = self.duration()
 
         self.__start = 0
 

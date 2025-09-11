@@ -1,6 +1,6 @@
-from sanitisation.markdown_helpers import strip_markdown
-from sanitisation.stopwords import remove_stopwords
-from sanitisation.string_helpers import (
+from formulation.sanitisation.dev.dev_markdown_helpers import strip_markdown
+from formulation.sanitisation.stopwords import remove_stopwords
+from formulation.sanitisation.string_helpers import (
     clean_str,
     get_frontmatter,
     pad_new_lines,
@@ -9,38 +9,14 @@ from sanitisation.string_helpers import (
     shrink_whitespace,
     strip_frontmatter,
 )
-from core.strings import EMPTY
+from formulation.sanitisation.common import (
+    ISanitiser,
+    SanitiserOptions,
+    SanitiserResult,
+)
 
 
-class SanitiserOptions:
-    def __init__(self, stopwords: str | None = None) -> None:
-        self.stopwords = stopwords
-
-    clean: bool = True
-
-    pad_new_line: bool = True
-
-    periods_to_new_line: bool = True
-
-    prepare: bool = True
-
-    stopwords: str | None
-
-    strip_frontmatter: bool = True
-
-    strip_links: bool = True
-
-    strip_callouts: bool = True
-
-    strip_any_numeric: bool = True
-
-
-class SanitiserResult:
-    content: str = EMPTY
-    frontmatter: str | None = None
-
-
-class Sanitiser:
+class Sanitiser(ISanitiser):
     options: SanitiserOptions
 
     def __init__(self, options: SanitiserOptions) -> None:
@@ -93,32 +69,20 @@ class Sanitiser:
 
 
 # const lines = value.split(NEWLINE);
-
 # for (let i = 0; i < lines.length; i++) {
 #     let line = lines[i];
-
 #     line = tokens.stripTokens(line);
-
 #     line = this.clean(line);
-
 #     let words = line.split(SPACE);
-
 #     words = tokens.stripNumbers(words);
-
 #     if (options.aggressiveSanitisation && words.length < options.minSequence) {
 #         lines[i] = EMPTY;
-
 #         continue;
 #     }
-
 #     words = tokens.stripWords(words);
-
 #     line = words.join(SPACE);
-
 #     line = tokens.stripPhrases(line);
-
 #     line = shrinkWhitespace(line);
-
 #     // // TODO: count space characters...
 #     if (options.aggressiveSanitisation && line.split(SPACE).length < options.minSequence) {
 #         lines[i] = EMPTY;
@@ -126,5 +90,4 @@ class Sanitiser:
 #         lines[i] = line;
 #     }
 # }
-
 # value = lines.join(NEWLINE);

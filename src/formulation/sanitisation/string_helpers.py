@@ -1,4 +1,5 @@
 import re
+
 from typing import List
 from core.strings import (
     EMPTY,
@@ -34,13 +35,13 @@ def has_links(x: str) -> bool:
 
 
 def clean_str(x: str) -> str:
-    return re.sub(r"(\s{2,})", SPACE, x).strip()
+    return re.sub(r"( ){2,}", SPACE, x).strip()
 
 
 def prepare_str(x: str) -> str:
     x = x.lower()
 
-    x = re.sub(r"[']", EMPTY, x)
+    x = re.sub(r"'", EMPTY, x)
 
     x = re.sub(r"[^\w\s]|_", EMPTY, x)
 
@@ -58,7 +59,7 @@ def pad_new_lines(x: str) -> str:
 
 
 def shrink_whitespace(x: str) -> str:
-    return re.sub(r"(\s{2,})", SPACE, x).strip()
+    return re.sub(r"( ){2,}", SPACE, x).strip()
 
 
 def has_frontmatter(x: str):
@@ -102,12 +103,3 @@ def periods_to_new_line(x: str) -> str:
 
 def to_words(x: str) -> List[str]:
     return str(x).split(SPACE)
-
-
-# const getFrontmatter = (content: string): string => {
-#     const end = content.indexOf(`${NEWLINE}${FRONTMATTER}`);
-
-#     const value = content.substring(0, end + 4);
-
-#     return value;
-# };

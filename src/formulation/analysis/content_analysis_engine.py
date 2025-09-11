@@ -1,7 +1,8 @@
 from core.sink import Sink, sink_factory
-from sanitisation.analyser import AnalyserType, IAnalyser
-from sanitisation.analysis import Analysis
-from sanitisation.analyser_factory import AnalyserFactory
+from formulation.analysis.analyser import AnalyserType, IAnalyser
+from formulation.analysis.analysis import Analysis
+from formulation.analysis.analyser_factory import AnalyserFactory
+from utils.progress import TimedProgress
 
 
 class ContentAnalysisEngine[T]:
@@ -13,10 +14,10 @@ class ContentAnalysisEngine[T]:
     ):
         length = len(contents)
 
+        progress = TimedProgress("content analysis", length)
+
         for i in range(length):
-            print(
-                "content analysis progress [%d%%]\r" % ((i + 1) / length * 100), end=""
-            )
+            progress.update(i)
 
             content = contents[i]
 
@@ -26,7 +27,7 @@ class ContentAnalysisEngine[T]:
 
             sink.add(analysis)
 
-        print("")  # move cursor to next line
+        progress.complete()
 
 
 def content_analysis_runner(

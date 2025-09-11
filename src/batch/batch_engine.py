@@ -1,3 +1,5 @@
+import math
+
 from typing import List
 
 # from batch.file_domain import FileDomain
@@ -6,6 +8,7 @@ from batch.processor import IProcessor
 from batch.processor_factory import ProcessorFactory, ProcessorTypes
 from core.sequence import Sequence
 from core.sink import Sink, sink_factory
+from utils.progress import TimedProgress
 
 
 class BatchEngine[T, C]:
@@ -20,11 +23,13 @@ class BatchEngine[T, C]:
         total = length * length / 2
         count = 0
 
+        progress = TimedProgress("batch", math.ceil(total))
+
         for i_a in range(length):
             a = sequences[i_a]
 
             for i_b in range(length):
-                print(f"{'batch progress [%d%%]\r'}" % (count / total * 100), end="")
+                progress.update(count)
 
                 if i_b >= i_a:
                     # only process a pair once
@@ -41,7 +46,7 @@ class BatchEngine[T, C]:
 
                 count += 1
 
-        print("")  # move cursor to next line
+        progress.complete()
 
 
 def batch_runner[C](

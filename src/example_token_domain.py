@@ -2,8 +2,9 @@ from typing import List
 from example_1_source import source
 from core.domains import TokenDomain
 from core.sequence import Sequence
+from data.source import get_sequences
 
-sequences: List[Sequence[str]] = source.get_sequences()
+sequences: List[Sequence[str]] = get_sequences(source)
 
 token_domain = TokenDomain(sequences)
 

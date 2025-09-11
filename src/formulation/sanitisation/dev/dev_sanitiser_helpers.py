@@ -1,8 +1,9 @@
 from typing import List
 from data.file import File, FileState
-from sanitisation.sanitiser import Sanitiser
-from sanitisation.markkdown_sanitiser_helper import EXCALIDRAW_PLUGIN
+from formulation.sanitisation.sanitiser import ISanitiser
 from core.strings import SPACE
+from formulation.sanitisation.common import ISanitiser
+from utils.progress import TimedProgress
 
 
 def strip_numbers(x: str) -> str:
@@ -21,15 +22,10 @@ def only_numbers(x: str) -> list[str]:
     return list(filter(lambda y: y.isnumeric(), x.split(SPACE)))
 
 
-def sanitise_file(sanitiser: Sanitiser, file: File):
+def sanitise_file(sanitiser: ISanitiser, file: File):
     result = sanitiser.sanitise(file.content)
 
     file.state = FileState.OK
-
-    if result.frontmatter is not None:
-        if EXCALIDRAW_PLUGIN in result.frontmatter:
-            file.state = FileState.ERROR
-            file.frontmatter = result.frontmatter
 
     words = result.content.split(SPACE)
 
@@ -52,6 +48,14 @@ def sanitise_file(sanitiser: Sanitiser, file: File):
     file.content = content
 
 
-def sanitise_files(sanitiser: Sanitiser, files: List[File]):
-    for file in files:
-        sanitise_file(sanitiser, file)
+def sanitise_files(sanitiser: ISanitiser, files: List[File]):
+    progress = TimedProgress("sanitisation", len(files))
+
+    for i, file in enumerate(files):
+        progress.update(i)
+
+        sanitiser.sanitise(file.content)
+
+        # sanitise_file(sanitiser, file)
+
+    progress.complete()

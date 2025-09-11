@@ -1,15 +1,14 @@
 from data.source_helper import SourceHelper
 from data.source import Source
-from sanitisation.character_analyser import to_character_list
-from sanitisation.analyser import AnalyserType
-from sanitisation.content_analysis_engine import content_analysis_runner
-from sanitisation.elemental_curator import (
+from formulation.analysis.character_analyser import to_character_list
+from formulation.analysis.analyser import AnalyserType
+from formulation.analysis.content_analysis_engine import content_analysis_runner
+from formulation.sanitisation.elemental_curator import (
     curate_and_collect,
 )
 
-from sanitisation.map_content import map_contents
-from sanitisation.sanitise_contents import sanitise_contents
-from sanitisation.markkdown_sanitiser_helper import EXCALIDRAW_PLUGIN
+from formulation.sanitisation.map_content import map_contents
+from formulation.sanitisation.markdown import EXCALIDRAW_PLUGIN
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
@@ -52,10 +51,10 @@ def map_content():
 
     source = Source(helper)
 
-    contents = source.get_content()
+    contents = source.get_all_contents()
 
     # content exclusion
-    
+
     contents = list(filter(lambda x: EXCALIDRAW_PLUGIN not in x, contents))
 
     # i_i = 0
@@ -78,24 +77,24 @@ def map_content():
 
     curator = curate_and_collect(characters)
 
-    print("sanitise")
+    print(f"{curator}")
 
     # mapped = map_contents(curator, contents)
     # maps = map_content_elements2(curator, contents)
 
-    sanitised = sanitise_contents(curator, contents)
+    # sanitised = sanitise_contents(curator, contents)
 
-    print(f"{len(sanitised)}")
+    # print(f"{len(sanitised)}")
 
     # filtered = list(filter(lambda x: "](" in x, sanitised))
 
-    character_analysis2 = content_analysis_runner(AnalyserType.CHARACTER, sanitised)
+    # character_analysis2 = content_analysis_runner(AnalyserType.CHARACTER, sanitised)
 
-    character_list2 = to_character_list(character_analysis2)
+    # character_list2 = to_character_list(character_analysis2)
 
-    characters2 = set(character_list2)
+    # characters2 = set(character_list2)
 
-    print(f"{len(sanitised)}")
+    # print(f"{len(sanitised)}")
 
     # 1. make it work  <--- STILL HERE! ;)
 

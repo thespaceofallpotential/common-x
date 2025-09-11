@@ -1,6 +1,7 @@
 from typing import List
 from data.file import File
 from core.strings import EMPTY
+from utils.progress import TimedProgress
 from utils.path_helper import PathHelper
 from utils.io_helper import IOHelper, ScanOptions
 
@@ -18,14 +19,27 @@ class FileHelper(PathHelper):
 
         content = self.io_helper.get_content(full_path) or EMPTY
 
-        file = File(path, content )
+        file = File(path, content)
 
         return file
 
     def get_files(self, paths: list[str]) -> List[File]:
+        items: List[File] = []
+
         relative_paths = self.get_relative_paths(paths)
 
-        return list(map(self.get_file, relative_paths))
+        progress = TimedProgress("retrieving files", len(paths))
+
+        for i, relative_path in enumerate(relative_paths):
+            progress.update(i)
+
+            file = self.get_file(relative_path)
+
+            items.append(file)
+
+        progress.complete()
+
+        return items
 
     def get_file_paths(self, options: ScanOptions) -> list[str]:
         if options.path is None:

@@ -1,4 +1,4 @@
-from data.source import Source
+from data.source import Source, get_sequences
 from data.source_helper import SourceHelper
 from core.domains import WordDomain
 from utils.io_helper import ScanOptions
@@ -19,7 +19,7 @@ source = Source(helper)
 
 print("get sequences")
 
-sequences = source.get_sequences()
+sequences = get_sequences(source)
 
 print("word domain")
 

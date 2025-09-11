@@ -1,6 +1,7 @@
 import abc
-from enum import Enum
 import re
+
+from enum import Enum
 from typing import Callable
 
 

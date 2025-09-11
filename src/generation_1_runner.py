@@ -1,9 +1,10 @@
 from example_1_source import source
 from batch.processor_factory import ProcessorTypes
+from data.source import get_sequences
 from utils.runner import run_and_print
 
 
-sequences = source.get_sequences()
+sequences = get_sequences(source)
 
 a, b = sequences
 
