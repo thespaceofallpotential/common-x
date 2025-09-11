@@ -1,8 +1,8 @@
 from typing import List
 from data.file import File, FileState
-from formulation.sanitisation.sanitiser import ISanitiser
+from formulation.sanitisation.markdown_sanitiser import ISanitiser
 from core.strings import SPACE
-from formulation.sanitisation.common import ISanitiser
+from formulation.sanitisation.sanitiser import ISanitiser
 from utils.progress import TimedProgress
 
 

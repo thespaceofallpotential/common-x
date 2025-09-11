@@ -1,10 +1,10 @@
-from example_1_source import source
+from example_1_source import source, sanitiser_options
 from batch.processor_factory import ProcessorTypes
 from data.source import get_sequences
 from utils.runner import run_and_print
 
 
-sequences = get_sequences(source)
+sequences = get_sequences(source, sanitiser_options=sanitiser_options)
 
 a, b = sequences
 

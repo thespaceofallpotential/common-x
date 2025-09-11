@@ -7,9 +7,9 @@ from formulation.sanitisation.elemental_curator import (
     curate_and_collect,
 )
 
-from formulation.sanitisation.markdown import EXCALIDRAW_PLUGIN
-from formulation.sanitisation.common import SanitiserOptions
-from formulation.sanitisation.sanitiser import sanitise_contents
+from formulation.sanitisation.markdown.markdown import EXCALIDRAW_PLUGIN
+from formulation.sanitisation.sanitiser import SanitiserOptions
+from formulation.sanitisation.sanitiser_helpers import sanitise_contents
 from formulation.sanitisation.sanitiser_factory import build_sanitiser
 from utils.io_helper import ScanOptions
 

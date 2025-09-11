@@ -9,7 +9,7 @@ from formulation.sanitisation.string_helpers import (
     shrink_whitespace,
     strip_frontmatter,
 )
-from formulation.sanitisation.common import (
+from formulation.sanitisation.sanitiser import (
     ISanitiser,
     SanitiserOptions,
     SanitiserResult,

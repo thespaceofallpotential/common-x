@@ -8,7 +8,7 @@ from formulation.sanitisation.elemental_curator import (
 )
 
 from formulation.sanitisation.map_content import map_contents
-from formulation.sanitisation.markdown import EXCALIDRAW_PLUGIN
+from formulation.sanitisation.markdown.markdown import EXCALIDRAW_PLUGIN
 from utils.io_helper import ScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,

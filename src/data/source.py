@@ -4,17 +4,17 @@ from core.sequence import Sequence
 from core.strings import EMPTY
 from data.file import File
 from data.source_helper import SourceHelper
-from formulation.sanitisation.common import SanitiserOptions
+from formulation.sanitisation.sanitiser import SanitiserOptions
 from formulation.sanitisation.string_helpers import to_words
 from formulation.sanitisation.elemental_curator import (
     ElementalCurator,
     curate_and_collect,
 )
-from formulation.sanitisation.sanitiser import sanitise_contents
 from formulation.sanitisation.sanitiser_factory import build_sanitiser
 from formulation.analysis.analyser import AnalyserType
 from formulation.analysis.character_analyser import to_character_list
 from formulation.analysis.content_analysis_engine import content_analysis_runner
+from formulation.sanitisation.sanitiser_helpers import sanitise_contents
 from utils.progress import TimedProgress
 from utils.io_helper import ScanOptions
 
@@ -80,11 +80,14 @@ class Source:
 
 
 def get_sanitised_contents(
-    source: Source, curator: ElementalCurator | None = None
+    source: Source,
+    curator: ElementalCurator | None = None,
+    sanitiser_options: SanitiserOptions | None = None,
 ) -> list[str]:
     stopwords_file = source.helper.get_file("stopwords.txt")
 
-    sanitiser_options = SanitiserOptions(stopwords_file.content)
+    if sanitiser_options is None:
+        sanitiser_options = SanitiserOptions(stopwords_file.content)
 
     contents = source.get_all_contents()
 
@@ -114,8 +117,9 @@ def get_sequences(
     source: Source,
     curator: ElementalCurator | None = None,
     sanitised_contents: List[str] | None = None,
+    sanitiser_options: SanitiserOptions | None = None,
 ) -> List[Sequence]:
     if not sanitised_contents:
-        sanitised_contents = get_sanitised_contents(source, curator)
+        sanitised_contents = get_sanitised_contents(source, curator, sanitiser_options)
 
     return list(map(lambda x: Sequence(to_words(x)), sanitised_contents))
