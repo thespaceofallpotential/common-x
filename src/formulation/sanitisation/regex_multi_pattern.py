@@ -3,14 +3,23 @@ import re
 from formulation.analysis.curation_helpers import StructuredPatternMap
 
 
-def get_pattern(items: list[str]) -> str:
-    def prepare(x: str) -> str:
-        x = re.escape(x)
-        return r"(^| ){x}( |$)"
+def get_word_pattern(x: str) -> re.Pattern[str]:
+    return re.compile(r"(^| )" + x + r"( |$)")
 
-    items = list(map(lambda x: prepare(x), items))
 
-    return str.join("|", items)
+def get_pattern(items: list[str]) -> re.Pattern[str]:
+    captured = map(lambda x: f"({x})", items)
+
+    return re.compile(r"(^| )" + str.join("|", captured) + r"( |$)")
+
+    # def prepare(x: str) -> str:
+    #     x = f"(^| ){x}( |$)"
+
+    #     return x
+
+    # items = list(map(lambda x: prepare(x), items))
+
+    # return str.join("|", items)
 
 
 def get_structured_pattern_map(

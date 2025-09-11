@@ -19,6 +19,7 @@ SPACE_TRANSLATIONS = [
     "\\",
     "~",
     "_",
+    "\t",
 ]
 
 BLANK_TRANSLATIONS = [
@@ -56,9 +57,15 @@ def regex_transform(content: str, spaced: list[str], blanked: list[str]):
 
     translated = content.translate(translations)
 
+    # TODO: sort this...
+    
+    translated = re.sub(r"( ){2,}", " ", translated)
     translated = re.sub(r"\.", r"\n", translated)
-    translated = re.sub(r"\n( ){1,}\n", r"\n", translated)  #
-    translated = re.sub(r"(\n){2,}", r"\n", translated)
-    translated = re.sub(r"( ){2,}", " ", translated).strip()
+    translated = re.sub(r"( ){1,}(\n|\\n)( ){1,}", r"\n", translated)
+    translated = re.sub(r"(\n|\\n){2,}", r"\n", translated)
+    # translated = re.sub(r"(\n|\\n)( ){1,}(\n|\\n)", r"\n", translated)
+    translated = re.sub(r"(\n|\\n)(\d){1,}(\n|\\n)", r"\n", translated)
+    translated = re.sub(r"(\n )", "\n", translated)
+    # translated = re.sub(r"( ){2,}", " ", translated)
 
-    return translated
+    return translated.strip()

@@ -26,3 +26,9 @@ class SanitiserOptions:
     sanitiser_kind: SanitiserKind | None = None
 
     regex_stopwords: bool | None = None
+
+    def assign(self, items: dict[str, object]):
+        for key in items:
+            value = items[key]
+
+            self.__setattr__(key, value)

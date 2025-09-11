@@ -54,3 +54,6 @@ class FileHelper(PathHelper):
         return (
             absolute_paths if not relative else self.get_relative_paths(absolute_paths)
         )
+
+    def write(self, path: str, content: str):
+        self.io_helper.set_content(path, content)

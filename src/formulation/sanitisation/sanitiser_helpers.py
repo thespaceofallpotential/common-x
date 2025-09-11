@@ -1,4 +1,4 @@
-from typing import List
+from typing import Callable, List
 from data.file import File
 from formulation.sanitisation.sanitiser import (
     ISanitiser,
@@ -55,9 +55,16 @@ def get_basic_sanitiser_options(stopwords: str) -> SanitiserOptions:
     return options
 
 
-def get_sanitiser_options(stopwords: str, kind: SanitiserKind) -> SanitiserOptions:
+def get_sanitiser_options(
+    stopwords: str,
+    kind: SanitiserKind,
+    configure: dict[str, object] | None = None,
+) -> SanitiserOptions:
     options = SanitiserOptions(stopwords)
 
     options.sanitiser_kind = kind
+
+    if configure:
+        options.assign(configure)
 
     return options

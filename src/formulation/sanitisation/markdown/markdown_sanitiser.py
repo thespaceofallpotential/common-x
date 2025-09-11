@@ -13,6 +13,7 @@ from formulation.sanitisation.regex_transforms import (
     regex_transform,
 )
 from formulation.sanitisation.stopwords import StopwordRemover
+from utils.custom_exception import CustomException
 
 
 class MarkdownSanitiser(ISanitiser):
@@ -33,8 +34,6 @@ class MarkdownSanitiser(ISanitiser):
 
         if i is not None:
             curator.structured_pattern_maps[i] = structured_pattern_map
-
-        original = content
 
         result = SanitiserResult()
 
@@ -72,31 +71,23 @@ class MarkdownSanitiser(ISanitiser):
 
                 content = content.replace(group, replacement)
 
-                # i_r = safe_index(content, group)
-
-                # if i_r > -1:
-                #     print("here")
-
         content = regex_transform(content, SPACE_TRANSLATIONS, BLANK_TRANSLATIONS)
-
-        if content == original:
-            c_e = set(list(content))
-            o_e = set(list(original))
-            diff = c_e.symmetric_difference(o_e)
-            if len(diff) > 0:
-                print("here")
 
         if self.options.stopwords is not None:
             stopword_remover = StopwordRemover()
 
             if self.options.regex_stopwords:
+                raise CustomException("NOT IMPLEMENTED")
                 content = stopword_remover.process_regex(
                     content, self.options.stopwords
                 )
             else:
                 content = stopword_remover.process(content, self.options.stopwords)
 
-        result.content = content
+        result.content = content.strip()
+        
+        if "\n " in content:
+            print(content)
 
         return result
 

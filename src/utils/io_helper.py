@@ -2,6 +2,7 @@ import os
 
 
 READ = "r"
+WRITE = "w"
 
 
 class DirectoryScanOptions:
@@ -28,6 +29,13 @@ class IOHelper:
         try:
             with open(path, READ, encoding="utf-8") as io:
                 return io.read()
+        except:  # noqa: E722
+            return None
+
+    def set_content(self, path: str, content: str):
+        try:
+            with open(path, WRITE, encoding="utf-8") as io:
+                return io.write(content)
         except:  # noqa: E722
             return None
 

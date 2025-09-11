@@ -50,7 +50,7 @@ class Source:
 
         files = self.__files
 
-        progress = TimedProgress("retrieving files", len(files))
+        progress = TimedProgress("processing files", len(files))
 
         for i, file in enumerate(files):
             progress.update(i)

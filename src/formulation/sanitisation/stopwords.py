@@ -4,19 +4,35 @@ from core.strings import EMPTY, NEWLINE, SPACE
 from formulation.sanitisation.regex_multi_pattern import (
     get_pattern,
     get_structured_pattern_list,
+    get_word_pattern,
 )
 
 
 class StopwordRemover:
     def process_regex(self, content: str, stopwords: str) -> str:
+        # items = re.findall(r"(?:^| )([^\\ ])", content)
+
         exclude = stopwords.split(NEWLINE)
 
-        patterns = get_pattern(exclude)
+        # original = content
 
-        items = get_structured_pattern_list(content, patterns)
+        for item in exclude:
+            content = re.sub(get_word_pattern(item), EMPTY, content)
 
-        for item in items:
-            content = re.sub(item, EMPTY, content)
+        # print(f"{len(original)} | {len(content)}")
+        # # elements = set(map(lambda x: x, items))
+        # # elements = set(items)
+
+        # # exclude = list(filter(lambda x: x[:1] in elements, exclude))
+
+        # pattern = get_pattern(exclude)
+
+        # # items = get_structured_pattern_list(content, patterns)
+
+        # # for item in items:
+        # content2 = re.sub(pattern, EMPTY, original)
+
+        # print(f"{len(original)} | {len(content)} | {len(content2)}")
 
         return content
 
