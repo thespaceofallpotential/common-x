@@ -1,10 +1,9 @@
 import re
+
 from core.strings import EMPTY, NEWLINE, SPACE
-from formulation.sanitisation.regex_transforms import regex_transform
 from formulation.sanitisation.regex_multi_pattern import (
     get_pattern,
     get_structured_pattern_list,
-    get_structured_pattern_map,
 )
 
 

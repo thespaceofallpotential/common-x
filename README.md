@@ -1,6 +1,13 @@
 # common-x:  *—from "knowledge culture" and a "universal solver", to a basic model of "organic general-intelligence"*
 
-> ***note: presently porting TS to python***
+---
+##### ***note: presently porting TS to python***
+
+> # 1. make it work  <--- WE ARE HERE!
+> # 2. make it right
+
+---
+
 
 Yeah-yeah, ***finding*** solutions (within some problem-space) is cool... *—but did you ever think about **growing** them?*
 

@@ -24,3 +24,5 @@ class SanitiserOptions:
     strip_any_numeric: bool = True
 
     sanitiser_kind: SanitiserKind | None = None
+
+    regex_stopwords: bool | None = None

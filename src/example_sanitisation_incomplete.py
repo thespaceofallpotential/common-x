@@ -4,14 +4,19 @@ from formulation.analysis.character_analyser import to_character_list
 from formulation.analysis.analyser import AnalyserType
 from formulation.analysis.content_analysis_engine import content_analysis_runner
 from formulation.analysis.elemental_curator import (
-    curate_and_collect,
+    collect_and_curate,
 )
 
 from formulation.sanitisation.markdown.markdown import EXCALIDRAW_PLUGIN
 from formulation.sanitisation.sanitiser import SanitiserOptions
-from formulation.sanitisation.sanitiser_helpers import sanitise_contents
+from formulation.sanitisation.sanitiser_helpers import (
+    get_sanitiser_options,
+    sanitise_contents,
+)
 from formulation.sanitisation.sanitiser_factory import build_sanitiser
-from utils.io_helper import ScanOptions
+from core.strings import NEWLINE
+from formulation.sanitisation.sanitiser_kind import SanitiserKind
+from utils.io_helper import DirectoryScanOptions
 
 # textual-domain analysis: as a precoursour to intelligent sanitisation,
 # using approach & methods consistent with common-x solvers
@@ -30,35 +35,27 @@ from utils.io_helper import ScanOptions
 def sanitise_content():
     helper = SourceHelper("data/local/aeim")
 
-    options = ScanOptions(
-        helper.file_helper.root, ext=".md", relative=True, recursive=True
+    helper.add_all_for(
+        DirectoryScanOptions(
+            helper.file_helper.root, ext=".md", relative=True, recursive=True
+        )
     )
 
-    helper.add_all(options)
-
     print(f"{len(helper.relative_paths)} files")
+
+    stopwords = helper.get_content("../stopwords.txt")
+
+    print(f"{len(stopwords.split(NEWLINE))} stopwords")
 
     source = Source(helper)
 
     contents = source.get_contents(excluding=[EXCALIDRAW_PLUGIN])
 
-    character_analysis = content_analysis_runner(AnalyserType.CHARACTER, contents)
+    curator = collect_and_curate(contents)
 
-    character_list = to_character_list(character_analysis)
+    options = get_sanitiser_options(stopwords, SanitiserKind.MARKDOWN)
 
-    characters = set(character_list)
-
-    print(f"{characters}")
-
-    print("curate & collect")
-
-    curator = curate_and_collect(characters)
-
-    stopwords_file = helper.get_file("../stopwords.txt")
-
-    sanitiser_options = SanitiserOptions(stopwords_file.content)
-
-    sanitiser = build_sanitiser(curator, sanitiser_options)
+    sanitiser = build_sanitiser(curator, options)
 
     sanitised = sanitise_contents(sanitiser, contents)
 

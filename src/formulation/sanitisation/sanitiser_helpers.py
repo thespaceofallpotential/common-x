@@ -47,7 +47,7 @@ def sanitise_files(sanitiser: ISanitiser, files: List[File]) -> List[SanitiserRe
     return items
 
 
-def get_basic_options(stopwords: str) -> SanitiserOptions:
+def get_basic_sanitiser_options(stopwords: str) -> SanitiserOptions:
     options = SanitiserOptions(stopwords)
 
     options.sanitiser_kind = SanitiserKind.BASIC
@@ -55,9 +55,9 @@ def get_basic_options(stopwords: str) -> SanitiserOptions:
     return options
 
 
-def get_stopword_options(stopwords: str) -> SanitiserOptions:
+def get_sanitiser_options(stopwords: str, kind: SanitiserKind) -> SanitiserOptions:
     options = SanitiserOptions(stopwords)
 
-    options.sanitiser_kind = SanitiserKind.STOPWORD
+    options.sanitiser_kind = kind
 
     return options

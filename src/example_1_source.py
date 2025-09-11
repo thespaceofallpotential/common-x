@@ -1,6 +1,6 @@
 from data.source import Source
 from data.source_helper import SourceHelper
-from formulation.sanitisation.sanitiser_helpers import get_basic_options
+from formulation.sanitisation.sanitiser_helpers import get_basic_sanitiser_options
 
 helper = SourceHelper("data/example_1")
 
@@ -11,7 +11,7 @@ source = Source(helper)
 
 stopwords_file = source.helper.get_file("stopwords.txt")
 
-sanitiser_options = get_basic_options(stopwords_file.content)
+sanitiser_options = get_basic_sanitiser_options(stopwords_file.content)
 
 # sanitised = source.get_sanitised()
 

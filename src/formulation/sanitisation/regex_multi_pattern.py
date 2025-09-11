@@ -4,7 +4,11 @@ from formulation.analysis.curation_helpers import StructuredPatternMap
 
 
 def get_pattern(items: list[str]) -> str:
-    items = list(map(lambda x: re.escape(x), items))
+    def prepare(x: str) -> str:
+        x = re.escape(x)
+        return r"(^| ){x}( |$)"
+
+    items = list(map(lambda x: prepare(x), items))
 
     return str.join("|", items)
 

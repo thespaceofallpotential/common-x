@@ -8,7 +8,7 @@ from formulation.sanitisation.sanitiser import SanitiserOptions
 from formulation.sanitisation.string_helpers import to_words
 from formulation.analysis.elemental_curator import (
     ElementalCurator,
-    curate_and_collect,
+    collect_and_curate,
 )
 from formulation.sanitisation.sanitiser_factory import build_sanitiser
 from formulation.analysis.analyser import AnalyserType
@@ -16,7 +16,7 @@ from formulation.analysis.character_analyser import to_character_list
 from formulation.analysis.content_analysis_engine import content_analysis_runner
 from formulation.sanitisation.sanitiser_helpers import sanitise_contents
 from utils.progress import TimedProgress
-from utils.io_helper import ScanOptions
+from utils.io_helper import DirectoryScanOptions
 
 
 def parse_excluding(content: str, exclude: list[str]) -> str:
@@ -72,7 +72,7 @@ class Source:
     def get_textual_sequences(self):
         return list(map(lambda x: Sequence(list(x.content.lower())), self.__files))
 
-    def list_file_paths(self, options: ScanOptions):
+    def list_file_paths(self, options: DirectoryScanOptions):
         paths = self.helper.file_helper.get_file_paths(options)
 
         for path in paths:
@@ -90,13 +90,7 @@ def get_sanitised_contents(
     contents = source.get_all_contents()
 
     if curator is None:
-        character_analysis = content_analysis_runner(AnalyserType.CHARACTER, contents)
-
-        character_list = to_character_list(character_analysis)
-
-        characters = set(character_list)
-
-        curator = curate_and_collect(characters)
+        curator = collect_and_curate(contents)
 
     sanitiser = build_sanitiser(curator, sanitiser_options)
 

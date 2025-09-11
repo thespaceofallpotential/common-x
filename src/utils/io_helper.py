@@ -4,7 +4,7 @@ import os
 READ = "r"
 
 
-class ScanOptions:
+class DirectoryScanOptions:
     path: str
     extension: str | None
     recursive: bool | None
@@ -31,7 +31,7 @@ class IOHelper:
         except:  # noqa: E722
             return None
 
-    def get_file_paths(self, options: ScanOptions) -> list[str]:
+    def get_file_paths(self, options: DirectoryScanOptions) -> list[str]:
         paths: list[str] = []
 
         ext = options.extension

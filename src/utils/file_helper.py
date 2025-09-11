@@ -3,7 +3,7 @@ from data.file import File
 from core.strings import EMPTY
 from utils.progress import TimedProgress
 from utils.path_helper import PathHelper
-from utils.io_helper import IOHelper, ScanOptions
+from utils.io_helper import IOHelper, DirectoryScanOptions
 
 
 class FileHelper(PathHelper):
@@ -41,7 +41,7 @@ class FileHelper(PathHelper):
 
         return items
 
-    def get_file_paths(self, options: ScanOptions) -> list[str]:
+    def get_file_paths(self, options: DirectoryScanOptions) -> list[str]:
         if options.path is None:
             options.path = self.root
 

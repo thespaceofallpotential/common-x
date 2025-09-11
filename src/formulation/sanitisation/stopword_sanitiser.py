@@ -18,7 +18,12 @@ class StopwordSanitiser(ISanitiser):
         if self.options.stopwords is not None:
             stopword_remover = StopwordRemover()
 
-            content = stopword_remover.process(content, self.options.stopwords)
+            if self.options.regex_stopwords:
+                content = stopword_remover.process_regex(
+                    content, self.options.stopwords
+                )
+            else:
+                content = stopword_remover.process(content, self.options.stopwords)
 
         result.content = content
 

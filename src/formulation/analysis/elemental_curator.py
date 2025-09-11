@@ -56,8 +56,8 @@ class ElementalCurator:
 
             # to finditer
 
-    def collect(self):
-        def collect_basic_elements():
+    def prepare(self):
+        def prepare_basic_elements():
             for sanitisation_type in self.culture.curated_elements:
                 elements = self.culture.curated_elements[sanitisation_type]
 
@@ -76,7 +76,7 @@ class ElementalCurator:
 
                     self.collection[character] = Director() if regex.positive else None
 
-        def collect_structured_elements():
+        def prepare_structured_elements():
             structured_keys = list(self.culture.structured)
 
             for structured_sanitisation_key in structured_keys:
@@ -100,12 +100,14 @@ class ElementalCurator:
                         f"{structured_sanitisation_key}"
                     )
 
-        collect_basic_elements()
-        collect_structured_elements()
+        prepare_basic_elements()
+        prepare_structured_elements()
 
 
-def curate_and_collect(elements: set[str]) -> ElementalCurator:
-    culture = ElementalCulture(elements, structured_regex_map)
+def collect_and_curate(contents: list[str]) -> ElementalCurator:
+    culture = ElementalCulture(structured_regex_map)
+
+    culture.initialise_culture(contents)
 
     structured_regex_order = [
         SanitisationTypes.STRUCTURED_FRONTMATTER,
@@ -120,7 +122,7 @@ def curate_and_collect(elements: set[str]) -> ElementalCurator:
     for key in structured_regex_map:
         curator.curate(key)
 
-    curator.collect()
+    curator.prepare()
 
     return curator
 
